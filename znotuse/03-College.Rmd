@@ -1,0 +1,184 @@
+# 通讯地址统计 {#college}
+
+> "What we know is a droplet, what we don't know is an ocean"
+>
+> --- Newton
+
+## 各学院英文地址
+
+通过对四川师范大学主页 ^[http://www.sicnu.edu.cn/]进行访问，将部分学院官网提供的英文名进行汇总，如表所示：
+
+```{r message=FALSE, warning=FALSE}
+cname <- read_csv("data/map_list/college_name.csv")
+```
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+knitr::kable(cname, booktabs = T, caption = "我校官网给出的各学院英文地址.") %>%
+              kable_styling("striped")
+```
+
+
+
+
+## 统计
+
+看看论文中大家的通讯地址是否也和官网的一样？和我预想的有些差别，论文中地址的书写比较五花八门，看来需要规范。
+
+
+```{r}
+addr <- sicnu_set %>% 
+        select(C1) %>% 
+        str_extract_all("Sichuan Normal Univ,\\s+([^,]*),") %>% unlist()
+  
+str(addr)
+```
+
+
+
+
+```{r}
+dt <- tibble( Coll_name = addr) %>%
+      separate(Coll_name, into = c("univ", "coll", "no_use"), sep = ",") %>% 
+      select(univ, coll)
+
+knitr::kable(head(dt))
+```
+
+
+
+
+```{r}
+tb <- dt %>% 
+      count(univ, coll) %>% 
+      arrange(desc(n))
+
+knitr::kable(head(tb))
+```
+
+
+
+
+
+```{r, out.width = "90%"}
+dt %>% count(univ, coll) %>% 
+       arrange(desc(n)) %>%  
+       filter(n > 10) %>%
+       ggplot(aes(n, reorder(coll, n) )) +
+       geom_point() +
+       labs(y = NULL) +
+       ggtitle("我校SCI论文通讯地址中二级学院英文名使用频次", subtitle = '（数据来源 Web of Science）') 
+
+```
+
+
+
+
+
+## 部分学院结果
+
+```{r}
+tb %>% filter(str_detect(coll, "Math")) %>%
+    knitr::kable( caption = "数学学院发表的 SCI 论文中使用各种英文地址的频次.")
+```
+
+数学与软件科学学院中英文地址使用频次最多的是Coll Math
+& Software Sci，达到306篇，其次是Dept
+Math，共计到84篇。而在官网上提供的英文名为school of mathematical
+science，由此可见，存在的差异较大。可以看到官网提供的英文名称较为片面，不能完全概括学院内的研究方向。因此，建议相关研究者在发表论文时使用college
+of math and software science，缩写为Coll Math & Software Sci。
+
+
+
+```{r}
+tb %>% filter(str_detect(coll, "Phys")) %>%
+    knitr::kable( caption = "物理学院学院发表的 SCI 论文中使用各种英文地址的频次.")
+```
+
+物理与电子工程学院的论文统计中使用较多的两种形式分别是Coll Phys \& Elect Engn和Dept Phys，而四川师范大学官网中提供的英文名为school of physics and electronic engineering。建议相关研究者使用college of physics and electronic engineering作为英文通信地址。
+
+
+```{r}
+tb %>% filter(str_detect(coll, "Chem")) %>%
+    knitr::kable( caption = "化学与材料科学学院发表的 SCI 论文中使用各种英文地址的频次.")
+```
+
+化学与材料科学学院发表的论文中英文地址出现最多的是Coll Chem \&Mat Sci，频次达到297次，而官网上的英文名为school of chemistry and materials science，差异性不大，建议相关研究者使用college of chemistry and materials science。
+
+
+
+
+```{r}
+tb %>% filter(str_detect(coll, "Life")) %>%
+    knitr::kable( caption = "生命科学学院发表的 SCI 论文中使用各种英文地址的频次.")
+```
+
+生命科学学院发表的SCI论文中使用Coll Life Sci作为通信地址的论文数量远远高于其他形式地址，同时与四川师范大学所提供的英文名相一致，因此建议相关领域研究者使用college of life science 作为英文通信地址。
+
+
+
+## 随年份的变化
+
+
+```{r}
+wrt <- sicnu_set %>%
+  select(C1, PY) %>% 
+  mutate(colleges = str_extract_all(C1, "Sichuan Normal Univ,\\s+([^,]*),") ) %>% 
+  select(PY, colleges) %>% 
+  tidyr::unnest(colleges) 
+```
+
+
+```{r}
+wrt %>%
+      separate(colleges, into = c("univ", "coll", "no_use"), sep = ",") %>% 
+      count(PY, coll) %>% 
+      arrange(PY, desc(n)) %>%  
+      filter(n > 5) %>%
+      ggplot(aes(n, reorder(coll, n) )) +
+      geom_point() +
+      facet_wrap(~PY) +
+      labs(y = NULL) +
+     ggtitle("我校SCI论文通讯地址中二级学院英文名使用频次", subtitle = '（数据来源 Web of Science）') 
+
+
+```
+
+
+```{r}
+library(ggrepel)
+
+
+
+timesData <- wrt %>%
+      separate(colleges, into = c("univ", "coll", "no_use"), sep = ",") %>% 
+      count(PY, coll) %>% 
+      arrange(PY, desc(n)) %>%  
+      filter(n > 5)
+  
+timesfinalYear <- timesData %>% 
+                  filter(PY == 2016)
+timesfirstAppearance <- timesData %>% 
+                  filter(PY == 2007)
+
+      ggplot(timesData, aes(x=PY, y= n)) + 
+      geom_line(aes(colour=coll), size=1.5) + 
+      geom_point(shape = 21, stroke = 2, size=5, fill = "white", aes(colour=coll)) + 
+geom_label_repel(data = timesfirstAppearance, aes(label=coll), size=3, fontface = "bold", color='#2f2f2f') +
+  geom_label(data = timesfinalYear, aes(label=coll), size=3, fontface = "bold", color='#2f2f2f', hjust=0) +
+        scale_y_reverse(lim=c(20,1), breaks = scales::pretty_breaks(n = 20)) +
+  scale_x_continuous(expand = c(.12, .12), breaks = scales::pretty_breaks(n = 5)) +
+      ggtitle('Times World Universities Ranking') +
+      xlab(NULL) +
+      ylab("World Rank") +
+      theme_bw() +
+  theme(panel.background = element_rect(fill = '#ffffff'),
+    plot.title = element_text(size=14), legend.title=element_blank(),
+    axis.text = element_text(size=11), axis.title=element_text(size=11), 
+    panel.border = element_blank(), legend.position='none', 
+    panel.grid.minor.x = element_blank(), panel.grid.minor.y = element_blank(),
+    axis.ticks.x=element_blank(), axis.ticks.y=element_blank())
+  
+
+
+```

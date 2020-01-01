@@ -1,0 +1,237 @@
+# 学院对学科的贡献 {#contri}
+
+p6代码R化，匹配后存一列，起配合再一列，最后合并去重，接下来就是统计分析
+
+## 开始吧
+先perl6做分解，然后需要第一作者和通讯作者删选，再学科映射
+统计口径见《蓝皮书》
+采用issn映射ESI学科，这里有issn找不到学科的情况
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(googleVis)
+```
+
+## 这里开始吧0
+
+```{r data, message=FALSE, warning=FALSE}
+data1 <- read_csv("data/Project_Contribution/wos_sicnu.csv")
+```
+
+
+
+
+```{r message=FALSE, warning=FALSE}
+data1 %>% select(C1) %>%  
+         summarise(count = n()) 
+```
+
+
+比较烂七八糟的，因此需要规则
+
+
+
+## 这里开始吧1
+```{r}
+record <- read.delim("data/Project_Contribution/01perl6/05_Sichuan_Normal_Univ_new.txt", row.names=NULL, stringsAsFactors=FALSE, quote = "\t", encoding="UTF-8")
+```
+
+
+
+```{r}
+firstauthor <- record %>% 
+      filter(str_detect(addr, "^\\[([^]]+)\\]\\s+Sichuan Normal Univ,\\s+([^,]*),")) 
+      
+```
+
+
+
+```{r}
+reprintauthor <- record %>% 
+     filter(str_detect(RP, "Sichuan Normal Univ")) 
+     
+```
+
+
+
+## together
+```{r}
+author <- union(firstauthor, reprintauthor) #%>%
+  #filter(UT == "WOS:000322913200008")
+```
+
+
+
+
+# Part Two --------- Journal list--------------
+```{r, message=FALSE, warning=FALSE}
+jour <- read_csv("data/JournalList_ESI.csv")
+```
+
+# good way
+```{r}
+journew <- jour %>%
+   mutate(id = row_number()) %>%
+   arrange(desc(id)) %>%
+   distinct(ISSN,.keep_all = TRUE) %>%
+   select(Full_title,ISSN,Category_name)
+```
+
+
+
+```{r}
+#record_new <- left_join(author, journew, by =c("issn"="ISSN"))#%>% 
+record_new <- left_join(record, journew, by =c("issn"="ISSN"))#%>% 
+                  #summarise(n=n()) 
+```
+
+
+
+
+
+
+# Import Journal chinese name
+```{r, message=FALSE, warning=FALSE}
+encn <- read_csv("data/ESI_en2cn.csv")
+```
+
+
+
+```{r}
+record_new <- record_new %>% 
+          rename(dis = Category_name, journame = Full_title) %>%
+          left_join(encn, by = "dis")
+```
+
+
+
+
+# Part THree --------- chinese college name map --------------
+
+```{r, message=FALSE, warning=FALSE}
+coll_cn_name <- read_csv("data/sicnu_coll_name_en2cn.csv")
+```
+
+
+```{r}
+record_all <- left_join(record_new, coll_cn_name, by =c("coll"="Coll_name")) #%>%                   #summarise(n=n()) 
+```
+
+
+
+```{r}
+addr1 <- data %>% 
+     select(C1) %>% 
+     mutate(a = str_extract_all(C1, "Sichuan Normal Univ,\\s+([^,]*)," )  ) %>% 
+     unnest()
+```
+
+
+
+
+<!-- ```{r} -->
+<!-- addr2 <- data %>%  -->
+<!--      select(RP) %>%  -->
+<!--      mutate(a = str_extract_all(RP, "Sichuan Normal Univ,\\s+([^,]*)," )   ) %>%  -->
+<!--      unnest() -->
+<!-- ``` -->
+
+
+
+<!-- ```{r} -->
+<!-- addr3 <- data %>%  -->
+<!--      select(C1,RP) %>%  -->
+<!--      mutate(a = str_extract_all(C1, "Sichuan Normal Univ,\\s+([^,]*)," )   ) %>%  -->
+<!--      mutate(b = str_extract_all(RP, "Sichuan Normal Univ,\\s+([^,]*)," )   ) #%>%   -->
+<!--      #mutate(c = str_c(a,b)  ) -->
+<!--      #unnest() -->
+<!-- ``` -->
+
+
+
+
+```{r}
+record_all %>% 
+          filter(is.na(dis)) %>%
+          summarise(sum = n())  
+```
+
+
+
+```{r}
+record_all %>% 
+          filter(is.na(coll_name_cn)) %>%
+          summarise(sum = n())  
+```
+
+
+
+```{r}
+record_all %>% 
+   select(cn_dis, coll_name_cn, year) %>%
+   filter(!is.na(cn_dis), !is.na(coll_name_cn) ) %>%
+   group_by(cn_dis,coll_name_cn) %>%
+   summarise(count=n()) %>%
+   arrange(cn_dis,desc(count)) %>%
+   write.csv(file = "dis_contri_by_coll.csv")
+```
+
+
+
+
+```{r}
+record_all %>% 
+   select(cn_dis, coll_name_cn, year) %>%
+   filter(!is.na(cn_dis), !is.na(coll_name_cn) ) %>%
+   group_by(coll_name_cn,cn_dis) %>%
+   summarise(count=n()) %>%
+   arrange(coll_name_cn,desc(count)) %>%
+   write.csv(file = "coll_contri_by_dis.csv")
+```
+
+
+
+```{r}
+library(networkD3)
+
+links <- record_all %>% 
+   select(cn_dis, coll_name_cn, year) %>%
+   filter(!is.na(cn_dis), !is.na(coll_name_cn) ) %>%
+   group_by(cn_dis,coll_name_cn) %>%
+   summarise(count=n()) %>%
+   arrange(cn_dis,desc(count)) 
+```
+
+
+
+```{r}
+nodes <- data.table(name=LETTERS[1:12])
+
+## Need to hover to get counts
+sankeyNetwork(Links=links, Nodes=nodes, Source='cn_dis', Target='coll_name_cn',
+  Value='count', NodeID='name', fontSize=16)
+```
+
+
+
+
+
+```{r}
+colnames(data) <- c("From", "To", "Weight")
+```
+
+
+```{r}
+sankey1 <- gvisSankey(data, from="From", to="To", weight="Weight" ,
+              options=list(
+                height=500,
+                sankey="{link:{color:{fill:'lightblue'}}}"
+              ))
+
+plot(sankey1)
+#print(sankey1, file="sankey_diagram_paper.html")
+```
+
+
+```{r echo = FALSE, out.width = "99%"}
+knitr::include_graphics("images/SankeyID1.png")
+```

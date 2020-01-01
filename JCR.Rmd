@@ -1,0 +1,125 @@
+# 期刊使用情况 {#JCR}
+
+
+## JCR简介
+《期刊引证报告》（Journal Citation Reports，简称 JCR）是科睿唯安（原汤森路透知识产权与科技事业部）的报告产品^[https://jcr.incites.thomsonreuters.com/]。
+该年度报告为全球最权威最具影响力的学术期刊提供了多纬度的期刊评估指标，包括著名的期刊影响因子（Journal Impact Factor）。
+
+作为独立于出版商的机构，科睿唯安自1973 年以来发布的 JCR，一直基于客观的统计数据来评估期刊在学术文献中的地位。相关分析包括引证数据、影响力指标、以及来自业内领先的涵盖自然科学、社会科学及艺术和人文学科领域的引文索引数据库 Web of Science 中数以百万计的期刊被引及施引数据。
+
+## JCR初探
+
+```{r}
+esi_plus_cas_IF_set <- read_rds("data/dataset/esi_plus_cas_IF_set.rds")
+```
+
+
+```{r}
+stat_ESI <- esi_plus_cas_IF_set %>%
+   group_by(Category_ESI_cn) %>%
+   summarise(total_num_of_ESI = n_distinct(ISSN), 
+             total_num_of_cn_ESI = sum(is_chinese)) %>% 
+   arrange(desc(total_num_of_ESI))
+
+#stat_ESI
+```
+
+```{r}
+stat_ESI %>% 
+    knitr::kable( caption = "ESI各学科下的期刊与中国SCI期刊数目对比.") %>%
+              kable_styling("striped")
+```
+
+## 中国SCI期刊
+
+```{r, results='asis', echo=FALSE}
+vars_select <- c("Category_ESI_cn", "Full_title", "Degree_CAS", "ImpactFactor")
+#dis_select <- c("物理学", "数学", "化学", "材料科学")
+esi_plus_cas_IF_set %>%
+  filter(is_chinese == 1) %>%
+  select(vars_select) %>% 
+  mutate_at(vars(Full_title), str_to_title) %>% 
+  rename("学科" = Category_ESI_cn, 
+      "期刊全名" = Full_title, 
+      "中科院分区" = Degree_CAS, 
+      "影响因子" = ImpactFactor) %>%
+  split(.$`学科`) %>%
+  map(~as_tibble(.) %>% arrange(-`影响因子`)) %>% 
+  imap(~knitr::kable(.x, caption = glue::glue("{.y}中的中国SCI期刊 ")) %>%    
+         kable_styling("striped") )
+```
+
+
+
+## 可视化
+```{r}
+stat_ESI %>% #drop_na() %>% 
+  mutate( Category_ESI_cn =  fct_reorder(Category_ESI_cn, total_num_of_ESI)) %>% 
+  ggplot(aes(x = Category_ESI_cn)) +
+        geom_bar(aes(y = total_num_of_ESI), stat = "identity",fill = "blue") +
+        geom_bar(aes(y = total_num_of_cn_ESI), stat = "identity",  fill = "red") +
+             #theme( axis.text.x = element_text(angle = -30, vjust = 1, hjust=0),
+             #       legend.position="none") +
+             coord_flip() +
+       labs(x = "ESI学科", y = "期刊数量",
+            title = "ESI各学科下的期刊数目与中国SCI期刊.",
+            subtitle = "数据来源 Web of Science",
+            caption = "Data Acquisition and Preparation from Web of Science")
+
+
+```
+
+
+大家看到，各学科中国SCI期刊（红色部分）所占比例很低，而且除《Cell Research》、《National Science Review》外，基本都在3区和4区。可见，提高学术地位，创办具有国际影响力的一流学术期刊也是非常重要的。
+
+
+## 各学科期刊使用情况
+
+```{r}
+stat_kind_used <- complete_set %>%
+     mutate(ISSN_cn = if_else(is.na(Title), '', ISSN)) %>% 
+     group_by(University_cn, Category_ESI_cn) %>%
+     summarise( used_kind_num_of_ESI = n_distinct(ISSN), 
+           used_kind_num_of_cn_ESI =  n_distinct(ISSN_cn)) %>% 
+     arrange(desc(used_kind_num_of_ESI))
+
+stat_kind_used
+```
+
+
+
+```{r}
+stat_combine <- left_join(stat_kind_used, stat_ESI, by = "Category_ESI_cn" ) %>% 
+            arrange(University_cn, Category_ESI_cn) %>%
+            #mutate(prop = n_of_number/total_of_number) %>%
+            filter(!is.na(Category_ESI_cn))
+
+stat_combine
+```
+
+
+
+
+
+
+
+
+
+
+```{r fig.asp = 1.2, fig.width = 10, out.width = "99%"}
+library(showtext)
+showtext_auto()
+
+stat_combine %>%
+   filter(University_cn %in% c("四川农业大学", "成都理工大学", "四川师范大学", "西华大学")) %>% 
+  ggplot(aes(x = fct_reorder(Category_ESI_cn, total_num_of_ESI)), width = 0.75) +
+             geom_bar(data = stat_ESI, aes(y = total_num_of_ESI), stat = "identity", fill = "gray") +
+             geom_bar(aes(y = used_kind_num_of_ESI, fill = University_cn), stat = "identity"  ) +
+             theme(legend.position = "none", text = element_text(size = 14)) +
+             coord_flip() + 
+             facet_wrap(~University_cn) +
+             labs(x = NULL, y = NULL) +
+             ggtitle("期刊覆盖率", subtitle = '（数据来源 Web of Science）') 
+             
+
+```

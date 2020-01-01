@@ -1,0 +1,75 @@
+# 影响力结构分析 {#impact}
+
+基于中科院期刊等级分区的论文影响力结构分析。
+一般来说，等级越高的文章，受关注的程度越高，产生的影响就越大。具体到引文量上，就是高等级期刊的文章被引次数会越高？如果真是这样，那么一区和四区的论文，产生的引文到底有多大差别？
+
+## 论文影响力结构
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+stat1 <- complete_set %>% 
+     filter(!is.na(Degree_CAS)) %>% 
+     group_by( Degree_CAS) %>%
+     summarise( num_of_paper = n(), 
+                num_of_cited = sum(TC),
+                prop = round(num_of_cited/num_of_paper, 2)) %>% 
+     arrange(Degree_CAS) 
+
+```
+
+
+
+```{r echo=FALSE}
+library(knitr)
+knitr::kable(
+  stat1,
+  caption = "基于中科院期刊分区的论文影响力结构（四川省省属高校近几年数据）"
+)%>%
+  kable_styling("striped")
+```
+大家多多发一区的文章吧，1篇一区文章影响力相当于10篇四区的喔！
+
+## 各学科论文影响力结构
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+stat2 <- complete_set %>% 
+     filter(!is.na(Degree_CAS)) %>% 
+     group_by( Category_ESI_cn, Degree_CAS) %>%
+     summarise( num_of_paper = n(), 
+                num_of_cited = sum(TC),
+                prop = round(num_of_cited/num_of_paper, 2)) %>% 
+     arrange(Category_ESI_cn, Degree_CAS) 
+
+```
+
+```{r echo=FALSE}
+knitr::kable(
+  stat2,
+  caption = "基于中科院期刊分区的各学科论文影响力结构（四川省省属高校近几年数据）"
+)%>%
+  kable_styling("striped")
+```
+
+有的学科，一区和四区文章影响力差别不止10倍！
+
+
+
+## 引文最大贡献的期刊
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+stat3 <- complete_set %>% 
+     filter(!is.na(Degree_CAS)) %>% 
+     group_by( Category_ESI_cn, SO) %>%
+     summarise( num_of_paper = n(), 
+                num_of_cited = sum(TC),
+                prop = round(num_of_cited/num_of_paper, 2)) %>% 
+     top_n(5, prop) %>% 
+     arrange(Category_ESI_cn, -prop) 
+
+```
+
+```{r echo=FALSE}
+knitr::kable(
+  stat3,
+  caption = "对引文最大贡献的期刊排行（四川省省属高校近几年数据）"
+)%>%
+  kable_styling("striped")
+```
+
+

@@ -1,0 +1,68 @@
+# 学校科研人员的选刊倾向 {#Journal}
+
+> "I thoroughly disapprove of duels. If a man should challenge me,
+  I would take him kindly and forgivingly by the hand and lead him
+  to a quiet place and kill him."
+>
+> --- Mark Twain
+
+## 中科院JCR期刊分区介绍
+
+SCI 作为论文与引文分析的重要手段, 被国内各级科研管理部门所重视,不少单位把它作为科研业绩考核的主要量化指标之一。SCIE收录的科学论文涉及到基础研究的各个领域, 由于各学科属性与发展特点各异, 以及数据库统计源的学科结构存在巨大差别, 使得不同学科的影响因子和被引频次分布存在不均衡性, 很难进行学科间的比较和评价。为了更科学地对学术期刊进行评价, 更合理地考核科研人员的工作业绩, 中国科学院文献情报中心于2004年起，开始发布中科院JCR期刊分区, 按年度和学科对SCIE期刊进行4 个等级的分区：
+
+- 将全部SCIE期刊分为13大类:地学、地学天文、工程技术、医学、化学、物理、环境科学、农林科学、生物、数学、社会科学、管理科学及综合性期刊;
+
+- 在每一类期刊中按照期刊影响力, 分为1-4 区:一区是各领域的顶级期刊,在同一学科中排名前5%, 二区是高水平期刊, 三区次之, 四区则更普通。一区和二区的一小部分杂志被列为顶尖学术期刊(TopJournal)。
+
+
+```{r echo = FALSE, out.width = "99%"}
+knitr::include_graphics("images/dif.jpg")
+```
+
+
+## 各学科论文的期刊分布
+```{r}
+jour_freq <- sicnu_set %>%
+             select(Category_CAS, Degree_CAS, SO ) %>% 
+             count(Category_CAS, Degree_CAS, SO) 
+```
+
+
+```{r}
+jour_freq %>% filter(Category_CAS =="物理") %>%
+              arrange(Degree_CAS, desc(n)) %>%
+              top_n(10) %>% 
+              knitr::kable( booktabs = T, caption = "我校物理学科的论文在各等级期刊上的分布: ^[这里：Category_CAS为学科分类；Degree_CAS为学科等级；SO为期刊名；n为使用频次]") %>%
+              kable_styling("striped")
+```
+
+
+ 
+ 
+ 
+```{r}
+jour_freq %>% filter(Category_CAS =="化学") %>%
+              arrange(Degree_CAS, desc(n)) %>%
+              top_n(10) %>% 
+              knitr::kable( booktabs = T, caption = "我校化学学科的论文在各等级期刊上的分布") %>%
+              kable_styling("striped")
+```
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+jour_freq %>% filter(Category_CAS =="数学") %>%
+              arrange(Degree_CAS, desc(n)) %>%
+              top_n(10) %>% 
+              knitr::kable( booktabs = T, caption = "我校数学学科的论文在各等级期刊上的分布") %>%
+              kable_styling("striped")
+```
+
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+jour_freq %>% filter(Category_CAS =="工程技术") %>%
+              arrange(Degree_CAS, desc(n)) %>%
+              top_n(10) %>% 
+              knitr::kable( booktabs = T, caption = "我校工程技术学科的论文在各等级期刊上的分布") %>%
+              kable_styling("striped")
+```

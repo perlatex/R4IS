@@ -1,0 +1,135 @@
+# 学校研究人员的选刊倾向 {#wind}
+
+瞎扯几句。我想做一张图:
+生物信息有很多期刊
+(各种等级的)，而我校发表文章主要集中在，较低等级的期刊。
+
+用什么图可视化出来呢？能否举个例子？
+
+
+## 张老爷子
+
+话说张老爷子写了一首诗：
+
+> 姑苏开遍碧桃时，邂逅河阳女画师。  
+红豆江南留梦影，白苹风末唱秋词。
+
+## 彭大将领
+
+貌似大家都喜欢用白萍风这个意境。又如彭玉麟的对联：
+
+> 凭栏看云影波光，最好是红蓼花疏、白苹秋老；  
+把酒对琼楼玉宇，莫孤负天心月到、水面风来。
+
+嘿，玛尼玛尼哄。
+
+```{r, include=FALSE}
+library(tidyverse)
+library(stringr)
+options(digits=3)
+```
+
+
+```{r echo = FALSE, out.width = "99%"}
+knitr::include_graphics("images/Wos2.PNG")
+```
+
+直接从源文件开始，然后作者删选
+```{r, message=FALSE, warning=FALSE}
+record <- read_csv("data/Project_Journal_Distriution/wos_sicnu.csv")
+```
+
+
+
+作者删选
+```{r}
+firstauthor <- record %>% 
+      filter(str_detect(addr, "^\\[([^]]+)\\]\\s+Sichuan Normal Univ,\\s+([^,]*),")) 
+      
+```
+
+
+
+```{r}
+reprintauthor <- record %>% 
+     filter(str_detect(RP, "Sichuan Normal Univ")) 
+     
+```
+
+
+
+## together
+```{r}
+author <- union(firstauthor, reprintauthor) #%>%
+  #filter(UT == "WOS:000322913200008")
+```
+
+
+
+
+```{r}
+record <- record %>% #select(AF,SO,DE,C1,RP,FU,TC,SN,PY,UT)
+                    select(SO,SN) %>%
+                    mutate(SO=str_to_title(SO)) 
+```
+
+
+
+
+
+```{r, message=FALSE, warning=FALSE}
+jour <- read_csv("data/map_list/JournalList_ESI.csv", col_names = TRUE)
+```
+
+
+```{r}
+journew <- jour %>%
+   mutate(id = row_number()) %>%
+   arrange(desc(id)) %>%
+   distinct(ISSN,.keep_all = TRUE) %>%
+   select(Full_title,ISSN,Category_name)#%>%
+   #select(ISSN,Category_name)
+```
+
+
+```{r}
+data <- left_join(record, journew, by =c("SN"="ISSN"))#%>% 
+                  #summarise(n=n()) 
+```
+
+
+
+
+
+
+```{r, message=FALSE, warning=FALSE}
+encn <- read_csv("data/map_list/ESI_en2cn.csv",col_names = TRUE)
+```
+
+
+```{r}
+data <- data %>% 
+          rename(dis = Category_name, journame = SO) %>%
+          left_join(encn, by = "dis")
+```
+
+
+
+
+```{r}
+data %>% 
+      group_by(cn_dis, journame) %>%
+      summarise(count=n()) %>%
+      arrange(cn_dis, journame, -count)
+```
+
+
+
+
+
+
+
+
+
+
+

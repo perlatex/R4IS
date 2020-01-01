@@ -1,0 +1,132 @@
+# 科研合作 {#cooperation}
+
+看看我们的科研小圈子
+
+
+## 机构匹配
+需要用到强大的正则表达式
+
+```{r message=FALSE, warning=FALSE}
+mc <- "\\[.*?\\]\\s+([^,]*),"
+
+complete_set %>% select(C1) %>% 
+                 top_n(1) %>% 
+                 str_view_all(mc)
+```
+
+
+
+
+## 化学学科
+
+我们就看看四川省的化学学科吧
+
+```{r}
+Organ <- complete_set %>% 
+         filter(Category_ESI == "CHEMISTRY") %>% 
+         select(UT, C1) %>%
+         mutate(a = str_extract_all(C1, mc) ) %>%
+         unnest() %>% 
+         #tidyr::extract(a, c("namelist", "organization"), "(\\[.*?\\])\\s+([^,]*),")
+         tidyr::extract(a, "Organization", "\\[.*?\\]\\s+([^,]*),")
+
+head(Organ)
+```
+
+
+
+
+```{r message=FALSE, warning=FALSE}
+library(widyr)
+paper_org_pairs <- Organ %>% 
+       pairwise_count(Organization, UT, sort = TRUE)
+head(paper_org_pairs)
+``` 
+
+
+```{r}
+links <- paper_org_pairs %>% select(item1, item2, n) %>%
+                             filter(n >= 50) %>%
+                             rename(from = item1, to = item2, weight = n)
+links
+```
+
+
+```{r message=FALSE, warning=FALSE}
+library(igraph)
+library(ggraph)
+
+links %>%
+  graph_from_data_frame(directed = F) %>%
+  ggraph(layout = 'kk') + 
+  geom_edge_fan(aes(edge_alpha = weight, edge_width = weight)) +
+  geom_node_point(size = 1) +
+  geom_node_text(aes(label = name), repel = TRUE, 
+                 point.padding = unit(0.2, "lines")) 
+  #theme_void() +
+  #facet_wrap(~ type)  
+
+
+```
+
+
+
+
+## 全部学科
+
+不过瘾吗？ 那我们就看看全局
+
+```{r}
+Organize <- complete_set %>% 
+         select(Category_ESI_cn, UT, C1) %>%
+         mutate(a = str_extract_all(C1, mc) ) %>%
+         unnest() %>% 
+         #tidyr::extract(a, c("namelist", "organization"), "(\\[.*?\\])\\s+([^,]*),")
+         tidyr::extract(a, "Organization", "\\[.*?\\]\\s+([^,]*),")
+
+head(Organize)
+```
+
+
+
+
+```{r message=FALSE, warning=FALSE}
+library(widyr)
+paper_organ_pairs <- Organize %>% 
+       group_by(Category_ESI_cn) %>%
+       pairwise_count(Organization, UT, sort = TRUE, upper = FALSE)
+head(paper_organ_pairs)
+``` 
+
+
+```{r}
+linkss <- paper_organ_pairs %>% 
+         select(item1, item2, n, Category_ESI_cn) %>%
+         filter(n >= 10) %>% 
+         filter(Category_ESI_cn %in% c("物理学", "化学", "数学", "工程学", "计算机科学", "材料科学")) %>%
+         rename(from = item1, to = item2, weight = n)
+linkss
+```
+
+
+```{r message=FALSE, warning=FALSE}
+library(igraph)
+library(ggraph)
+
+linkss %>%
+  graph_from_data_frame(directed = F) %>%
+  ggraph(layout = 'kk') + 
+  geom_edge_fan(aes(edge_alpha = weight, 
+                    edge_width = weight,
+                    edge_colour = Category_ESI_cn)) +
+  geom_node_point(size = 1) +
+  geom_node_text(aes(label = name), repel = TRUE, 
+                 point.padding = unit(0.2, "lines")) +
+  theme_void() +
+  facet_wrap(~ Category_ESI_cn)  
+
+
+```
+
+## 学科合作网络
+蓝皮书的网络图

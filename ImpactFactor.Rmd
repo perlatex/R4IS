@@ -1,0 +1,98 @@
+# 期刊的影响因子 {#ImpactFactor}
+
+
+## 各学科影响因子最高的期刊
+
+```{r}
+esi_plus_cas_IF_set<- read_rds("data/dataset/esi_plus_cas_IF_set.rds")
+```
+
+
+
+
+```{r}
+glimpse( esi_plus_cas_IF_set )
+```
+
+
+
+```{r}
+esi_plus_cas_IF_set %>% select(Category_ESI_cn, Full_title, ImpactFactor ) %>% 
+             arrange(Category_ESI_cn, desc(ImpactFactor)) %>% 
+             group_by(Category_ESI_cn) %>% 
+             top_n(10)%>% 
+             knitr::kable( booktabs = T, caption = "各学科影响因子最高的期刊") %>%
+             kable_styling("striped")
+```
+
+
+
+## 不同ESI学科，影响因子的分布
+
+
+
+```{r}
+esi_plus_cas_IF_set %>% select(Category_ESI_cn, ImpactFactor ) %>% 
+      ggplot(aes(x = Category_ESI_cn, y = ImpactFactor, colour = Category_ESI_cn )) +
+      geom_boxplot() +
+      #geom_dotplot(binaxis='y', binwidth = 3, stackdir='center') +
+      theme(legend.position = "none") + 
+      labs(x = NULL, y = NULL) +
+      ggtitle("JCR影响因子分布", subtitle = '（数据来源 Web of Science）') + 
+      coord_flip() 
+
+
+```
+
+
+xlim放大看看
+
+```{r}
+esi_plus_cas_IF_set %>% select(Category_ESI_cn, ImpactFactor ) %>% 
+      ggplot(aes(x = Category_ESI_cn, y = ImpactFactor, colour = Category_ESI_cn )) +
+      geom_jitter() +
+      geom_boxplot() +
+      ylim(0, 50) +
+      theme(legend.position = "none") + 
+      labs(x = NULL, y = NULL) +
+      ggtitle("JCR影响因子分布", subtitle = '（数据来源 Web of Science）') + 
+      coord_flip() 
+```
+
+或者这样
+
+```{r}
+library(ggridges)
+ esi_plus_cas_IF_set %>% select(Category_ESI_cn, ImpactFactor ) %>% 
+    ggplot(aes( x = ImpactFactor, y = Category_ESI_cn, group = Category_ESI_cn )) +
+    geom_density_ridges(aes(fill = Category_ESI_cn)) +
+    xlim(0, 20) +
+    theme(legend.position = "none") + 
+    labs(x = NULL, y = NULL) +
+    ggtitle("JCR影响因子分布", subtitle = '（数据来源 Web of Science）') 
+  
+```
+
+
+
+
+## 加入学校数据，影响因子求和得分
+
+
+## 得分与被引量的关系
+
+
+## 看看不同中科院学科和等级下，随影响因子排序的期刊
+
+```{r message=FALSE, warning=FALSE}
+esi_plus_cas_IF_set %>% select(Category_CAS, Degree_CAS, ImpactFactor ) %>% 
+      filter(!is.na(Degree_CAS)) %>% 
+      ggplot(aes(x = ImpactFactor, 
+                 y =  Degree_CAS %>% factor() %>% fct_rev(), 
+                 colour = factor(Degree_CAS) )) +
+      geom_jitter() +
+      facet_wrap(vars(Category_CAS), scales = "free_x" ) +
+      theme(legend.position = "none") + 
+      labs(x = NULL, y = NULL) +
+      ggtitle("JCR影响因子分布", subtitle = '（数据来源 Web of Science）') 
+```

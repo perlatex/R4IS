@@ -1,0 +1,7 @@
+# 基于bibliometrix宏包 {#tidybib}
+
+
+本章基于R语言bibliometrix宏包^[<https://github.com/massimoaria/bibliometrix>]，分析文献信息。
+
+
+

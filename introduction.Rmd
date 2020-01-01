@@ -1,0 +1,103 @@
+\mainmatter
+
+# 数据科学与R语言 {#intro}
+
+## 数据科学
+```{r echo = FALSE, out.width = "45%"}
+knitr::include_graphics("images/Data_Science2010.png")
+```
+
+## R语言基础
+
+R 软件是一个自由、开源软件平台，具有统计分析、可视化和编程的强大功能。
+你可以从这里免费[下载](https://cloud.r-project.org)。 为了更好的使用 R 软件，我推荐大家使用 [RStudio](https://www.rstudio.com/products/rstudio)这个 IDE。这里有个[在线教程](https://www.rstudio.com/online-learning/)帮助我们熟悉 R 和 RStudio。
+R 与 RStudio 是什么关系呢？你可以简单的理解为，RStudio 是话筒，而 R 则是沟通所用的语言。
+
+```{r echo = FALSE, fig.cap='RStudio用户界面', out.width = "90%"}
+knitr::include_graphics("images/rstudio-editor.png")
+```
+
+RStudio 的用户界面十分简洁，想要运行一段R代码，只需要在 RStudio 控制台面板最下面一行内键入R 代码，然后回车即可。比如我们键入`1 + 1` 并按回车后，RStudio 将显示如下结果
+```{r }
+1 + 1
+```
+
+在R中存储的数据称为**对象**， R语言数据处理实际上就是不断的创建和操控这些对象。创建一个R对象，首先确定一个名称，然后使用
+赋值操作符 `<-`，将数据赋值给它。比如，如果想给变量 x 赋值为5，在命令行中可以这样写 `x <- 5` ，然后回车.
+
+```{r assignment operator}
+x <- 5
+```
+
+当键入`x` 然后回车，就打印出 x 的值。当然也可以使用命令`print(x)`，结果一样。
+```{r print x}
+x
+```
+
+R 语言的强大在于使用**函数**操控各种对象，你可以把对象看作是名词，而函数看作是动词。
+我们用一个简单的例子，`sum()`来演示函数如何工作的。这个函数的功能正如它的名字一样，对输入的各个对象求和，然后返回求和后的值，你可以在命令行中键入`?sum()`查看其官方文档。
+`sum()`后的结果可以直接显示出来，也可以赋名。比如下面代码，首先计算`x + 10`并赋以名字`y`， 然后第二行中打印出来这个新创建的对象`y`
+
+```{r sum}
+y <- sum(x, 10)
+y
+```
+
+因为代码的灵活性，可以不断地重新定义对象。只要数据发生改变，原来的代码就会返回新的值。比如，对`x`重新赋值为 15， 同样运行`sum()`函数，这次我们不赋值给对象`y`，而是让它直接显示
+
+```{r reassign object}
+x <- 15
+sum(x, 10)
+```
+
+如果我们已经写好了一段R程序，我们可以保存为**脚本**文件，脚本文件通常以.R作为文件的后缀名。比如我们可以将刚才创建`x`和 `y`对象的命令，保存为脚本文件`my_script.R`。
+这样我们可以在其它时间修改和重新运行它。
+
+在RStudio中，你可以通过菜单栏依此点击`File > New File > R Script` 来创建一个新的脚本。
+强烈建议大家在运行代码之前，使用脚本的形式编写和编辑自己的程序，养成这样的习惯后，你今后所有的工作都有案可查，并且具有可重复性。
+
+
+## R 宏包: The tidyverse
+
+R 语言的强大还在于各种宏包，一般在[The Comprehensive R Archive Network (CRAN)](https://cran.r-project.org)下载安装。宏包扩展了R语言本身的各种功能，也为解决问题提供了各种方案。截至撰写本书时止，CRAN上大约有1.2万个宏包可以使用。但由于各种包接口不统一，语法不一致，也带来一些困扰。为了解决这个问题，RStudio 公司的[Hadley Wickham](http://hadley.nz) 与其带领的团队推出了`tidyverse`宏包， [tidyverse](https://www.tidyverse.org)将常用的宏包整合在一起，并保持了语法的一致性。可以说，`tidyverse`宏包是R语言[入门](http://varianceexplained.org/r/teach-tidyverse/) 学习的首选。
+
+
+本书正是基于`tidyverse`宏包而成的，本书也将通过一些例子不断地展示`tidyverse`在数据分析和可视化的应用。
+数据分析主要使用[dplyr package](http://dplyr.tidyverse.org) ，而可视化主要使用 [ggplot2](http://ggplot2.tidyverse.org)。 **dplyr**的函数主要有`filter()`, `select()`, `arrange()`, `mutate()`, `group_by()`, 以及 `summarise()`。 它们都具体相似的语法结构，将数据框（`data frame`）作为第一个参数，随后的参数才是需要执行操作的列名。这些函数均返回一个新的数据框，这也让
+`dplyr`的各种函数借助管道操作符`%>%`，能够**串联**起来，像流水线一样对数据框执行若干操作，从而得到想要的结果。
+
+
+
+如果说`dplyr`定义数据操作的语法，那么`ggplot2` 定义了图形语法。`ggplot2`的图形语法可以通过很短的R代码绘制出漂亮的图形，这主要得益于`ggplot2` 两个主要的部件：**几何对象**和**美学映射**。所谓几何对象 就是使用什么样的可视化元素图形，是点？是线？还是矩阵？美学映射就是指数据框中的哪一列用来设置图形元素的大小、形状以及颜色等。 
+
+## 字符串处理：正则表达式
+
+## 数据科学工作流程
+数据科学工作流程
+```{r echo = FALSE, out.width = "90%"}
+#knitr::include_graphics("images/data-science-explore.png")
+knitr::include_graphics("images/tidyverse.png")
+```
+
+本书用到的R语言库包
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+my_packages <- c("ggplot2", "dplyr", "tidyr", "stringr", "widyr", "ggRadar",
+                 "ggiraph", "ggiraphExtra", "ggraph", "tidygraph", "googlevis", 
+                 "broom", "modelr", "knitr", "rlang", "tidytext", "wordcloud2", 
+                 "tibbletime", "corrr", "devtools")
+
+#install.packages(my_packages, repos = "http://cran.rstudio.com")
+```
+
+
+##  推荐书目
+这不是一本讲R语言的书，如果您对R语言感兴趣，隆重向您推荐Hadley Wickham的《R for Data Science》这本书 [@Wickham2017]，
+
+```{r echo = FALSE, out.width = "50%"}
+knitr::include_graphics("images/rbook.png")
+```
+
+您也可以抽空参加我的一小时系列讲座，课表时间在附录 \@ref(sound)。
+
+

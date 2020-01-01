@@ -1,0 +1,39 @@
+book_filename: R4IS
+clean: [packages.bib, bookdown.bbl]
+language:
+  label:
+    fig: "图 "
+    tab: "表 "
+  ui:
+    edit: "编辑"
+    chapter_name: ["第 ", " 章"]
+
+rmd_files: [
+   "index.Rmd",
+   "author.Rmd",
+
+   "introduction.Rmd",
+   "Development.Rmd",
+   "College.Rmd",
+   "Contribution.Rmd",
+   "Journal.Rmd",
+   "JCR.Rmd",
+   "Cooperation.Rmd",
+   "Potential.Rmd",
+   "Impact.Rmd",
+   "Prediction.Rmd",
+   "Keywords.Rmd",
+   "ImpactFactor.Rmd",
+   "Fund.Rmd",
+   "Highcited.Rmd",
+   "Coupling.Rmd",
+   "Occurence_Matrix.Rmd",
+   "tidyabstract.Rmd",
+   "citedtime.Rmd",
+   #"analysis_acknowledgements.Rmd",
+   "tidybib.Rmd",
+
+
+  "Appendix.Rmd",
+  "references.Rmd"
+]

@@ -1,0 +1,96 @@
+--- 
+title:  "基于R语言的科研信息分析与服务"
+author: "王敏杰"
+date: "`r Sys.Date()`"
+documentclass: ctexbook
+output:
+  bookdown::gitbook:
+    df_print: paged
+bibliography: [book.bib, packages.bib, yet-another.bib]
+biblio-style: apalike
+link-citations: yes
+colorlinks: yes
+lot: yes
+lof: yes
+geometry: [a4paper, tmargin=2.5cm, bmargin=2.5cm, lmargin=3.5cm, rmargin=2.5cm]
+site: bookdown::bookdown_site
+description: "Scientific Research information service using R"
+github-repo: perlatex/R4IS
+#cover-image: images/R_logo.png
+always_allow_html: yes
+---
+
+```{r setup, include=FALSE}
+options(
+  htmltools.dir.version = FALSE, formatR.indent = 2, width = 55, digits = 4
+)
+
+knitr::opts_chunk$set(echo = TRUE, 
+                      warning = FALSE, 
+                      message = FALSE,
+                      fig.width = 6, 
+                      fig.height = 4)
+
+# 填上你需要用到的包，如 c('ggplot2', 'dplyr')
+lapply(c(), function(pkg) {
+  if (system.file(package = pkg) == '') install.packages(pkg)
+})
+```
+
+
+# 前言 {-}
+
+在图书馆开设R语言系列讲座也有一年半载了，在此过程中我萌生了用R语言写一本书的想法，一方面是想为学生提供R语言学习范例，另一方面也借此为我校科研人员提供一些科研信息服务。如果此举能做到教学相长，更好地实践和应用数据科学，也算是一次很有意义的尝试，无奈自己时间精力有限，写书进展缓慢。
+
+
+## 本书内容 {-}
+
+- 第 \@ref(intro) 章简单介绍数据科学与R语言，
+- 第 \@ref(develop) 章引入科研信息数据集，并利用tidyverse宏包进行数理统计和数据可视化，
+- 第 \@ref(college) 章统计科研论文中通讯地址使用情况，并给出写作的规范建议，
+- 第 \@ref(contri) 章介绍了各学院对ESI学科的贡献，以及期刊对引文的贡献，
+- 第 \@ref(Journal) 章基于中科院JCR期刊分区分析我校科研人员的选刊倾向，
+- 第 \@ref(JCR) 章统计分析期刊引证报告以及中国SCI期刊的情况，
+- 第 \@ref(cooperation) 章讨论四川省部分高校科研合作网络，
+- 第 \@ref(potential) 章预测四川省部分高校的潜力学科，
+- 第 \@ref(impact) 章基于中科院期刊等级分区分析论文影响力结构，
+- 第 \@ref(prediction) 章基于机器学习和引文模式，预测科研成效与学术影响力，
+- 第 \@ref(keywords) 章利用文本挖掘技术分析文献主题词，
+- 第 \@ref(ImpactFactor) 章分析期刊影响因子和特征因子，帮助科研人员选择合适期刊，
+- 第 \@ref(fund) 章分析基金资助情况，
+- 第 \@ref(Highcited) 章分析高被引论文，提炼当前研究热点和主题，
+- 第 \@ref(Coupling) 章尝试引文分析，分析引文之间的耦合关系和共现关系等，
+- 第 \@ref(Occurence) 章讨论共现矩阵在信息服务中的应用，
+- 第 \@ref(tidyabstract)章利用文本挖掘技术分析文献摘要等等，更多内容和章节未完待续...
+- 第 \@ref(tidybib)章介绍bibliometrix的宏包，以及引文分析
+
+## 数据和代码 {-}
+
+本书的代码可以公开，您完全可以重复每一过程。本书使用的代码和数据集
+
+- <https://github.com/perlatex/R4IS>
+
+## 未来想法 {-}
+
+- 四川省最近五年的题录（包括引文，与后面bibliometrix的要统一数据来源）
+- 兼顾（tidyverse擅长的格式和bibliometrix能处理的格式）
+- 以Claus O. Wilke的[《Fundamentals of Data Visualization》](https://serialmentor.com/dataviz/) 为指导， 重新精细化图片
+- 有项目经费，才好启动，但感觉这是个人爱好，估计很难了，只有自己写书
+- 如果要想有项目，也可以，比如用shiny，实时在线生成各竞争高校的，科研学术发展动态指示图
+- 批量下载使用[< G:\\Guide_DS_Perl6\\0.0.7 >]，配置好文件后，直接执行
+
+```{markdown}
+perl6 -Ilib wos.p6 
+```
+
+
+
+## 致谢 {-}
+
+非常感谢川师图书馆对我的帮助。
+
+```{block2, type='flushright', html.tag='p'}
+王敏杰
+于 川师图书馆某角落
+```
+

@@ -1,0 +1,325 @@
+\mainmatter
+
+# 数据科学与R语言 {#intro}
+
+## 数据科学
+```{r echo = FALSE, out.width = "45%"}
+knitr::include_graphics("images/Data_Science2010.png")
+```
+
+## R语言基础
+
+现在我们可以试试 **bookdown** 的一些初级功能了，例如图表。图 \@ref(fig:hello) 是一幅无趣的散点图，表 \@ref(tab:iris) 是一份枯燥的数据。
+
+
+
+```{r hello, fig.cap='雷猴啊，散点图！', out.width='90%'}
+par(mar = c(4, 4, 1, .1))
+plot(cars, pch = 19)
+```
+
+```{r iris}
+knitr::kable(
+  head(iris), caption = '雷猴啊，iris 数据！',
+  booktabs = TRUE
+)
+```
+
+
+
+
+R 软件是一个自由、开源软件平台，具有统计分析、可视化和编程的强大功能。可以从这里免费
+[下载](https://cloud.r-project.org). 为了更好的使用 R 软件，我推荐大家使用[RStudio](https://www.rstudio.com/products/rstudio)这个 IDE。这里有个[在线教程](https://www.rstudio.com/online-learning/)帮助我们熟悉 R 和 RStudio.
+R 与 RStudio 是什么关系呢？RStudio 是话筒，而 R 则是沟通所用的语言。
+
+```{r echo = FALSE, fig.cap='RStudio用户界面', out.width = "80%"}
+knitr::include_graphics("images/rstudio-editor.png")
+```
+
+RStudio 的用户界面十分简洁，想要运行一段R代码，只需要在RStudio控制台面板最下面一行内键入Rdi代码，然后回车即可。比如我们键入`1 + 1` 并按回车后，RStudio将显示如下结果
+```{r }
+1 + 1
+```
+
+在R中存储的数据称为**对象**， R语言数据处理就是不断的创建和操控这些对象。创建一个R对象，先确定一个名称，然后使用
+赋值操作符 `<-`，将数据赋值给它。比如，如果想给变量 x 赋值为，在命令行中可以这样写 `x <- 5` ，然后回车.
+
+```{r assignment operator}
+x <- 5
+```
+
+当键入`x` 然后回车，就打印出 x 的值。当然也可以使用命令`print(x)`，结果一样。
+```{r print x}
+x
+```
+
+R 语言的强大在于使用**函数**操控各种对象，你可以把对象看作是名词，而函数看作是动词。
+我们用一个简单的例子，`sum()`来演示函数如何工作的。正如它的名字，对输入的各个对象求和，然后返回求和后的值，可以在命令行中键入`?sum()`查看官方文档。
+`sum()`后的结果可以直接显示出来，也可以赋名。比如下面代码，首先计算`x + 10`并赋以名字`y`， 然后第二行中打印出来这个新创建的对象`y`
+
+
+```{r sum}
+y <- sum(x, 10)
+y
+```
+因为代码的灵活性，可以不断地重新定义对象。数据发生改变，原来的代码就会返回新的值。比如，对`x`重新赋值为 15， 同样运行`sum()`函数，这次我们不赋值给对象`y`，而是让它直接显示
+
+
+```{r reassign object}
+x <- 15
+sum(x, 10)
+```
+如果我们已经写好了一段R程序，我们可以保存为**脚本**文件，**脚本**文件通常以.R作为文件的后缀名。比如我们可以将刚才创建`x`和 `y`对象的命令，保存为脚本文件`my_script.R`。
+这样我们可以在其它时间修改和重新运行它。
+
+在RStudio中，你可以通过菜单栏依此点击`File > New File > R Script` 来创建一个新的脚本。
+强烈建议大家在运行代码之前，使用脚本的形式编写和编辑自己的程序，养成这样的习惯后，你今后所有的工作都有案可查，并且具有可重复性。
+
+
+## R 宏包: The tidyverse
+R 语言的强大还在于各种宏包，一般在 [The Comprehensive R Archive Network (CRAN)](https://cran.r-project.org)下载安装。宏包扩展了R语言本身的各种功能，也为解决问题提供了各种方案。截至2017年12月cran已经有10000个packages。由于各种包接口不统一，语法不一致，也带来一些困扰。为了解决这个问题，RStudio 的 [Hadley Wickham](http://hadley.nz) 带领的团队 推出了`tidyverse`宏包， [tidyverse](https://www.tidyverse.org)将常用的宏包整合在一起，并保持了语法的一致性，是R 语言 [入门](http://varianceexplained.org/r/teach-tidyverse/) 学习的首选。
+
+Upon download, R comes with a large number of functions, which together are referred to as base R. However, the capabilities of R can be greatly extended through the use of additional packages, which can be downloaded through [The Comprehensive R Archive Network (CRAN)](https://cran.r-project.org). Packages both extend what is possible in R and provide alternative ways to do things possible in base R. This can be confusing, because it means there are often a plethora of ways to do a single operation, but the extension in capability is well worth it. Particularly significant are the packages bundled together in the `tidyverse` package that were built by [Hadley Wickham](http://hadley.nz) and collaborators. The [tidyverse](https://www.tidyverse.org) provides a set of linked packages that all use a similar grammar to work with data. The tidyverse is [the best place to start if you are new to R](http://varianceexplained.org/r/teach-tidyverse/).
+
+本书也是基于tidyverse宏包而成的，下面通过一些例子展示tidyverse在数据分析和可视化的应用。
+数据分析主要使用 [dplyr package](http://dplyr.tidyverse.org) ，而可视化主要使用 [ggplot2](http://ggplot2.tidyverse.org).
+
+The examples below show the ability to analyze and visualize data using the tidyverse packages. The analysis will mainly be done with the [dplyr package](http://dplyr.tidyverse.org) and the visualization is done with [ggplot](http://ggplot2.tidyverse.org). The **dplyr** functions all have a similar structure. The main `dplyr` verbs or functions are `filter()`, `select()`, `arrange()`, `mutate()`, `group_by()`, and `summarise()`. All take a data frame as their first argument. The next set of arguments are the column names on which the function performs its actions. The result of the functions is a new data frame object. The `dplyr` functions can be linked together, so that it is possible to perform multiple manipulations on a data frame in one command. This is done with the use of the pipe, which in R is `%>%`.[^11]
+
+The commands needed to produce a **ggplot** graph can be confusing at first, but the advantages of `ggplot` are that it is based on a [grammar of graphics](http://vita.had.co.nz/papers/layered-grammar.pdf), which provides a systematic way to discuss graphs, and that `ggplot` comes with good defaults, enabling the creation of nice looking graphs with minimal code. The two main components of `ggplot` are geoms and the mapping of aesthetics. **Geoms** tell `ggplot` what kind of visual graphic to make, so there are separate geom functions for bar charts, points, lines, etc. **Aesthetics** tell `ggplot` which columns of the data to use for placement on the graph and for any other distinguishing aspects of these variables such as size, shape, and color. The graphs below are used to show some of the possibilities of `ggplot` while staying mainly within the defaults. Publication ready visualizations are possible with `ggplot`, but this would take more fiddling.[^12]
+
+## An Example: Analyzing a correspondence network
+With this basic overview of R out of the way, let’s move on to an example of an actual analysis of historical data to see what analysis and visualization in R looks like in practice. The data and an R script with all of the code can be found on [my GitHub page](https://github.com/jessesadler/intro-to-r), if you would like to run the code yourself.
+
+Before doing anything with the data, it is necessary to set up our environment in R. This means loading the packages that we will be using with the `library()` command. To begin we only need to load the `tidyverse` package, which includes the individual packages that I will use for the analysis.
+
+```{r load tidyverse, message = FALSE}
+library(tidyverse)
+```
+
+Once this is done, it is possible to use the functions from the tidyverse packages, beginning with reading our data into R with the `read_csv()` function. The code below takes a [csv file](https://en.wikipedia.org/wiki/Comma-separated_values) from a location on my computer and loads it into R as a data frame, while saving the object under the name `letters`.[^13] The code can be read as "create a data frame object called `letters` from the csv file named `correspondence-data-1585.csv`."
+
+```{r clean-data, eval = FALSE, include = FALSE}
+# Script for creating clean data that was then saved to data
+# Not run here
+letters1585 <- read_csv("data/dvdm-correspondence-1591.csv") %>% 
+  filter(destination != "NA", source != "NA", year == 1585) %>% 
+  select(writer, source, destination, date)
+```
+
+```{r load data, message = FALSE}
+letters <- read_csv("data/correspondence-data-1585.csv")
+```
+
+Even before anything has been done to manipulate the data, we are already in a better position than if we kept the data in Excel. Having loaded the data, all further manipulations will be done on the object `letters`, and no changes will be made to the `correspondence-data-1585.csv` file. In other words, there is no way to tamper with the database that may have taken hours (or more) to meticulously produce.
+
+Let's start by taking a look at the data itself by printing out a subset of the data to the console, which can be done by typing the name of the object into the console.[^14]
+
+```{r letters_tibble}
+letters
+```
+
+This tells us that `letters` is a [tibble](http://r4ds.had.co.nz/tibbles.html), which is a special kind of data frame meant to work well in the tidyverse. Though not necessarily aesthetically pleasing, the basic shape of a table of data is clear.[^15] The command printed out the first ten rows, while informing us that the complete data set contains `r nrow(letters)` rows. Each letter has four pieces of information or variables: the writer of the letter, the place from which it was sent, the place to which it was sent, and the date sent. Below the column headings of writer, source, destination, and date we are informed of the type of data for each variable. This shows that the first three columns consist of character strings (chr), meaning that the data is words, while the last column contains dates, which is discussed in greater detail below.
+
+## Creating new data frames
+Now that we have an idea of the basic structure of the data, it is possible to begin to analyze it. A simple question that is fairly difficult to answer in Excel — at least I do not know how to do it other than by hand — is how many different people wrote letters to Daniel during this period. The below gives a list of the writers of letters. The code is a good demonstration of basic structure of `dplyr` functions. The function `distinct()` takes a data frame, followed by the name of the column that I am interested in, returning a new data frame object with one column, which consists of the unique values from the original column.
+
+```{r distinct writers}
+distinct(letters, writer)
+```
+
+Because I did not assign the output a name, the results simply printed to the console. Saving the object requires the use of the assignment operator and choosing a memorable name. With this relatively simple operation I have created my first new data frame, which I can now refer to and further manipulate by calling to `writers`.
+
+```{r save distinct writers}
+writers <- distinct(letters, writer)
+```
+
+Printing out the object shows that there are `r nrow(writers)` people who sent Daniel letters in 1585, but another way to get this information is to run the `nrow()` function, which returns the number of rows in a data frame. It is possible to run the function on either the `writers` data frame, or to use the command that created the `writers` data frame. Let's do the latter and print the result to the console. If you happen to forget the number of correspondents, the command can be typed again.
+
+```{r nrow distinct writers}
+nrow(distinct(letters, writer))
+```
+
+Once we run the commands and see that they produce results that are what we would expect from the data, it is possible to both save the commands in a script and also to reuse their structure for other pieces of information. For example, we can learn the locations from which Daniel's correspondents sent letters and the locations in which he received letters by reusing the `distinct()` function and changing the column name to be manipulated.
+
+```{r distinct sources and locations}
+distinct(letters, source)
+distinct(letters, destination)
+```
+
+We can save the objects for later use by using the assignment operator and giving the data frames names.
+
+```{r save sources and locations}
+sources <- distinct(letters, source)
+destinations <- distinct(letters, destination)
+```
+
+## Linking `dplyr` commands together with the pipe
+Thus far, I have created data frames with one variable that show the unique values of the different variables, but this has not told us anything about the number of letters sent by each author or from each location. Doing this is more complicated, because it is necessary to chain together a series of functions using the pipe. This is the case for the question of how many letters each correspondent sent. Looking at the `dplyr` verbs listed above you might assume that the `summarise()` function will create a sum of the data. We can use the `summarise()` function to create a new column called count that is filled with the number of observations through the `n()` function. In other words, the code below tells R to summarize the `letters` data frame and place the number of observations in a column called count.
+
+```{r summarise}
+per_correspondent <- summarise(letters, count = n())
+per_correspondent
+```
+
+Running the command and printing the result shows a result that was not what we hoped. Instead of showing letters per correspondent, the function created a column called count with a single value equal to the amount of rows in the `letters` data frame. However, because the objects that are made in R are ephemeral, we can simply rerun the code after reworking it. This overwrites the old `per_correspondent` object with one that is more useful. In the first attempt there is no notion that the goal is to group the number of letters by writer. This is the task `group_by()` function. To create an object with correspondents in one column and the number of letters they sent in the second column we need to group the `letters` data frame by writer and then summarize the letters within each group, creating the count column while doing so. The last line of the code arranges the table in descending order of letters sent by the newly created count variable. Notice that the `letters` data frame is listed first before any function. This is because the `letters` data frame is piped into each of the functions with the use of the `%>%` command, which can be read as "and then."
+
+```{r per_correspondent_tbl}
+per_correspondent <- letters %>% 
+  group_by(writer) %>% 
+  summarise(count = n()) %>% 
+  arrange(desc(count))
+per_correspondent
+```
+
+Looking at the result, we can see that the above changes produced the kind output we expected. The `group_by()` and `summarise()` functions worked to create a data frame in which each author is listed once. The `count = n()` within the `summarise()` function created a new variable called count that is filled with the number of letters each correspondent sent. A cursory look at the results shows that the vast majority of the letters sent to Daniel were written by his brother Andries and his brother-in-law Jacques della Faille. Andries lived in the besieged city of Antwerp for most of 1585, and Jacques lived in Haarlem, so it will hardly be surprising that if we look at the amount of letters sent from each location that Antwerp and Haarlem dominate. Having written the above code, it is possible to rework it to create a data frame called `per_source`, which is done by replacing the writer column in the `group_by()` function with the source variable.
+
+```{r per_source_tbl}
+per_source <- letters %>% 
+  group_by(source) %>% 
+  summarise(count = n()) %>% 
+  arrange(desc(count))
+per_source
+```
+
+## Visualizing the data with `ggplot`
+While it is nice to have the two above sets of information presented in tables, it is also possible to visualize the newly created data with `ggplot`. The structure of `ggplot` functions is a bit different than that of `dplyr`. Like `dplyr` the functions are linked together, but the linking is done with the `+` symbol instead of `%>%`. With `ggplot` the three main functions are `ggplot()`, one or more `geom_*` function, which informs the type of graphical element to draw, and one or more `aes()` function that sets the aesthetic values of the graph. The designation of the data to use and the `aes()` functions can be placed within either the `ggplot()` function, indicating that they apply to all of the geoms, or they can be placed within individual `geom_*` functions in which case they will only be used for that geom. All this is to say that there are a variety of ways to produce the same visuals. The below code adds an extra function to label the axes with `labs()`.
+
+```{r per_source}
+ggplot(data = per_source) +
+  geom_bar(aes(x = source, y = count), stat = "identity") +
+  labs(x = NULL, y = "Letters written")
+```
+
+One part of the above code that might be a bit difficult to figure out is `stat = "identity"`. This needs to be called, because the code to create the `per_source` data frame actually did more work than necessary. `stat = "identity"` tells `geom_bar()` to set the height of the bars to the exact number in the count column. However, with `geom_bar()` only the x-axis needs to be specified. The y value is then calculated automatically based on the x value. Therefore, the below code, which uses the original `letters` data frame, could produce the exact same graph. Because of this, it is little trouble to change the variable for the x-axis to writers and get a completely new graph. Notice the change in the data and the deletion of the y variable and `stat`. One problem with the correspondents data is the length of the names. Therefore, this command makes changes to the `theme()` function. The arguments in the function are used to place the correspondent names at a ninety degree angle so that they do not overlap.
+
+```{r per_correspondent, fig.asp = 1}
+ggplot(data = letters) +
+  geom_bar(aes(x = writer)) +
+  labs(x = NULL, y = "Letters written") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+```
+
+## Working with dates
+Now, let's investigate the dates column. Dealing with dates is often tricky. To facilitate this analysis we need to load the `lubridate` package. [lubridate](http://lubridate.tidyverse.org/) is another package created by Hadley Wickham, which fits into the tidyverse manner of dealing with data. It is not among the packages loaded with `library(tidyverse)`, and so it is necessary to load it separately.
+
+```{r load lubridate, message = FALSE}
+library(lubridate)
+```
+
+Since the letters in this data set were all received in one year, it would be interesting to see how many letters Daniel received each month. This question is particularly interesting, because in 1585 Daniel's home city of Antwerp was under siege by Spanish troops, and Daniel was serving as a representative for his city to the rebels in Holland. It is also an interesting issue of analysis, because while the `letters` data frame contains information about the month the letters were sent, there is no month column. This prevents us from using the `group_by()` and `summarise()` workflow that we have developed. The answer comes from the `lubridate` package, which includes a function called `month()`. This function extracts the month from a date object, which we know the date column is, because it is identified as such when we have printed the `letters` data frame. The goal is to create a new column called month. This is done through the `dplyr` function `mutate()`, which creates the column and then applies the `month()` function to each of the dates. The remaining code is similar to that used above, but now the column we want to `group_by()` and `summarise()` is the newly created month column.
+
+```{r per_month_nr}
+per_month <- letters %>% 
+  mutate(month = month(date)) %>% 
+  group_by(month) %>% 
+  summarise(count = n())
+per_month
+```
+
+Looking at the result of this code, a problem is immediately apparent. The number of letters per month is as expected, but the months are returned as numbers, which is less than ideal. However, by looking at the documentation for lubridate by typing `?month()` into the console, it is possible to see that what needs to be done is to change the label argument to TRUE from the default of FALSE.
+
+```{r per_month_tbl}
+per_month <- letters %>% 
+  mutate(month = month(date, label = TRUE)) %>% 
+  group_by(month) %>% 
+  summarise(count = n())
+per_month
+```
+
+Now that we have the data in a good form we can plot it by making another bar chart.
+
+```{r per_month}
+ggplot(data = per_month) +
+  geom_bar(aes(x = month, y = count), stat = "identity") +
+  labs(x = 1585, y = "Letters sent")
+```
+
+The graph shows a peak in March of 1585 when Antwerp was in an extremely vulnerable position and it was more important than ever that it receive military and monetary assistance from the rebels in Holland. Another peak is reached in August when Antwerp surrendered, forcing Daniel and his family members to go into exile. The letters declined beginning in October, when Daniel left Holland to live in exile with his family in Bremen.
+
+As a fun aside, it is also possible to see what day of the week the letters were sent. Luckily, the data comes from 1585, three years after the creation of [Gregorian Calendar](http://en.wikipedia.org/wiki/Gregorian_calendar), and the areas from which the letters were sent had already transitioned to the new calendar. This means that they were using the same calendar as we do now, as opposed to a place like England, which only adopted the Gregorian Calendar in 1752. Therefore, we do not have to worry about adding 10 days to move from the old calendar to the new calendar.
+
+```{r per_wday_tbl}
+per_wday <- letters %>% 
+  mutate(wday = wday(date, label = TRUE)) %>% 
+  group_by(wday) %>% 
+  summarise(count = n())
+per_wday
+```
+
+We can even create the chart using the original `letters` data frame and call the `wday()` function within the definition of the x variable.
+
+```{r per_wday}
+ggplot(data = letters) +
+  geom_bar(aes(x = wday(date, label = TRUE))) +
+  labs(x = 1585, y = "Letters sent")
+```
+
+Finally, let's see who sent Daniel letters on Sundays. We can use the `filter()` function, which returns rows that match a certain argument. The below code uses the knowledge that without labels, Sunday is equivalent to 1. The code is also written in a slightly different style. Even though only a single function is called, `%>%` is used to pipe the data frame into the function, which cleans up the function call slightly.
+
+```{r sunday}
+letters %>% filter(wday(date) == 1)
+```
+
+## Combining data for correspondents and dates
+The `group_by()` and `summarise()` workflow developed so far results in data frames with two columns and thus only tells us about one variable from the data at a time. We can get a better understanding of Daniel's network by looking into how many letters each writer sent per month, which would involve the creation of a data frame with three columns. One advantage of using code is that it is often relatively simple to take a functioning line of code and tweak it to create a different result. Here, I take the line of code that produced `per_month` and alter it by adding the writer variable to the `group_by` function. Now the code will group the letters written by each correspondent per month and then count them. Notice how the dimensions of the resulting data frame has changed.
+
+```{r correspondent_per_month}
+correspondent_month <- letters %>% 
+  mutate(month = month(date, label = TRUE)) %>% 
+  group_by(writer, month) %>% 
+  summarise(count = n()) %>% 
+  arrange(desc(count))
+correspondent_month
+```
+
+With this new object called `correspondent_month` it is possible to add to the bar chart on letters per month, by filling in the bars with letters per correspondent in each month. The only difference in the code below from the earlier chart is the inclusion of `fill = writer` in `geom_bar()` and then giving it a label in `labs()`.
+
+```{r correspondent_month}
+ggplot(data = correspondent_month) +
+  geom_bar(aes(x = month, y = count, fill = writer), stat = "identity") +
+  labs(x = 1585, y = "Letters sent", fill = "Correspondents")
+```
+
+A bar graph is only one of many different geoms made available through `ggplot`, so let me finish by using the same information to produce a line graph with points showing the amount of letters each correspondent sent in a month. The structure of the command is slightly different here, because I place the `aes()` function in the `ggplot()` function. This is done because the same aesthetics will be used by both `geom_point()` and `geom_line()`. In the `geom_point()` function I increase the size of all of the points so that they are more clearly visible. The `geom_line()` function adds a new aesthetic for group, which tells the function how to connect the lines.
+
+```{r line_graph, fig.asp = 0.75}
+ggplot(data = correspondent_month, aes(x = month, y = count, color = writer)) + 
+  geom_point(size = 3) + 
+  geom_line(aes(group = writer)) + 
+  labs(x = 1585, y = "Letters sent", color = "Correspondents")
+```
+
+These two graphs provide different ways to visualize the data. Both give a clearer picture of the development of Daniel's correspondence over the course of 1585. Up until September, Andries was Daniel's most signifiant correspondent. After the fall of Antwerp, the two lived together in Bremen, forestalling any need to communicate by correspondence. On the other hand, in the second half of the year, Daniel's correspondence picked up with his brother-in-law, Jacques.
+
+
+
+
+## 数据科学工作流程
+数据科学工作流程
+```{r echo = FALSE, out.width = "90%"}
+#knitr::include_graphics("images/data-science-explore.png")
+knitr::include_graphics("images/tidyverse.png")
+```
+
+本书用到的R语言库包
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+my_packages <- c("ggplot2", "dplyr", "tidyr", "stringr", "widyr", "ggRadar",
+                 "ggiraph", "ggiraphExtra", "ggraph", "tidygraph", "googlevis", 
+                 "broom", "modelr", "knitr", "rlang", "tidytext", "wordcloud2", 
+                 "tibbletime", "corrr", "devtools")
+
+#install.packages(my_packages, repos = "http://cran.rstudio.com")
+```
+
+
+##  推荐书目
+这不是一本讲R语言的书，如果您对R语言感兴趣，隆重向您推荐Hadley Wickham的《R for Data Science》这本书 [@Wickham2017]，
+
+```{r echo = FALSE, out.width = "50%"}
+knitr::include_graphics("images/rbook.png")
+```
+
+您也可以抽空参加我的一小时系列讲座，课表时间在附录 \@ref(sound)。
+

@@ -1,0 +1,136 @@
+# 学院对学科的贡献 {#contri}
+
+>"Imagination is more important than knowledge"
+>
+>--- Albert Einstein
+
+在高校内，学科并非等同与学院。以四川师范大学为例，如化学与材料科学学
+院的发文方向除了化学学科，还包括材料学、工程学、物理学、微生物学等。另一方面，从
+学院对学科的贡献角度来说，如化学学科的发展，除了绝大部分是化学与材料科学学院
+的科研学者的贡献，也与物理与电子工程学院以及部分实验室功不可没。
+
+因此，厘清各学院乃至科研人员对学科的贡献结构情况，有利于在全校范围内聚焦优势学科，挖掘关键团队和科研人员，集中力量，精准发力，以期早日实现 ESI 学科的突破。
+
+
+
+## 这里开始吧
+
+
+```{r}
+record <- sicnu_set %>%
+  select(C1, Category_ESI_cn, TC) %>% 
+  mutate(colleges = str_extract_all(C1, "Sichuan Normal Univ,\\s+([^,]*),") ) %>% 
+  select(colleges, Category_ESI_cn, TC) %>% 
+  tidyr::unnest(colleges) 
+```
+
+
+
+
+```{r, message=FALSE, warning=FALSE}
+coll_cn_name <- read_csv("data/map_list/sicnu_coll_name_en2cn.csv")
+coll_cn_name
+```
+
+
+
+
+
+```{r}
+record_all <- left_join(record, coll_cn_name, by =c("colleges"="Coll_name")) #%>%                   #summarise(n=n()) 
+```
+
+
+
+<!-- ```{r} -->
+<!-- addr1 <- data %>%  -->
+<!--      select(C1) %>%  -->
+<!--      mutate(a = str_extract_all(C1, "Sichuan Normal Univ,\\s+([^,]*)," )  ) %>%  -->
+<!--      unnest() -->
+<!-- ``` -->
+
+
+
+
+<!-- ```{r} -->
+<!-- addr2 <- data %>%  -->
+<!--      select(RP) %>%  -->
+<!--      mutate(a = str_extract_all(RP, "Sichuan Normal Univ,\\s+([^,]*)," )   ) %>%  -->
+<!--      unnest() -->
+<!-- ``` -->
+
+
+
+<!-- ```{r} -->
+<!-- addr3 <- data %>%  -->
+<!--      select(C1,RP) %>%  -->
+<!--      mutate(a = str_extract_all(C1, "Sichuan Normal Univ,\\s+([^,]*)," )   ) %>%  -->
+<!--      mutate(b = str_extract_all(RP, "Sichuan Normal Univ,\\s+([^,]*)," )   ) #%>%   -->
+<!--      #mutate(c = str_c(a,b)  ) -->
+<!--      #unnest() -->
+<!-- ``` -->
+
+
+
+
+
+```{r}
+df <- record_all %>% 
+   select(Category_ESI_cn, coll_name_cn, TC) %>%
+   filter(!is.na(Category_ESI_cn), !is.na(coll_name_cn) ) %>%
+   group_by(Category_ESI_cn, coll_name_cn) %>%
+   summarise(count=n(), cited = sum(TC)) %>%
+   arrange(Category_ESI_cn, desc(count)) %>%
+   ungroup()
+```
+
+
+## 学院对发文的贡献
+```{r setOptions, message=FALSE}
+library(googleVis)
+op <- options(gvis.plot.tag='chart')
+```
+
+
+
+```{r}
+colnames(df) <- c("From", "To", "Weight", "Cited")
+```
+
+
+
+
+```{r results='asis', tidy=FALSE, fig.asp = 1.2, fig.width = 10, out.width = "99%"}
+df1 <- df %>% select(-Cited)
+
+sankey1 <- gvisSankey(df1, from="From", to="To", weight="Weight" ,
+              options=list(
+                height=800, width=600,
+                sankey="{link:{color:{fill:'lightblue'}}}"
+              ))
+
+plot(sankey1)
+
+```
+
+## 学院对引文的贡献
+同样，我们也可以绘制各学院引文贡献图
+
+```{r results='asis', tidy=FALSE, fig.asp = 1.2, fig.width = 10, out.width = "99%"}
+df2 <- df %>% select(-Weight)
+
+sankey2 <- gvisSankey(df2, from="From", to="To", weight="Weight" ,
+              options=list(
+                height=800, width=600,
+                sankey="{link:{color:{fill:'lightblue'}}}"
+              ))
+
+plot(sankey2)
+
+```
+
+
+
+
+## 期刊对引文的贡献分析
+见第 \@ref(impact) 章

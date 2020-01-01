@@ -1,0 +1,76 @@
+# 基金资助分析 {#fund}
+
+## 各学科受基金资助
+所发表的文章，受基金资助的情况。与学校的国家自然科学和社会科学基金申报，不是同一个事情。我们统计的是文章受资助的情况。
+```{r}
+complete_set %>% group_by(University_cn) %>% 
+         summarise(paper_cnt  = n(), fund_cnt = sum(!is.na(FU))) %>% 
+         mutate(percent = fund_cnt /paper_cnt) %>% 
+         arrange(desc(percent))
+```
+
+
+## 各学科情况
+两两统计
+
+```{r}
+datSM <- complete_set %>% count(University_cn, Category_ESI_cn) %>% arrange(desc(n))
+```
+
+
+```{r}
+datDM <- complete_set %>% 
+         select( Category_ESI_cn, FU) %>% 
+         separate_rows(FU, sep = ";") %>% 
+         mutate(FU = str_replace(FU, "\\[.*?\\]", "")) %>%
+         mutate(FU = str_trim(FU)) %>% 
+         filter(!is.na(FU) ) %>%
+         count(Category_ESI_cn, FU) %>%
+         filter(n > 10) %>% 
+         arrange(Category_ESI_cn, desc(n)) 
+```
+
+
+```{r}
+colnames(datSM) <- colnames(datDM) <- c("From", "To", "Dummy")
+
+datVis <- bind_rows(datSM, datDM)
+```
+
+
+
+```{r results='asis', tidy=FALSE, fig.asp = 1.2, fig.width = 10, out.width = "99%"}
+library(googleVis)
+sankeyVis <- gvisSankey(datVis, from = "from", to = "to", weight = "weight",
+              options=list(height=1800, width=900,
+              sankey="{
+               link:{color:{fill: 'lightgray', fillOpacity: 0.7}},
+               node:{nodePadding: 5, label:{fontSize: 12}, interactivity: true, width: 20},
+              }")
+  )
+
+plot(sankeyVis)
+```
+
+
+
+
+## 各校的情况
+这个只有用表格的形式了
+
+```{r}
+ complete_set %>% 
+         select(University_cn, Category_ESI_cn, UT, FU) %>% 
+         separate_rows(FU, sep = ";") %>% 
+         mutate(FU = str_replace(FU, "\\[.*?\\]", "")) %>%
+         mutate(FU = str_trim(FU)) %>% 
+         filter(!is.na(FU) ) %>%
+         count(University_cn, Category_ESI_cn, FU) %>%
+         filter(n > 10) %>% 
+         arrange(University_cn, Category_ESI_cn, desc(n)) %>%
+         drop_na() %>% 
+         knitr::kable( booktabs = T, caption = "各校学科基金资助") %>%
+         kable_styling("striped")
+```
+
+## 那个项目基金下的文章最丰富？
