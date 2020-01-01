@@ -1,2 +1,3 @@
 # R4IS
-Scientific research information service using R and tidyverse
+
+基于R语言的科研信息分析与服务

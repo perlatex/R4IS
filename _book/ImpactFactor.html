@@ -1,0 +1,2877 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>第 12 章 期刊的影响因子 | 基于R语言的科研信息分析与服务</title>
+  <meta name="description" content="Scientific Research information service using R" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="第 12 章 期刊的影响因子 | 基于R语言的科研信息分析与服务" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Scientific Research information service using R" />
+  <meta name="github-repo" content="perlatex/R4IS" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 12 章 期刊的影响因子 | 基于R语言的科研信息分析与服务" />
+  
+  <meta name="twitter:description" content="Scientific Research information service using R" />
+  
+
+<meta name="author" content="王敏杰" />
+
+
+<meta name="date" content="2020-01-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="keywords.html"/>
+<link rel="next" href="fund.html"/>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<link href="libs/pagedtable/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable/js/pagedtable.js"></script>
+<script src="libs/kePrint/kePrint.js"></script>
+<script src="libs/htmlwidgets/htmlwidgets.js"></script>
+<link href="libs/str_view/str_view.css" rel="stylesheet" />
+<script src="libs/str_view-binding/str_view.js"></script>
+<link href="libs/wordcloud2/wordcloud.css" rel="stylesheet" />
+<script src="libs/wordcloud2/wordcloud2-all.js"></script>
+<script src="libs/wordcloud2/hover.js"></script>
+<script src="libs/wordcloud2-binding/wordcloud2.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css\psyteachr.css" type="text/css" />
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">科研信息服务</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-1"><i class="fa fa-check"></i>本书内容</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-2"><i class="fa fa-check"></i>数据和代码</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-3"><i class="fa fa-check"></i>未来想法</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-4"><i class="fa fa-check"></i>致谢</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i>作者简介</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> 数据科学与R语言</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#section-5"><i class="fa fa-check"></i><b>1.1</b> 数据科学</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#r"><i class="fa fa-check"></i><b>1.2</b> R语言基础</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#r--the-tidyverse"><i class="fa fa-check"></i><b>1.3</b> R 宏包: The tidyverse</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#section-6"><i class="fa fa-check"></i><b>1.4</b> 字符串处理：正则表达式</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#section-7"><i class="fa fa-check"></i><b>1.5</b> 数据科学工作流程</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#section-8"><i class="fa fa-check"></i><b>1.6</b> 推荐书目</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="develop.html"><a href="develop.html"><i class="fa fa-check"></i><b>2</b> 学科结构与发展</a><ul>
+<li class="chapter" data-level="2.1" data-path="develop.html"><a href="develop.html#pros"><i class="fa fa-check"></i><b>2.1</b> PROS</a></li>
+<li class="chapter" data-level="2.2" data-path="develop.html"><a href="develop.html#web-of-science"><i class="fa fa-check"></i><b>2.2</b> Web of Science</a></li>
+<li class="chapter" data-level="2.3" data-path="develop.html"><a href="develop.html#section-9"><i class="fa fa-check"></i><b>2.3</b> 数据集的构建</a></li>
+<li class="chapter" data-level="2.4" data-path="develop.html"><a href="develop.html#section-10"><i class="fa fa-check"></i><b>2.4</b> 数据集的导入</a></li>
+<li class="chapter" data-level="2.5" data-path="develop.html"><a href="develop.html#section-11"><i class="fa fa-check"></i><b>2.5</b> 各高校对比</a></li>
+<li class="chapter" data-level="2.6" data-path="develop.html"><a href="develop.html#section-12"><i class="fa fa-check"></i><b>2.6</b> 分析单个学校</a></li>
+<li class="chapter" data-level="2.7" data-path="develop.html"><a href="develop.html#section-13"><i class="fa fa-check"></i><b>2.7</b> 第一作者筛查</a></li>
+<li class="chapter" data-level="2.8" data-path="develop.html"><a href="develop.html#section-14"><i class="fa fa-check"></i><b>2.8</b> 通讯作者筛查</a></li>
+<li class="chapter" data-level="2.9" data-path="develop.html"><a href="develop.html#section-15"><i class="fa fa-check"></i><b>2.9</b> 可视化之小试牛刀</a></li>
+<li class="chapter" data-level="2.10" data-path="develop.html"><a href="develop.html#section-16"><i class="fa fa-check"></i><b>2.10</b> 可视化之初显身手</a></li>
+<li class="chapter" data-level="2.11" data-path="develop.html"><a href="develop.html#section-17"><i class="fa fa-check"></i><b>2.11</b> 可视化之渐入佳境</a></li>
+<li class="chapter" data-level="2.12" data-path="develop.html"><a href="develop.html#section-18"><i class="fa fa-check"></i><b>2.12</b> 更多</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="college.html"><a href="college.html"><i class="fa fa-check"></i><b>3</b> 通讯地址统计</a><ul>
+<li class="chapter" data-level="3.1" data-path="college.html"><a href="college.html#section-19"><i class="fa fa-check"></i><b>3.1</b> 各学院英文地址</a></li>
+<li class="chapter" data-level="3.2" data-path="college.html"><a href="college.html#section-20"><i class="fa fa-check"></i><b>3.2</b> 统计</a></li>
+<li class="chapter" data-level="3.3" data-path="college.html"><a href="college.html#section-21"><i class="fa fa-check"></i><b>3.3</b> 部分学院结果</a></li>
+<li class="chapter" data-level="3.4" data-path="college.html"><a href="college.html#section-22"><i class="fa fa-check"></i><b>3.4</b> 随年份的变化</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="contri.html"><a href="contri.html"><i class="fa fa-check"></i><b>4</b> 学院对学科的贡献</a><ul>
+<li class="chapter" data-level="4.1" data-path="contri.html"><a href="contri.html#section-23"><i class="fa fa-check"></i><b>4.1</b> 这里开始吧</a></li>
+<li class="chapter" data-level="4.2" data-path="contri.html"><a href="contri.html#section-24"><i class="fa fa-check"></i><b>4.2</b> 学院对发文的贡献</a></li>
+<li class="chapter" data-level="4.3" data-path="contri.html"><a href="contri.html#section-25"><i class="fa fa-check"></i><b>4.3</b> 学院对引文的贡献</a></li>
+<li class="chapter" data-level="4.4" data-path="contri.html"><a href="contri.html#section-26"><i class="fa fa-check"></i><b>4.4</b> 期刊对引文的贡献分析</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="Journal.html"><a href="Journal.html"><i class="fa fa-check"></i><b>5</b> 学校科研人员的选刊倾向</a><ul>
+<li class="chapter" data-level="5.1" data-path="Journal.html"><a href="Journal.html#jcr"><i class="fa fa-check"></i><b>5.1</b> 中科院JCR期刊分区介绍</a></li>
+<li class="chapter" data-level="5.2" data-path="Journal.html"><a href="Journal.html#section-27"><i class="fa fa-check"></i><b>5.2</b> 各学科论文的期刊分布</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="JCR.html"><a href="JCR.html"><i class="fa fa-check"></i><b>6</b> 期刊使用情况</a><ul>
+<li class="chapter" data-level="6.1" data-path="JCR.html"><a href="JCR.html#jcr-1"><i class="fa fa-check"></i><b>6.1</b> JCR简介</a></li>
+<li class="chapter" data-level="6.2" data-path="JCR.html"><a href="JCR.html#jcr-2"><i class="fa fa-check"></i><b>6.2</b> JCR初探</a></li>
+<li class="chapter" data-level="6.3" data-path="JCR.html"><a href="JCR.html#sci"><i class="fa fa-check"></i><b>6.3</b> 中国SCI期刊</a></li>
+<li class="chapter" data-level="6.4" data-path="JCR.html"><a href="JCR.html#section-28"><i class="fa fa-check"></i><b>6.4</b> 可视化</a></li>
+<li class="chapter" data-level="6.5" data-path="JCR.html"><a href="JCR.html#section-29"><i class="fa fa-check"></i><b>6.5</b> 各学科期刊使用情况</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="cooperation.html"><a href="cooperation.html"><i class="fa fa-check"></i><b>7</b> 科研合作</a><ul>
+<li class="chapter" data-level="7.1" data-path="cooperation.html"><a href="cooperation.html#section-30"><i class="fa fa-check"></i><b>7.1</b> 机构匹配</a></li>
+<li class="chapter" data-level="7.2" data-path="cooperation.html"><a href="cooperation.html#section-31"><i class="fa fa-check"></i><b>7.2</b> 化学学科</a></li>
+<li class="chapter" data-level="7.3" data-path="cooperation.html"><a href="cooperation.html#section-32"><i class="fa fa-check"></i><b>7.3</b> 全部学科</a></li>
+<li class="chapter" data-level="7.4" data-path="cooperation.html"><a href="cooperation.html#section-33"><i class="fa fa-check"></i><b>7.4</b> 看看某个学校的呢</a></li>
+<li class="chapter" data-level="7.5" data-path="cooperation.html"><a href="cooperation.html#section-34"><i class="fa fa-check"></i><b>7.5</b> 思考1</a></li>
+<li class="chapter" data-level="7.6" data-path="cooperation.html"><a href="cooperation.html#section-35"><i class="fa fa-check"></i><b>7.6</b> 思考2</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="potential.html"><a href="potential.html"><i class="fa fa-check"></i><b>8</b> 潜力学科</a><ul>
+<li class="chapter" data-level="8.1" data-path="potential.html"><a href="potential.html#esi"><i class="fa fa-check"></i><b>8.1</b> ESI学科</a></li>
+<li class="chapter" data-level="8.2" data-path="potential.html"><a href="potential.html#section-36"><i class="fa fa-check"></i><b>8.2</b> 潜力学科定义</a></li>
+<li class="chapter" data-level="8.3" data-path="potential.html"><a href="potential.html#esi-1"><i class="fa fa-check"></i><b>8.3</b> 各学科进入ESI的阈值</a></li>
+<li class="chapter" data-level="8.4" data-path="potential.html"><a href="potential.html#section-37"><i class="fa fa-check"></i><b>8.4</b> 潜力学科统计</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="impact.html"><a href="impact.html"><i class="fa fa-check"></i><b>9</b> 影响力结构分析</a><ul>
+<li class="chapter" data-level="9.1" data-path="impact.html"><a href="impact.html#section-38"><i class="fa fa-check"></i><b>9.1</b> 论文影响力结构</a></li>
+<li class="chapter" data-level="9.2" data-path="impact.html"><a href="impact.html#section-39"><i class="fa fa-check"></i><b>9.2</b> 各学科论文影响力结构</a></li>
+<li class="chapter" data-level="9.3" data-path="impact.html"><a href="impact.html#section-40"><i class="fa fa-check"></i><b>9.3</b> 引文最大贡献的期刊</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="prediction.html"><a href="prediction.html"><i class="fa fa-check"></i><b>10</b> 预测</a><ul>
+<li class="chapter" data-level="10.1" data-path="prediction.html"><a href="prediction.html#section-41"><i class="fa fa-check"></i><b>10.1</b> 学科发展的相关性</a></li>
+<li class="chapter" data-level="10.2" data-path="prediction.html"><a href="prediction.html#section-42"><i class="fa fa-check"></i><b>10.2</b> 发文量的预测</a></li>
+<li class="chapter" data-level="10.3" data-path="prediction.html"><a href="prediction.html#section-43"><i class="fa fa-check"></i><b>10.3</b> 建模</a></li>
+<li class="chapter" data-level="10.4" data-path="prediction.html"><a href="prediction.html#section-44"><i class="fa fa-check"></i><b>10.4</b> 引文量的预测</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="keywords.html"><a href="keywords.html"><i class="fa fa-check"></i><b>11</b> 主题词分析</a><ul>
+<li class="chapter" data-level="11.1" data-path="keywords.html"><a href="keywords.html#section-45"><i class="fa fa-check"></i><b>11.1</b> 化学学科</a></li>
+<li class="chapter" data-level="11.2" data-path="keywords.html"><a href="keywords.html#section-46"><i class="fa fa-check"></i><b>11.2</b> 词云</a></li>
+<li class="chapter" data-level="11.3" data-path="keywords.html"><a href="keywords.html#section-47"><i class="fa fa-check"></i><b>11.3</b> 共现矩阵</a></li>
+<li class="chapter" data-level="11.4" data-path="keywords.html"><a href="keywords.html#section-48"><i class="fa fa-check"></i><b>11.4</b> 全部学科</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="ImpactFactor.html"><a href="ImpactFactor.html"><i class="fa fa-check"></i><b>12</b> 期刊的影响因子</a><ul>
+<li class="chapter" data-level="12.1" data-path="ImpactFactor.html"><a href="ImpactFactor.html#section-49"><i class="fa fa-check"></i><b>12.1</b> 各学科影响因子最高的期刊</a></li>
+<li class="chapter" data-level="12.2" data-path="ImpactFactor.html"><a href="ImpactFactor.html#esi-2"><i class="fa fa-check"></i><b>12.2</b> 不同ESI学科，影响因子的分布</a></li>
+<li class="chapter" data-level="12.3" data-path="ImpactFactor.html"><a href="ImpactFactor.html#section-50"><i class="fa fa-check"></i><b>12.3</b> 加入学校数据，影响因子求和得分</a></li>
+<li class="chapter" data-level="12.4" data-path="ImpactFactor.html"><a href="ImpactFactor.html#section-51"><i class="fa fa-check"></i><b>12.4</b> 得分与被引量的关系</a></li>
+<li class="chapter" data-level="12.5" data-path="ImpactFactor.html"><a href="ImpactFactor.html#section-52"><i class="fa fa-check"></i><b>12.5</b> 看看不同中科院学科和等级下，随影响因子排序的期刊</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="fund.html"><a href="fund.html"><i class="fa fa-check"></i><b>13</b> 基金资助分析</a><ul>
+<li class="chapter" data-level="13.1" data-path="fund.html"><a href="fund.html#section-53"><i class="fa fa-check"></i><b>13.1</b> 各学科受基金资助</a></li>
+<li class="chapter" data-level="13.2" data-path="fund.html"><a href="fund.html#section-54"><i class="fa fa-check"></i><b>13.2</b> 各学科情况</a></li>
+<li class="chapter" data-level="13.3" data-path="fund.html"><a href="fund.html#section-55"><i class="fa fa-check"></i><b>13.3</b> 各校的情况</a></li>
+<li class="chapter" data-level="13.4" data-path="fund.html"><a href="fund.html#section-56"><i class="fa fa-check"></i><b>13.4</b> 那个项目基金下的文章最丰富？</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="Highcited.html"><a href="Highcited.html"><i class="fa fa-check"></i><b>14</b> 高被引论文</a><ul>
+<li class="chapter" data-level="14.1" data-path="Highcited.html"><a href="Highcited.html#section-57"><i class="fa fa-check"></i><b>14.1</b> 还没想好</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="Coupling.html"><a href="Coupling.html"><i class="fa fa-check"></i><b>15</b> 耦合</a><ul>
+<li class="chapter" data-level="15.1" data-path="Coupling.html"><a href="Coupling.html#bibliographic-coupling"><i class="fa fa-check"></i><b>15.1</b> Bibliographic coupling</a></li>
+<li class="chapter" data-level="15.2" data-path="Coupling.html"><a href="Coupling.html#sicnu_set"><i class="fa fa-check"></i><b>15.2</b> 用<code>sicnu_set</code>看看吧</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="Occurence.html"><a href="Occurence.html"><i class="fa fa-check"></i><b>16</b> 共现矩阵在信息服务中的应用</a><ul>
+<li class="chapter" data-level="16.1" data-path="Occurence.html"><a href="Occurence.html#section-58"><i class="fa fa-check"></i><b>16.1</b> 邻接矩阵</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="Occurence.html"><a href="Occurence.html#section-59"><i class="fa fa-check"></i><b>16.1.1</b> 共现矩阵</a></li>
+<li class="chapter" data-level="16.1.2" data-path="Occurence.html"><a href="Occurence.html#section-60"><i class="fa fa-check"></i><b>16.1.2</b> 距离矩阵</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="Occurence.html"><a href="Occurence.html#section-61"><i class="fa fa-check"></i><b>16.2</b> 聚类案例1：主题词聚类</a></li>
+<li class="chapter" data-level="16.3" data-path="Occurence.html"><a href="Occurence.html#section-62"><i class="fa fa-check"></i><b>16.3</b> 聚类案例2：若干学校的聚类</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="tidyabstract.html"><a href="tidyabstract.html"><i class="fa fa-check"></i><b>17</b> 利用文本挖掘技术分析文献摘要</a><ul>
+<li class="chapter" data-level="17.1" data-path="tidyabstract.html"><a href="tidyabstract.html#section-63"><i class="fa fa-check"></i><b>17.1</b> 数据导入</a></li>
+<li class="chapter" data-level="17.2" data-path="tidyabstract.html"><a href="tidyabstract.html#section-64"><i class="fa fa-check"></i><b>17.2</b> 数据规整</a></li>
+<li class="chapter" data-level="17.3" data-path="tidyabstract.html"><a href="tidyabstract.html#tf_idf"><i class="fa fa-check"></i><b>17.3</b> 计算tf_idf</a></li>
+<li class="chapter" data-level="17.4" data-path="tidyabstract.html"><a href="tidyabstract.html#section-65"><i class="fa fa-check"></i><b>17.4</b> 文本相似性</a></li>
+<li class="chapter" data-level="17.5" data-path="tidyabstract.html"><a href="tidyabstract.html#section-66"><i class="fa fa-check"></i><b>17.5</b> 关联词汇</a></li>
+<li class="chapter" data-level="17.6" data-path="tidyabstract.html"><a href="tidyabstract.html#section-67"><i class="fa fa-check"></i><b>17.6</b> 下一步工作</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="citedtime.html"><a href="citedtime.html"><i class="fa fa-check"></i><b>18</b> 文章被引时间特征分析</a></li>
+<li class="chapter" data-level="19" data-path="tidybib.html"><a href="tidybib.html"><i class="fa fa-check"></i><b>19</b> 基于bibliometrix宏包</a></li>
+<li class="appendix"><span><b>附录</b></span></li>
+<li class="chapter" data-level="A" data-path="sound.html"><a href="sound.html"><i class="fa fa-check"></i><b>A</b> 附录</a><ul>
+<li class="chapter" data-level="A.1" data-path="sound.html"><a href="sound.html#r-1"><i class="fa fa-check"></i><b>A.1</b> R语言系列讲座</a></li>
+<li class="chapter" data-level="A.2" data-path="sound.html"><a href="sound.html#section-68"><i class="fa fa-check"></i><b>A.2</b> 联系我们</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">本书由 bookdown 强力驱动</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">基于R语言的科研信息分析与服务</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ImpactFactor" class="section level1">
+<h1><span class="header-section-number">第 12 章</span> 期刊的影响因子</h1>
+<div id="section-49" class="section level2">
+<h2><span class="header-section-number">12.1</span> 各学科影响因子最高的期刊</h2>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" title="1">esi_plus_cas_IF_set&lt;-<span class="st"> </span><span class="kw">read_rds</span>(<span class="st">&quot;data/dataset/esi_plus_cas_IF_set.rds&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" title="1"><span class="kw">glimpse</span>( esi_plus_cas_IF_set )</a></code></pre></div>
+<pre><code>## Observations: 11,684
+## Variables: 11
+## $ ISSN            &lt;chr&gt; &quot;2053-1583&quot;, &quot;2190-572X&quot;, ...
+## $ Full_title      &lt;chr&gt; &quot;2D Materials&quot;, &quot;3 Biotech...
+## $ Category_ESI    &lt;chr&gt; &quot;MATERIALS SCIENCE&quot;, &quot;BIOL...
+## $ Category_ESI_cn &lt;chr&gt; &quot;材料科学&quot;, &quot;生物学与生物化学&quot;, &quot;工程学&quot;,...
+## $ Category_CAS    &lt;chr&gt; &quot;工程技术&quot;, NA, &quot;工程技术&quot;, &quot;管理科学&quot;...
+## $ Degree_CAS      &lt;int&gt; 1, NA, 2, 3, 2, 2, 4, 4, 4...
+## $ Title           &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA...
+## $ is_chinese      &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0,...
+## $ Cites           &lt;dbl&gt; 3284, 1108, 260, 460, 1303...
+## $ ImpactFactor    &lt;dbl&gt; 7.042, 1.497, 2.304, 1.206...
+## $ Eigenfactor     &lt;dbl&gt; 0.01174, 0.00221, 0.00074,...</code></pre>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" title="1">esi_plus_cas_IF_set <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Category_ESI_cn, Full_title, ImpactFactor ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb129-2" title="2"><span class="st">             </span><span class="kw">arrange</span>(Category_ESI_cn, <span class="kw">desc</span>(ImpactFactor)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb129-3" title="3"><span class="st">             </span><span class="kw">group_by</span>(Category_ESI_cn) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb129-4" title="4"><span class="st">             </span><span class="kw">top_n</span>(<span class="dv">10</span>)<span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb129-5" title="5"><span class="st">             </span>knitr<span class="op">::</span><span class="kw">kable</span>( <span class="dt">booktabs =</span> T, <span class="dt">caption =</span> <span class="st">&quot;各学科影响因子最高的期刊&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb129-6" title="6"><span class="st">             </span><span class="kw">kable_styling</span>(<span class="st">&quot;striped&quot;</span>)</a></code></pre></div>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-137">表 12.1: </span>各学科影响因子最高的期刊
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Category_ESI_cn
+</th>
+<th style="text-align:left;">
+Full_title
+</th>
+<th style="text-align:right;">
+ImpactFactor
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+材料科学
+</td>
+<td style="text-align:left;">
+Nature Reviews Materials
+</td>
+<td style="text-align:right;">
+51.941
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+材料科学
+</td>
+<td style="text-align:left;">
+NATURE MATERIALS
+</td>
+<td style="text-align:right;">
+39.235
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+材料科学
+</td>
+<td style="text-align:left;">
+Nature Nanotechnology
+</td>
+<td style="text-align:right;">
+37.490
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+材料科学
+</td>
+<td style="text-align:left;">
+Materials Today
+</td>
+<td style="text-align:right;">
+24.537
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+材料科学
+</td>
+<td style="text-align:left;">
+MATERIALS SCIENCE &amp; ENGINEERING R-REPORTS
+</td>
+<td style="text-align:right;">
+24.480
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+材料科学
+</td>
+<td style="text-align:left;">
+PROGRESS IN MATERIALS SCIENCE
+</td>
+<td style="text-align:right;">
+23.750
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+材料科学
+</td>
+<td style="text-align:left;">
+ADVANCED MATERIALS
+</td>
+<td style="text-align:right;">
+21.950
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+材料科学
+</td>
+<td style="text-align:left;">
+Advanced Energy Materials
+</td>
+<td style="text-align:right;">
+21.875
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+材料科学
+</td>
+<td style="text-align:left;">
+Annual Review of Materials Research
+</td>
+<td style="text-align:right;">
+15.846
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+材料科学
+</td>
+<td style="text-align:left;">
+ADVANCED FUNCTIONAL MATERIALS
+</td>
+<td style="text-align:right;">
+13.325
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+地球科学
+</td>
+<td style="text-align:left;">
+Nature Geoscience
+</td>
+<td style="text-align:right;">
+14.391
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+地球科学
+</td>
+<td style="text-align:left;">
+REVIEWS OF GEOPHYSICS
+</td>
+<td style="text-align:right;">
+13.529
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+地球科学
+</td>
+<td style="text-align:left;">
+Annual Review of Marine Science
+</td>
+<td style="text-align:right;">
+12.867
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+地球科学
+</td>
+<td style="text-align:left;">
+Annual Review of Earth and Planetary Sciences
+</td>
+<td style="text-align:right;">
+11.391
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+地球科学
+</td>
+<td style="text-align:left;">
+Reviews in Mineralogy &amp; Geochemistry
+</td>
+<td style="text-align:right;">
+8.846
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+地球科学
+</td>
+<td style="text-align:left;">
+Earth System Science Data
+</td>
+<td style="text-align:right;">
+8.792
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+地球科学
+</td>
+<td style="text-align:left;">
+BULLETIN OF THE AMERICAN METEOROLOGICAL SOCIETY
+</td>
+<td style="text-align:right;">
+7.804
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+地球科学
+</td>
+<td style="text-align:left;">
+EARTH-SCIENCE REVIEWS
+</td>
+<td style="text-align:right;">
+7.491
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+地球科学
+</td>
+<td style="text-align:left;">
+REMOTE SENSING OF ENVIRONMENT
+</td>
+<td style="text-align:right;">
+6.457
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+地球科学
+</td>
+<td style="text-align:left;">
+ISPRS JOURNAL OF PHOTOGRAMMETRY AND REMOTE SENSING
+</td>
+<td style="text-align:right;">
+5.994
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+分子生物学与遗传学
+</td>
+<td style="text-align:left;">
+Oncotarget
+</td>
+<td style="text-align:right;">
+244.585
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+分子生物学与遗传学
+</td>
+<td style="text-align:left;">
+NATURE REVIEWS GENETICS
+</td>
+<td style="text-align:right;">
+41.465
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+分子生物学与遗传学
+</td>
+<td style="text-align:left;">
+NATURE REVIEWS MOLECULAR CELL BIOLOGY
+</td>
+<td style="text-align:right;">
+35.612
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+分子生物学与遗传学
+</td>
+<td style="text-align:left;">
+NATURE MEDICINE
+</td>
+<td style="text-align:right;">
+32.621
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+分子生物学与遗传学
+</td>
+<td style="text-align:left;">
+CELL
+</td>
+<td style="text-align:right;">
+31.398
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+分子生物学与遗传学
+</td>
+<td style="text-align:left;">
+NATURE GENETICS
+</td>
+<td style="text-align:right;">
+27.125
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+分子生物学与遗传学
+</td>
+<td style="text-align:left;">
+Cell Stem Cell
+</td>
+<td style="text-align:right;">
+23.290
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+分子生物学与遗传学
+</td>
+<td style="text-align:left;">
+CANCER CELL
+</td>
+<td style="text-align:right;">
+22.844
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+分子生物学与遗传学
+</td>
+<td style="text-align:left;">
+Cell Metabolism
+</td>
+<td style="text-align:right;">
+20.565
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+分子生物学与遗传学
+</td>
+<td style="text-align:left;">
+NATURE CELL BIOLOGY
+</td>
+<td style="text-align:right;">
+19.064
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+工程学
+</td>
+<td style="text-align:left;">
+TECHNOLOGY REVIEW
+</td>
+<td style="text-align:right;">
+79.258
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+工程学
+</td>
+<td style="text-align:left;">
+Nature Energy
+</td>
+<td style="text-align:right;">
+46.859
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+工程学
+</td>
+<td style="text-align:left;">
+PROGRESS IN ENERGY AND COMBUSTION SCIENCE
+</td>
+<td style="text-align:right;">
+25.242
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+工程学
+</td>
+<td style="text-align:left;">
+INTERNATIONAL JOURNAL OF COMPUTER VISION
+</td>
+<td style="text-align:right;">
+11.541
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+工程学
+</td>
+<td style="text-align:left;">
+PROGRESS IN QUANTUM ELECTRONICS
+</td>
+<td style="text-align:right;">
+10.733
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+工程学
+</td>
+<td style="text-align:left;">
+IEEE Industrial Electronics Magazine
+</td>
+<td style="text-align:right;">
+10.429
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+工程学
+</td>
+<td style="text-align:left;">
+IEEE TRANSACTIONS ON PATTERN ANALYSIS AND MACHINE INTELLIGENCE
+</td>
+<td style="text-align:right;">
+9.455
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+工程学
+</td>
+<td style="text-align:left;">
+RENEWABLE &amp; SUSTAINABLE ENERGY REVIEWS
+</td>
+<td style="text-align:right;">
+9.184
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+工程学
+</td>
+<td style="text-align:left;">
+PROCEEDINGS OF THE IEEE
+</td>
+<td style="text-align:right;">
+9.107
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+工程学
+</td>
+<td style="text-align:left;">
+IEEE TRANSACTIONS ON FUZZY SYSTEMS
+</td>
+<td style="text-align:right;">
+8.415
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+化学
+</td>
+<td style="text-align:left;">
+CHEMICAL REVIEWS
+</td>
+<td style="text-align:right;">
+52.613
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+化学
+</td>
+<td style="text-align:left;">
+CHEMICAL SOCIETY REVIEWS
+</td>
+<td style="text-align:right;">
+40.182
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+化学
+</td>
+<td style="text-align:left;">
+Energy &amp; Environmental Science
+</td>
+<td style="text-align:right;">
+30.067
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+化学
+</td>
+<td style="text-align:left;">
+Nature Chemistry
+</td>
+<td style="text-align:right;">
+26.201
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+化学
+</td>
+<td style="text-align:left;">
+PROGRESS IN POLYMER SCIENCE
+</td>
+<td style="text-align:right;">
+24.558
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+化学
+</td>
+<td style="text-align:left;">
+ACCOUNTS OF CHEMICAL RESEARCH
+</td>
+<td style="text-align:right;">
+20.955
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+化学
+</td>
+<td style="text-align:left;">
+JOURNAL OF PHOTOCHEMISTRY AND PHOTOBIOLOGY C-PHOTOCHEMISTRY REVIEWS
+</td>
+<td style="text-align:right;">
+15.325
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+化学
+</td>
+<td style="text-align:left;">
+COORDINATION CHEMISTRY REVIEWS
+</td>
+<td style="text-align:right;">
+14.499
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+化学
+</td>
+<td style="text-align:left;">
+JOURNAL OF THE AMERICAN CHEMICAL SOCIETY
+</td>
+<td style="text-align:right;">
+14.357
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+化学
+</td>
+<td style="text-align:left;">
+Chem
+</td>
+<td style="text-align:right;">
+14.104
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+环境科学与生态学
+</td>
+<td style="text-align:left;">
+Nature Climate Change
+</td>
+<td style="text-align:right;">
+19.181
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+环境科学与生态学
+</td>
+<td style="text-align:left;">
+TRENDS IN ECOLOGY &amp; EVOLUTION
+</td>
+<td style="text-align:right;">
+15.938
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+环境科学与生态学
+</td>
+<td style="text-align:left;">
+Annual Review of Ecology Evolution and Systematics
+</td>
+<td style="text-align:right;">
+10.160
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+环境科学与生态学
+</td>
+<td style="text-align:left;">
+ECOLOGY LETTERS
+</td>
+<td style="text-align:right;">
+9.137
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+环境科学与生态学
+</td>
+<td style="text-align:left;">
+GLOBAL CHANGE BIOLOGY
+</td>
+<td style="text-align:right;">
+8.997
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+环境科学与生态学
+</td>
+<td style="text-align:left;">
+SYSTEMATIC BIOLOGY
+</td>
+<td style="text-align:right;">
+8.523
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+环境科学与生态学
+</td>
+<td style="text-align:left;">
+ENVIRONMENTAL HEALTH PERSPECTIVES
+</td>
+<td style="text-align:right;">
+8.309
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+环境科学与生态学
+</td>
+<td style="text-align:left;">
+FRONTIERS IN ECOLOGY AND THE ENVIRONMENT
+</td>
+<td style="text-align:right;">
+8.302
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+环境科学与生态学
+</td>
+<td style="text-align:left;">
+ECOLOGICAL MONOGRAPHS
+</td>
+<td style="text-align:right;">
+7.828
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+环境科学与生态学
+</td>
+<td style="text-align:left;">
+CRITICAL REVIEWS IN ENVIRONMENTAL SCIENCE AND TECHNOLOGY
+</td>
+<td style="text-align:right;">
+7.683
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+计算机科学
+</td>
+<td style="text-align:left;">
+Journal of Statistical Software
+</td>
+<td style="text-align:right;">
+22.737
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+计算机科学
+</td>
+<td style="text-align:left;">
+IEEE Communications Surveys and Tutorials
+</td>
+<td style="text-align:right;">
+20.230
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+计算机科学
+</td>
+<td style="text-align:left;">
+IEEE COMMUNICATIONS MAGAZINE
+</td>
+<td style="text-align:right;">
+9.270
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+计算机科学
+</td>
+<td style="text-align:left;">
+IEEE WIRELESS COMMUNICATIONS
+</td>
+<td style="text-align:right;">
+9.202
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+计算机科学
+</td>
+<td style="text-align:left;">
+IEEE Transactions on Cybernetics
+</td>
+<td style="text-align:right;">
+8.803
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+计算机科学
+</td>
+<td style="text-align:left;">
+IEEE TRANSACTIONS ON EVOLUTIONARY COMPUTATION
+</td>
+<td style="text-align:right;">
+8.124
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+计算机科学
+</td>
+<td style="text-align:left;">
+IEEE Transactions on Neural Networks and Learning Systems
+</td>
+<td style="text-align:right;">
+7.982
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+计算机科学
+</td>
+<td style="text-align:left;">
+IEEE Transactions on Cloud Computing
+</td>
+<td style="text-align:right;">
+7.928
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+计算机科学
+</td>
+<td style="text-align:left;">
+IEEE NETWORK
+</td>
+<td style="text-align:right;">
+7.197
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+计算机科学
+</td>
+<td style="text-align:left;">
+NEURAL NETWORKS
+</td>
+<td style="text-align:right;">
+7.197
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+经济与商业
+</td>
+<td style="text-align:left;">
+Academy of Management Annals
+</td>
+<td style="text-align:right;">
+9.281
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+经济与商业
+</td>
+<td style="text-align:left;">
+ACADEMY OF MANAGEMENT REVIEW
+</td>
+<td style="text-align:right;">
+8.855
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+经济与商业
+</td>
+<td style="text-align:left;">
+JOURNAL OF THE ACADEMY OF MARKETING SCIENCE
+</td>
+<td style="text-align:right;">
+8.488
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+经济与商业
+</td>
+<td style="text-align:left;">
+JOURNAL OF MANAGEMENT
+</td>
+<td style="text-align:right;">
+8.080
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+经济与商业
+</td>
+<td style="text-align:left;">
+QUARTERLY JOURNAL OF ECONOMICS
+</td>
+<td style="text-align:right;">
+7.863
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+经济与商业
+</td>
+<td style="text-align:left;">
+JOURNAL OF MARKETING
+</td>
+<td style="text-align:right;">
+7.338
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+经济与商业
+</td>
+<td style="text-align:left;">
+JOURNAL OF SERVICE RESEARCH
+</td>
+<td style="text-align:right;">
+6.842
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+经济与商业
+</td>
+<td style="text-align:left;">
+ACADEMY OF MANAGEMENT JOURNAL
+</td>
+<td style="text-align:right;">
+6.700
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+经济与商业
+</td>
+<td style="text-align:left;">
+JOURNAL OF HUMAN RESOURCES
+</td>
+<td style="text-align:right;">
+6.531
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+经济与商业
+</td>
+<td style="text-align:left;">
+INTERNATIONAL JOURNAL OF MANAGEMENT REVIEWS
+</td>
+<td style="text-align:right;">
+6.489
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+精神病学与心理学
+</td>
+<td style="text-align:left;">
+World Psychiatry
+</td>
+<td style="text-align:right;">
+30.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+精神病学与心理学
+</td>
+<td style="text-align:left;">
+PSYCHOLOGICAL INQUIRY
+</td>
+<td style="text-align:right;">
+26.364
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+精神病学与心理学
+</td>
+<td style="text-align:left;">
+Annual Review of Psychology
+</td>
+<td style="text-align:right;">
+22.774
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+精神病学与心理学
+</td>
+<td style="text-align:left;">
+Psychological Science in the Public Interest
+</td>
+<td style="text-align:right;">
+21.286
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+精神病学与心理学
+</td>
+<td style="text-align:left;">
+JAMA Psychiatry
+</td>
+<td style="text-align:right;">
+16.642
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+精神病学与心理学
+</td>
+<td style="text-align:left;">
+Industrial and Organizational Psychology-Perspectives on Science and Practice
+</td>
+<td style="text-align:right;">
+16.375
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+精神病学与心理学
+</td>
+<td style="text-align:left;">
+TRENDS IN COGNITIVE SCIENCES
+</td>
+<td style="text-align:right;">
+15.557
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+精神病学与心理学
+</td>
+<td style="text-align:left;">
+Lancet Psychiatry
+</td>
+<td style="text-align:right;">
+15.233
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+精神病学与心理学
+</td>
+<td style="text-align:left;">
+AMERICAN JOURNAL OF PSYCHIATRY
+</td>
+<td style="text-align:right;">
+13.391
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+精神病学与心理学
+</td>
+<td style="text-align:left;">
+Annual Review of Clinical Psychology
+</td>
+<td style="text-align:right;">
+13.278
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+空间科学
+</td>
+<td style="text-align:left;">
+Annual Review of Astronomy and Astrophysics
+</td>
+<td style="text-align:right;">
+24.912
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+空间科学
+</td>
+<td style="text-align:left;">
+Living Reviews in Solar Physics
+</td>
+<td style="text-align:right;">
+12.833
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+空间科学
+</td>
+<td style="text-align:left;">
+ASTRONOMY AND ASTROPHYSICS REVIEW
+</td>
+<td style="text-align:right;">
+11.611
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+空间科学
+</td>
+<td style="text-align:left;">
+SPACE SCIENCE REVIEWS
+</td>
+<td style="text-align:right;">
+9.327
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+空间科学
+</td>
+<td style="text-align:left;">
+ASTROPHYSICAL JOURNAL SUPPLEMENT SERIES
+</td>
+<td style="text-align:right;">
+8.561
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+空间科学
+</td>
+<td style="text-align:left;">
+NEW ASTRONOMY REVIEWS
+</td>
+<td style="text-align:right;">
+7.500
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+空间科学
+</td>
+<td style="text-align:left;">
+Astrophysical Journal Letters
+</td>
+<td style="text-align:right;">
+6.634
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+空间科学
+</td>
+<td style="text-align:left;">
+Physics of the Dark Universe
+</td>
+<td style="text-align:right;">
+6.509
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+空间科学
+</td>
+<td style="text-align:left;">
+ASTRONOMY &amp; ASTROPHYSICS
+</td>
+<td style="text-align:right;">
+5.565
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+空间科学
+</td>
+<td style="text-align:left;">
+ASTROPHYSICAL JOURNAL
+</td>
+<td style="text-align:right;">
+5.551
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+临床医学
+</td>
+<td style="text-align:left;">
+CA-A CANCER JOURNAL FOR CLINICIANS
+</td>
+<td style="text-align:right;">
+244.585
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+临床医学
+</td>
+<td style="text-align:left;">
+DIGESTIVE DISEASES
+</td>
+<td style="text-align:right;">
+244.585
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+临床医学
+</td>
+<td style="text-align:left;">
+JOURNAL OF COSMETIC SCIENCE
+</td>
+<td style="text-align:right;">
+244.585
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+临床医学
+</td>
+<td style="text-align:left;">
+NEW ENGLAND JOURNAL OF MEDICINE
+</td>
+<td style="text-align:right;">
+79.258
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+临床医学
+</td>
+<td style="text-align:left;">
+LANCET
+</td>
+<td style="text-align:right;">
+53.254
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+临床医学
+</td>
+<td style="text-align:left;">
+PEDIATRIC DENTISTRY
+</td>
+<td style="text-align:right;">
+53.254
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+临床医学
+</td>
+<td style="text-align:left;">
+TUMORI
+</td>
+<td style="text-align:right;">
+52.613
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+临床医学
+</td>
+<td style="text-align:left;">
+JAMA-JOURNAL OF THE AMERICAN MEDICAL ASSOCIATION
+</td>
+<td style="text-align:right;">
+47.661
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+临床医学
+</td>
+<td style="text-align:left;">
+NATURE REVIEWS CANCER
+</td>
+<td style="text-align:right;">
+42.784
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+临床医学
+</td>
+<td style="text-align:left;">
+LANCET ONCOLOGY
+</td>
+<td style="text-align:right;">
+36.418
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+免疫学
+</td>
+<td style="text-align:left;">
+NATURE REVIEWS IMMUNOLOGY
+</td>
+<td style="text-align:right;">
+41.982
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+免疫学
+</td>
+<td style="text-align:left;">
+LANCET INFECTIOUS DISEASES
+</td>
+<td style="text-align:right;">
+25.148
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+免疫学
+</td>
+<td style="text-align:left;">
+Annual Review of Immunology
+</td>
+<td style="text-align:right;">
+22.714
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+免疫学
+</td>
+<td style="text-align:left;">
+NATURE IMMUNOLOGY
+</td>
+<td style="text-align:right;">
+21.809
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+免疫学
+</td>
+<td style="text-align:left;">
+IMMUNITY
+</td>
+<td style="text-align:right;">
+19.734
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+免疫学
+</td>
+<td style="text-align:left;">
+TRENDS IN IMMUNOLOGY
+</td>
+<td style="text-align:right;">
+14.188
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+免疫学
+</td>
+<td style="text-align:left;">
+JOURNAL OF ALLERGY AND CLINICAL IMMUNOLOGY
+</td>
+<td style="text-align:right;">
+13.258
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+免疫学
+</td>
+<td style="text-align:left;">
+Lancet HIV
+</td>
+<td style="text-align:right;">
+11.355
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+免疫学
+</td>
+<td style="text-align:left;">
+JOURNAL OF EXPERIMENTAL MEDICINE
+</td>
+<td style="text-align:right;">
+10.790
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+免疫学
+</td>
+<td style="text-align:left;">
+IMMUNOLOGICAL REVIEWS
+</td>
+<td style="text-align:right;">
+9.217
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+农业科学
+</td>
+<td style="text-align:left;">
+Annual Review of Food Science and Technology
+</td>
+<td style="text-align:right;">
+9.523
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+农业科学
+</td>
+<td style="text-align:left;">
+Annual Review of Nutrition
+</td>
+<td style="text-align:right;">
+8.886
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+农业科学
+</td>
+<td style="text-align:left;">
+COMPREHENSIVE REVIEWS IN FOOD SCIENCE AND FOOD SAFETY
+</td>
+<td style="text-align:right;">
+7.028
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+农业科学
+</td>
+<td style="text-align:left;">
+TRENDS IN FOOD SCIENCE &amp; TECHNOLOGY
+</td>
+<td style="text-align:right;">
+6.609
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+农业科学
+</td>
+<td style="text-align:left;">
+CRITICAL REVIEWS IN FOOD SCIENCE AND NUTRITION
+</td>
+<td style="text-align:right;">
+6.015
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+农业科学
+</td>
+<td style="text-align:left;">
+NUTRITION REVIEWS
+</td>
+<td style="text-align:right;">
+5.788
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+农业科学
+</td>
+<td style="text-align:left;">
+Global Change Biology Bioenergy
+</td>
+<td style="text-align:right;">
+5.415
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+农业科学
+</td>
+<td style="text-align:left;">
+PROCEEDINGS OF THE NUTRITION SOCIETY
+</td>
+<td style="text-align:right;">
+5.347
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+农业科学
+</td>
+<td style="text-align:left;">
+MOLECULAR NUTRITION &amp; FOOD RESEARCH
+</td>
+<td style="text-align:right;">
+5.151
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+农业科学
+</td>
+<td style="text-align:left;">
+FOOD HYDROCOLLOIDS
+</td>
+<td style="text-align:right;">
+5.089
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+社会科学总论
+</td>
+<td style="text-align:left;">
+ENVIRONMENTAL ETHICS
+</td>
+<td style="text-align:right;">
+244.585
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+社会科学总论
+</td>
+<td style="text-align:left;">
+Dialogues in Human Geography
+</td>
+<td style="text-align:right;">
+10.214
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+社会科学总论
+</td>
+<td style="text-align:left;">
+Annual Review of Public Health
+</td>
+<td style="text-align:right;">
+9.491
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+社会科学总论
+</td>
+<td style="text-align:left;">
+INTERNATIONAL JOURNAL OF EPIDEMIOLOGY
+</td>
+<td style="text-align:right;">
+8.360
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+社会科学总论
+</td>
+<td style="text-align:left;">
+REVIEW OF EDUCATIONAL RESEARCH
+</td>
+<td style="text-align:right;">
+8.241
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+社会科学总论
+</td>
+<td style="text-align:left;">
+EPIDEMIOLOGIC REVIEWS
+</td>
+<td style="text-align:right;">
+7.583
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+社会科学总论
+</td>
+<td style="text-align:left;">
+EUROPEAN JOURNAL OF EPIDEMIOLOGY
+</td>
+<td style="text-align:right;">
+7.023
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+社会科学总论
+</td>
+<td style="text-align:left;">
+PROGRESS IN HUMAN GEOGRAPHY
+</td>
+<td style="text-align:right;">
+6.885
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+社会科学总论
+</td>
+<td style="text-align:left;">
+Annual Review of Sociology
+</td>
+<td style="text-align:right;">
+6.773
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+社会科学总论
+</td>
+<td style="text-align:left;">
+ECONOMIC GEOGRAPHY
+</td>
+<td style="text-align:right;">
+6.438
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+神经系统学与行为学
+</td>
+<td style="text-align:left;">
+NATURE REVIEWS NEUROSCIENCE
+</td>
+<td style="text-align:right;">
+32.635
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+神经系统学与行为学
+</td>
+<td style="text-align:left;">
+LANCET NEUROLOGY
+</td>
+<td style="text-align:right;">
+27.138
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+神经系统学与行为学
+</td>
+<td style="text-align:left;">
+NATURE NEUROSCIENCE
+</td>
+<td style="text-align:right;">
+19.912
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+神经系统学与行为学
+</td>
+<td style="text-align:left;">
+Nature Reviews Neurology
+</td>
+<td style="text-align:right;">
+19.819
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+神经系统学与行为学
+</td>
+<td style="text-align:left;">
+ACTA NEUROPATHOLOGICA
+</td>
+<td style="text-align:right;">
+15.872
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+神经系统学与行为学
+</td>
+<td style="text-align:left;">
+BEHAVIORAL AND BRAIN SCIENCES
+</td>
+<td style="text-align:right;">
+15.071
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+神经系统学与行为学
+</td>
+<td style="text-align:left;">
+Annual Review of Neuroscience
+</td>
+<td style="text-align:right;">
+14.675
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+神经系统学与行为学
+</td>
+<td style="text-align:left;">
+NEURON
+</td>
+<td style="text-align:right;">
+14.318
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+神经系统学与行为学
+</td>
+<td style="text-align:left;">
+PROGRESS IN NEUROBIOLOGY
+</td>
+<td style="text-align:right;">
+14.163
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+神经系统学与行为学
+</td>
+<td style="text-align:left;">
+Alzheimers &amp; Dementia
+</td>
+<td style="text-align:right;">
+12.740
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+生物学与生物化学
+</td>
+<td style="text-align:left;">
+NATURE BIOTECHNOLOGY
+</td>
+<td style="text-align:right;">
+35.724
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+生物学与生物化学
+</td>
+<td style="text-align:left;">
+NATURE METHODS
+</td>
+<td style="text-align:right;">
+26.919
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+生物学与生物化学
+</td>
+<td style="text-align:left;">
+PHYSIOLOGICAL REVIEWS
+</td>
+<td style="text-align:right;">
+24.014
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+生物学与生物化学
+</td>
+<td style="text-align:left;">
+Annual Review of Biochemistry
+</td>
+<td style="text-align:right;">
+20.154
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+生物学与生物化学
+</td>
+<td style="text-align:left;">
+Science Translational Medicine
+</td>
+<td style="text-align:right;">
+16.710
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+生物学与生物化学
+</td>
+<td style="text-align:left;">
+TRENDS IN BIOCHEMICAL SCIENCES
+</td>
+<td style="text-align:right;">
+15.678
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+生物学与生物化学
+</td>
+<td style="text-align:left;">
+ENDOCRINE REVIEWS
+</td>
+<td style="text-align:right;">
+15.545
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+生物学与生物化学
+</td>
+<td style="text-align:left;">
+Annual Review of Physiology
+</td>
+<td style="text-align:right;">
+14.327
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+生物学与生物化学
+</td>
+<td style="text-align:left;">
+Nature Chemical Biology
+</td>
+<td style="text-align:right;">
+13.843
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+生物学与生物化学
+</td>
+<td style="text-align:left;">
+Physics of Life Reviews
+</td>
+<td style="text-align:right;">
+13.783
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+数学
+</td>
+<td style="text-align:left;">
+ACTA NUMERICA
+</td>
+<td style="text-align:right;">
+9.727
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+数学
+</td>
+<td style="text-align:left;">
+SIAM REVIEW
+</td>
+<td style="text-align:right;">
+4.886
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+数学
+</td>
+<td style="text-align:left;">
+ANNALS OF MATHEMATICS
+</td>
+<td style="text-align:right;">
+4.768
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+数学
+</td>
+<td style="text-align:left;">
+Advances in Nonlinear Analysis
+</td>
+<td style="text-align:right;">
+4.674
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+数学
+</td>
+<td style="text-align:left;">
+JOURNAL OF THE AMERICAN MATHEMATICAL SOCIETY
+</td>
+<td style="text-align:right;">
+4.625
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+数学
+</td>
+<td style="text-align:left;">
+AMERICAN STATISTICIAN
+</td>
+<td style="text-align:right;">
+4.302
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+数学
+</td>
+<td style="text-align:left;">
+Nonlinear Analysis-Hybrid Systems
+</td>
+<td style="text-align:right;">
+4.010
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+数学
+</td>
+<td style="text-align:left;">
+COMMUNICATIONS ON PURE AND APPLIED MATHEMATICS
+</td>
+<td style="text-align:right;">
+3.386
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+数学
+</td>
+<td style="text-align:left;">
+MATHEMATICAL MODELS &amp; METHODS IN APPLIED SCIENCES
+</td>
+<td style="text-align:right;">
+3.319
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+数学
+</td>
+<td style="text-align:left;">
+Annual Review of Statistics and Its Application
+</td>
+<td style="text-align:right;">
+3.290
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+微生物学
+</td>
+<td style="text-align:left;">
+NATURE REVIEWS MICROBIOLOGY
+</td>
+<td style="text-align:right;">
+31.851
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+微生物学
+</td>
+<td style="text-align:left;">
+CLINICAL MICROBIOLOGY REVIEWS
+</td>
+<td style="text-align:right;">
+20.642
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+微生物学
+</td>
+<td style="text-align:left;">
+Cell Host &amp; Microbe
+</td>
+<td style="text-align:right;">
+17.872
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+微生物学
+</td>
+<td style="text-align:left;">
+Nature Microbiology
+</td>
+<td style="text-align:right;">
+14.174
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+微生物学
+</td>
+<td style="text-align:left;">
+MICROBIOLOGY AND MOLECULAR BIOLOGY REVIEWS
+</td>
+<td style="text-align:right;">
+13.439
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+微生物学
+</td>
+<td style="text-align:left;">
+TRENDS IN MICROBIOLOGY
+</td>
+<td style="text-align:right;">
+11.776
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+微生物学
+</td>
+<td style="text-align:left;">
+FEMS MICROBIOLOGY REVIEWS
+</td>
+<td style="text-align:right;">
+11.392
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+微生物学
+</td>
+<td style="text-align:left;">
+Annual Review of Microbiology
+</td>
+<td style="text-align:right;">
+9.808
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+微生物学
+</td>
+<td style="text-align:left;">
+ISME Journal
+</td>
+<td style="text-align:right;">
+9.520
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+微生物学
+</td>
+<td style="text-align:left;">
+Microbiome
+</td>
+<td style="text-align:right;">
+9.133
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+物理学
+</td>
+<td style="text-align:left;">
+REVIEWS OF MODERN PHYSICS
+</td>
+<td style="text-align:right;">
+36.367
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+物理学
+</td>
+<td style="text-align:left;">
+Nature Photonics
+</td>
+<td style="text-align:right;">
+32.521
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+物理学
+</td>
+<td style="text-align:left;">
+ADVANCES IN PHYSICS
+</td>
+<td style="text-align:right;">
+30.917
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+物理学
+</td>
+<td style="text-align:left;">
+Living Reviews in Relativity
+</td>
+<td style="text-align:right;">
+23.333
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+物理学
+</td>
+<td style="text-align:left;">
+Nature Physics
+</td>
+<td style="text-align:right;">
+22.727
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+物理学
+</td>
+<td style="text-align:left;">
+Annual Review of Condensed Matter Physics
+</td>
+<td style="text-align:right;">
+21.853
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+物理学
+</td>
+<td style="text-align:left;">
+Advances in Optics and Photonics
+</td>
+<td style="text-align:right;">
+21.286
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+物理学
+</td>
+<td style="text-align:left;">
+PHYSICS REPORTS-REVIEW SECTION OF PHYSICS LETTERS
+</td>
+<td style="text-align:right;">
+20.099
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+物理学
+</td>
+<td style="text-align:left;">
+SURFACE SCIENCE REPORTS
+</td>
+<td style="text-align:right;">
+17.800
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+物理学
+</td>
+<td style="text-align:left;">
+Nano Today
+</td>
+<td style="text-align:right;">
+17.753
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+药理学和毒理学
+</td>
+<td style="text-align:left;">
+NATURE REVIEWS DRUG DISCOVERY
+</td>
+<td style="text-align:right;">
+50.167
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+药理学和毒理学
+</td>
+<td style="text-align:left;">
+PHARMACOLOGICAL REVIEWS
+</td>
+<td style="text-align:right;">
+18.964
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+药理学和毒理学
+</td>
+<td style="text-align:left;">
+ADVANCED DRUG DELIVERY REVIEWS
+</td>
+<td style="text-align:right;">
+13.660
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+药理学和毒理学
+</td>
+<td style="text-align:left;">
+Annual Review of Pharmacology and Toxicology
+</td>
+<td style="text-align:right;">
+13.295
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+药理学和毒理学
+</td>
+<td style="text-align:left;">
+TRENDS IN PHARMACOLOGICAL SCIENCES
+</td>
+<td style="text-align:right;">
+12.108
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+药理学和毒理学
+</td>
+<td style="text-align:left;">
+DRUG RESISTANCE UPDATES
+</td>
+<td style="text-align:right;">
+11.630
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+药理学和毒理学
+</td>
+<td style="text-align:left;">
+NATURAL PRODUCT REPORTS
+</td>
+<td style="text-align:right;">
+11.406
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+药理学和毒理学
+</td>
+<td style="text-align:left;">
+PHARMACOLOGY &amp; THERAPEUTICS
+</td>
+<td style="text-align:right;">
+10.376
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+药理学和毒理学
+</td>
+<td style="text-align:left;">
+MEDICINAL RESEARCH REVIEWS
+</td>
+<td style="text-align:right;">
+8.290
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+药理学和毒理学
+</td>
+<td style="text-align:left;">
+JOURNAL OF CONTROLLED RELEASE
+</td>
+<td style="text-align:right;">
+7.877
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+植物学与动物学
+</td>
+<td style="text-align:left;">
+Annual Review of Plant Biology
+</td>
+<td style="text-align:right;">
+18.712
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+植物学与动物学
+</td>
+<td style="text-align:left;">
+FUNGAL DIVERSITY
+</td>
+<td style="text-align:right;">
+14.078
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+植物学与动物学
+</td>
+<td style="text-align:left;">
+Annual Review of Entomology
+</td>
+<td style="text-align:right;">
+13.860
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+植物学与动物学
+</td>
+<td style="text-align:left;">
+TRENDS IN PLANT SCIENCE
+</td>
+<td style="text-align:right;">
+12.149
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+植物学与动物学
+</td>
+<td style="text-align:left;">
+STUDIES IN MYCOLOGY
+</td>
+<td style="text-align:right;">
+11.633
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+植物学与动物学
+</td>
+<td style="text-align:left;">
+Nature Plants
+</td>
+<td style="text-align:right;">
+11.471
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+植物学与动物学
+</td>
+<td style="text-align:left;">
+Annual Review of Phytopathology
+</td>
+<td style="text-align:right;">
+9.528
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+植物学与动物学
+</td>
+<td style="text-align:left;">
+Molecular Plant
+</td>
+<td style="text-align:right;">
+9.326
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+植物学与动物学
+</td>
+<td style="text-align:left;">
+PLANT CELL
+</td>
+<td style="text-align:right;">
+8.228
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+植物学与动物学
+</td>
+<td style="text-align:left;">
+PERSOONIA
+</td>
+<td style="text-align:right;">
+8.182
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+综合交叉学科
+</td>
+<td style="text-align:left;">
+NATURE
+</td>
+<td style="text-align:right;">
+41.577
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+综合交叉学科
+</td>
+<td style="text-align:left;">
+SCIENCE
+</td>
+<td style="text-align:right;">
+41.058
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+综合交叉学科
+</td>
+<td style="text-align:left;">
+Nature Communications
+</td>
+<td style="text-align:right;">
+12.353
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+综合交叉学科
+</td>
+<td style="text-align:left;">
+Science Advances
+</td>
+<td style="text-align:right;">
+11.511
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+综合交叉学科
+</td>
+<td style="text-align:left;">
+PROCEEDINGS OF THE NATIONAL ACADEMY OF SCIENCES OF THE UNITED STATES OF AMERICA
+</td>
+<td style="text-align:right;">
+9.504
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+综合交叉学科
+</td>
+<td style="text-align:left;">
+National Science Review
+</td>
+<td style="text-align:right;">
+9.408
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+综合交叉学科
+</td>
+<td style="text-align:left;">
+Nanoscale Horizons
+</td>
+<td style="text-align:right;">
+9.391
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+综合交叉学科
+</td>
+<td style="text-align:left;">
+GigaScience
+</td>
+<td style="text-align:right;">
+7.267
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+综合交叉学科
+</td>
+<td style="text-align:left;">
+Scientific Data
+</td>
+<td style="text-align:right;">
+5.305
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+综合交叉学科
+</td>
+<td style="text-align:left;">
+Journal of Advanced Research
+</td>
+<td style="text-align:right;">
+4.327
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="esi-2" class="section level2">
+<h2><span class="header-section-number">12.2</span> 不同ESI学科，影响因子的分布</h2>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" title="1">esi_plus_cas_IF_set <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Category_ESI_cn, ImpactFactor ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb130-2" title="2"><span class="st">      </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Category_ESI_cn, <span class="dt">y =</span> ImpactFactor, <span class="dt">colour =</span> Category_ESI_cn )) <span class="op">+</span></a>
+<a class="sourceLine" id="cb130-3" title="3"><span class="st">      </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb130-4" title="4"><span class="st">      </span><span class="co">#geom_dotplot(binaxis=&#39;y&#39;, binwidth = 3, stackdir=&#39;center&#39;) +</span></a>
+<a class="sourceLine" id="cb130-5" title="5"><span class="st">      </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb130-6" title="6"><span class="st">      </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="ot">NULL</span>, <span class="dt">y =</span> <span class="ot">NULL</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb130-7" title="7"><span class="st">      </span><span class="kw">ggtitle</span>(<span class="st">&quot;JCR影响因子分布&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&#39;（数据来源 Web of Science）&#39;) + </span></a>
+<a class="sourceLine" id="cb130-8" title="8"><span class="st">      coord_flip() </span></a></code></pre></div>
+<p><img src="R4IS_files/figure-html/unnamed-chunk-138-1.png" width="576" /></p>
+<p>xlim放大看看</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" title="1">esi_plus_cas_IF_set <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Category_ESI_cn, ImpactFactor ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb131-2" title="2"><span class="st">      </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Category_ESI_cn, <span class="dt">y =</span> ImpactFactor, <span class="dt">colour =</span> Category_ESI_cn )) <span class="op">+</span></a>
+<a class="sourceLine" id="cb131-3" title="3"><span class="st">      </span><span class="kw">geom_jitter</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb131-4" title="4"><span class="st">      </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb131-5" title="5"><span class="st">      </span><span class="kw">ylim</span>(<span class="dv">0</span>, <span class="dv">50</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb131-6" title="6"><span class="st">      </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb131-7" title="7"><span class="st">      </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="ot">NULL</span>, <span class="dt">y =</span> <span class="ot">NULL</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb131-8" title="8"><span class="st">      </span><span class="kw">ggtitle</span>(<span class="st">&quot;JCR影响因子分布&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&#39;（数据来源 Web of Science）&#39;) + </span></a>
+<a class="sourceLine" id="cb131-9" title="9"><span class="st">      coord_flip() </span></a></code></pre></div>
+<p><img src="R4IS_files/figure-html/unnamed-chunk-139-1.png" width="576" /></p>
+<p>或者这样</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" title="1"><span class="kw">library</span>(ggridges)</a>
+<a class="sourceLine" id="cb132-2" title="2"> esi_plus_cas_IF_set <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Category_ESI_cn, ImpactFactor ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb132-3" title="3"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>( <span class="dt">x =</span> ImpactFactor, <span class="dt">y =</span> Category_ESI_cn, <span class="dt">group =</span> Category_ESI_cn )) <span class="op">+</span></a>
+<a class="sourceLine" id="cb132-4" title="4"><span class="st">    </span><span class="kw">geom_density_ridges</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> Category_ESI_cn)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb132-5" title="5"><span class="st">    </span><span class="kw">xlim</span>(<span class="dv">0</span>, <span class="dv">20</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb132-6" title="6"><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb132-7" title="7"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="ot">NULL</span>, <span class="dt">y =</span> <span class="ot">NULL</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb132-8" title="8"><span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&quot;JCR影响因子分布&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&#39;（数据来源 Web of Science）&#39;) </span></a></code></pre></div>
+<p><img src="R4IS_files/figure-html/unnamed-chunk-140-1.png" width="576" /></p>
+</div>
+<div id="section-50" class="section level2">
+<h2><span class="header-section-number">12.3</span> 加入学校数据，影响因子求和得分</h2>
+</div>
+<div id="section-51" class="section level2">
+<h2><span class="header-section-number">12.4</span> 得分与被引量的关系</h2>
+</div>
+<div id="section-52" class="section level2">
+<h2><span class="header-section-number">12.5</span> 看看不同中科院学科和等级下，随影响因子排序的期刊</h2>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" title="1">esi_plus_cas_IF_set <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Category_CAS, Degree_CAS, ImpactFactor ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb133-2" title="2"><span class="st">      </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Degree_CAS)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb133-3" title="3"><span class="st">      </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> ImpactFactor, </a>
+<a class="sourceLine" id="cb133-4" title="4">                 <span class="dt">y =</span>  Degree_CAS <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">factor</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fct_rev</span>(), </a>
+<a class="sourceLine" id="cb133-5" title="5">                 <span class="dt">colour =</span> <span class="kw">factor</span>(Degree_CAS) )) <span class="op">+</span></a>
+<a class="sourceLine" id="cb133-6" title="6"><span class="st">      </span><span class="kw">geom_jitter</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb133-7" title="7"><span class="st">      </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(Category_CAS), <span class="dt">scales =</span> <span class="st">&quot;free_x&quot;</span> ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb133-8" title="8"><span class="st">      </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb133-9" title="9"><span class="st">      </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="ot">NULL</span>, <span class="dt">y =</span> <span class="ot">NULL</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb133-10" title="10"><span class="st">      </span><span class="kw">ggtitle</span>(<span class="st">&quot;JCR影响因子分布&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&#39;（数据来源 Web of Science）&#39;) </span></a></code></pre></div>
+<p><img src="R4IS_files/figure-html/unnamed-chunk-141-1.png" width="576" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="keywords.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="fund.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/yihui/bookdown-chinese/edit/master/ImpactFactor.Rmd",
+"text": "编辑"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["R4IS.pdf", "R4IS.epub"],
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

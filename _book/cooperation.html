@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>第 7 章 科研合作 | 基于R语言的科研信息分析与服务</title>
+  <meta name="description" content="Scientific Research information service using R" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="第 7 章 科研合作 | 基于R语言的科研信息分析与服务" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Scientific Research information service using R" />
+  <meta name="github-repo" content="perlatex/R4IS" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 7 章 科研合作 | 基于R语言的科研信息分析与服务" />
+  
+  <meta name="twitter:description" content="Scientific Research information service using R" />
+  
+
+<meta name="author" content="王敏杰" />
+
+
+<meta name="date" content="2020-01-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="JCR.html"/>
+<link rel="next" href="potential.html"/>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<link href="libs/pagedtable/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable/js/pagedtable.js"></script>
+<script src="libs/kePrint/kePrint.js"></script>
+<script src="libs/htmlwidgets/htmlwidgets.js"></script>
+<link href="libs/str_view/str_view.css" rel="stylesheet" />
+<script src="libs/str_view-binding/str_view.js"></script>
+<link href="libs/wordcloud2/wordcloud.css" rel="stylesheet" />
+<script src="libs/wordcloud2/wordcloud2-all.js"></script>
+<script src="libs/wordcloud2/hover.js"></script>
+<script src="libs/wordcloud2-binding/wordcloud2.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css\psyteachr.css" type="text/css" />
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">科研信息服务</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-1"><i class="fa fa-check"></i>本书内容</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-2"><i class="fa fa-check"></i>数据和代码</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-3"><i class="fa fa-check"></i>未来想法</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-4"><i class="fa fa-check"></i>致谢</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i>作者简介</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> 数据科学与R语言</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#section-5"><i class="fa fa-check"></i><b>1.1</b> 数据科学</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#r"><i class="fa fa-check"></i><b>1.2</b> R语言基础</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#r--the-tidyverse"><i class="fa fa-check"></i><b>1.3</b> R 宏包: The tidyverse</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#section-6"><i class="fa fa-check"></i><b>1.4</b> 字符串处理：正则表达式</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#section-7"><i class="fa fa-check"></i><b>1.5</b> 数据科学工作流程</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#section-8"><i class="fa fa-check"></i><b>1.6</b> 推荐书目</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="develop.html"><a href="develop.html"><i class="fa fa-check"></i><b>2</b> 学科结构与发展</a><ul>
+<li class="chapter" data-level="2.1" data-path="develop.html"><a href="develop.html#pros"><i class="fa fa-check"></i><b>2.1</b> PROS</a></li>
+<li class="chapter" data-level="2.2" data-path="develop.html"><a href="develop.html#web-of-science"><i class="fa fa-check"></i><b>2.2</b> Web of Science</a></li>
+<li class="chapter" data-level="2.3" data-path="develop.html"><a href="develop.html#section-9"><i class="fa fa-check"></i><b>2.3</b> 数据集的构建</a></li>
+<li class="chapter" data-level="2.4" data-path="develop.html"><a href="develop.html#section-10"><i class="fa fa-check"></i><b>2.4</b> 数据集的导入</a></li>
+<li class="chapter" data-level="2.5" data-path="develop.html"><a href="develop.html#section-11"><i class="fa fa-check"></i><b>2.5</b> 各高校对比</a></li>
+<li class="chapter" data-level="2.6" data-path="develop.html"><a href="develop.html#section-12"><i class="fa fa-check"></i><b>2.6</b> 分析单个学校</a></li>
+<li class="chapter" data-level="2.7" data-path="develop.html"><a href="develop.html#section-13"><i class="fa fa-check"></i><b>2.7</b> 第一作者筛查</a></li>
+<li class="chapter" data-level="2.8" data-path="develop.html"><a href="develop.html#section-14"><i class="fa fa-check"></i><b>2.8</b> 通讯作者筛查</a></li>
+<li class="chapter" data-level="2.9" data-path="develop.html"><a href="develop.html#section-15"><i class="fa fa-check"></i><b>2.9</b> 可视化之小试牛刀</a></li>
+<li class="chapter" data-level="2.10" data-path="develop.html"><a href="develop.html#section-16"><i class="fa fa-check"></i><b>2.10</b> 可视化之初显身手</a></li>
+<li class="chapter" data-level="2.11" data-path="develop.html"><a href="develop.html#section-17"><i class="fa fa-check"></i><b>2.11</b> 可视化之渐入佳境</a></li>
+<li class="chapter" data-level="2.12" data-path="develop.html"><a href="develop.html#section-18"><i class="fa fa-check"></i><b>2.12</b> 更多</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="college.html"><a href="college.html"><i class="fa fa-check"></i><b>3</b> 通讯地址统计</a><ul>
+<li class="chapter" data-level="3.1" data-path="college.html"><a href="college.html#section-19"><i class="fa fa-check"></i><b>3.1</b> 各学院英文地址</a></li>
+<li class="chapter" data-level="3.2" data-path="college.html"><a href="college.html#section-20"><i class="fa fa-check"></i><b>3.2</b> 统计</a></li>
+<li class="chapter" data-level="3.3" data-path="college.html"><a href="college.html#section-21"><i class="fa fa-check"></i><b>3.3</b> 部分学院结果</a></li>
+<li class="chapter" data-level="3.4" data-path="college.html"><a href="college.html#section-22"><i class="fa fa-check"></i><b>3.4</b> 随年份的变化</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="contri.html"><a href="contri.html"><i class="fa fa-check"></i><b>4</b> 学院对学科的贡献</a><ul>
+<li class="chapter" data-level="4.1" data-path="contri.html"><a href="contri.html#section-23"><i class="fa fa-check"></i><b>4.1</b> 这里开始吧</a></li>
+<li class="chapter" data-level="4.2" data-path="contri.html"><a href="contri.html#section-24"><i class="fa fa-check"></i><b>4.2</b> 学院对发文的贡献</a></li>
+<li class="chapter" data-level="4.3" data-path="contri.html"><a href="contri.html#section-25"><i class="fa fa-check"></i><b>4.3</b> 学院对引文的贡献</a></li>
+<li class="chapter" data-level="4.4" data-path="contri.html"><a href="contri.html#section-26"><i class="fa fa-check"></i><b>4.4</b> 期刊对引文的贡献分析</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="Journal.html"><a href="Journal.html"><i class="fa fa-check"></i><b>5</b> 学校科研人员的选刊倾向</a><ul>
+<li class="chapter" data-level="5.1" data-path="Journal.html"><a href="Journal.html#jcr"><i class="fa fa-check"></i><b>5.1</b> 中科院JCR期刊分区介绍</a></li>
+<li class="chapter" data-level="5.2" data-path="Journal.html"><a href="Journal.html#section-27"><i class="fa fa-check"></i><b>5.2</b> 各学科论文的期刊分布</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="JCR.html"><a href="JCR.html"><i class="fa fa-check"></i><b>6</b> 期刊使用情况</a><ul>
+<li class="chapter" data-level="6.1" data-path="JCR.html"><a href="JCR.html#jcr-1"><i class="fa fa-check"></i><b>6.1</b> JCR简介</a></li>
+<li class="chapter" data-level="6.2" data-path="JCR.html"><a href="JCR.html#jcr-2"><i class="fa fa-check"></i><b>6.2</b> JCR初探</a></li>
+<li class="chapter" data-level="6.3" data-path="JCR.html"><a href="JCR.html#sci"><i class="fa fa-check"></i><b>6.3</b> 中国SCI期刊</a></li>
+<li class="chapter" data-level="6.4" data-path="JCR.html"><a href="JCR.html#section-28"><i class="fa fa-check"></i><b>6.4</b> 可视化</a></li>
+<li class="chapter" data-level="6.5" data-path="JCR.html"><a href="JCR.html#section-29"><i class="fa fa-check"></i><b>6.5</b> 各学科期刊使用情况</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="cooperation.html"><a href="cooperation.html"><i class="fa fa-check"></i><b>7</b> 科研合作</a><ul>
+<li class="chapter" data-level="7.1" data-path="cooperation.html"><a href="cooperation.html#section-30"><i class="fa fa-check"></i><b>7.1</b> 机构匹配</a></li>
+<li class="chapter" data-level="7.2" data-path="cooperation.html"><a href="cooperation.html#section-31"><i class="fa fa-check"></i><b>7.2</b> 化学学科</a></li>
+<li class="chapter" data-level="7.3" data-path="cooperation.html"><a href="cooperation.html#section-32"><i class="fa fa-check"></i><b>7.3</b> 全部学科</a></li>
+<li class="chapter" data-level="7.4" data-path="cooperation.html"><a href="cooperation.html#section-33"><i class="fa fa-check"></i><b>7.4</b> 看看某个学校的呢</a></li>
+<li class="chapter" data-level="7.5" data-path="cooperation.html"><a href="cooperation.html#section-34"><i class="fa fa-check"></i><b>7.5</b> 思考1</a></li>
+<li class="chapter" data-level="7.6" data-path="cooperation.html"><a href="cooperation.html#section-35"><i class="fa fa-check"></i><b>7.6</b> 思考2</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="potential.html"><a href="potential.html"><i class="fa fa-check"></i><b>8</b> 潜力学科</a><ul>
+<li class="chapter" data-level="8.1" data-path="potential.html"><a href="potential.html#esi"><i class="fa fa-check"></i><b>8.1</b> ESI学科</a></li>
+<li class="chapter" data-level="8.2" data-path="potential.html"><a href="potential.html#section-36"><i class="fa fa-check"></i><b>8.2</b> 潜力学科定义</a></li>
+<li class="chapter" data-level="8.3" data-path="potential.html"><a href="potential.html#esi-1"><i class="fa fa-check"></i><b>8.3</b> 各学科进入ESI的阈值</a></li>
+<li class="chapter" data-level="8.4" data-path="potential.html"><a href="potential.html#section-37"><i class="fa fa-check"></i><b>8.4</b> 潜力学科统计</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="impact.html"><a href="impact.html"><i class="fa fa-check"></i><b>9</b> 影响力结构分析</a><ul>
+<li class="chapter" data-level="9.1" data-path="impact.html"><a href="impact.html#section-38"><i class="fa fa-check"></i><b>9.1</b> 论文影响力结构</a></li>
+<li class="chapter" data-level="9.2" data-path="impact.html"><a href="impact.html#section-39"><i class="fa fa-check"></i><b>9.2</b> 各学科论文影响力结构</a></li>
+<li class="chapter" data-level="9.3" data-path="impact.html"><a href="impact.html#section-40"><i class="fa fa-check"></i><b>9.3</b> 引文最大贡献的期刊</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="prediction.html"><a href="prediction.html"><i class="fa fa-check"></i><b>10</b> 预测</a><ul>
+<li class="chapter" data-level="10.1" data-path="prediction.html"><a href="prediction.html#section-41"><i class="fa fa-check"></i><b>10.1</b> 学科发展的相关性</a></li>
+<li class="chapter" data-level="10.2" data-path="prediction.html"><a href="prediction.html#section-42"><i class="fa fa-check"></i><b>10.2</b> 发文量的预测</a></li>
+<li class="chapter" data-level="10.3" data-path="prediction.html"><a href="prediction.html#section-43"><i class="fa fa-check"></i><b>10.3</b> 建模</a></li>
+<li class="chapter" data-level="10.4" data-path="prediction.html"><a href="prediction.html#section-44"><i class="fa fa-check"></i><b>10.4</b> 引文量的预测</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="keywords.html"><a href="keywords.html"><i class="fa fa-check"></i><b>11</b> 主题词分析</a><ul>
+<li class="chapter" data-level="11.1" data-path="keywords.html"><a href="keywords.html#section-45"><i class="fa fa-check"></i><b>11.1</b> 化学学科</a></li>
+<li class="chapter" data-level="11.2" data-path="keywords.html"><a href="keywords.html#section-46"><i class="fa fa-check"></i><b>11.2</b> 词云</a></li>
+<li class="chapter" data-level="11.3" data-path="keywords.html"><a href="keywords.html#section-47"><i class="fa fa-check"></i><b>11.3</b> 共现矩阵</a></li>
+<li class="chapter" data-level="11.4" data-path="keywords.html"><a href="keywords.html#section-48"><i class="fa fa-check"></i><b>11.4</b> 全部学科</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="ImpactFactor.html"><a href="ImpactFactor.html"><i class="fa fa-check"></i><b>12</b> 期刊的影响因子</a><ul>
+<li class="chapter" data-level="12.1" data-path="ImpactFactor.html"><a href="ImpactFactor.html#section-49"><i class="fa fa-check"></i><b>12.1</b> 各学科影响因子最高的期刊</a></li>
+<li class="chapter" data-level="12.2" data-path="ImpactFactor.html"><a href="ImpactFactor.html#esi-2"><i class="fa fa-check"></i><b>12.2</b> 不同ESI学科，影响因子的分布</a></li>
+<li class="chapter" data-level="12.3" data-path="ImpactFactor.html"><a href="ImpactFactor.html#section-50"><i class="fa fa-check"></i><b>12.3</b> 加入学校数据，影响因子求和得分</a></li>
+<li class="chapter" data-level="12.4" data-path="ImpactFactor.html"><a href="ImpactFactor.html#section-51"><i class="fa fa-check"></i><b>12.4</b> 得分与被引量的关系</a></li>
+<li class="chapter" data-level="12.5" data-path="ImpactFactor.html"><a href="ImpactFactor.html#section-52"><i class="fa fa-check"></i><b>12.5</b> 看看不同中科院学科和等级下，随影响因子排序的期刊</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="fund.html"><a href="fund.html"><i class="fa fa-check"></i><b>13</b> 基金资助分析</a><ul>
+<li class="chapter" data-level="13.1" data-path="fund.html"><a href="fund.html#section-53"><i class="fa fa-check"></i><b>13.1</b> 各学科受基金资助</a></li>
+<li class="chapter" data-level="13.2" data-path="fund.html"><a href="fund.html#section-54"><i class="fa fa-check"></i><b>13.2</b> 各学科情况</a></li>
+<li class="chapter" data-level="13.3" data-path="fund.html"><a href="fund.html#section-55"><i class="fa fa-check"></i><b>13.3</b> 各校的情况</a></li>
+<li class="chapter" data-level="13.4" data-path="fund.html"><a href="fund.html#section-56"><i class="fa fa-check"></i><b>13.4</b> 那个项目基金下的文章最丰富？</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="Highcited.html"><a href="Highcited.html"><i class="fa fa-check"></i><b>14</b> 高被引论文</a><ul>
+<li class="chapter" data-level="14.1" data-path="Highcited.html"><a href="Highcited.html#section-57"><i class="fa fa-check"></i><b>14.1</b> 还没想好</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="Coupling.html"><a href="Coupling.html"><i class="fa fa-check"></i><b>15</b> 耦合</a><ul>
+<li class="chapter" data-level="15.1" data-path="Coupling.html"><a href="Coupling.html#bibliographic-coupling"><i class="fa fa-check"></i><b>15.1</b> Bibliographic coupling</a></li>
+<li class="chapter" data-level="15.2" data-path="Coupling.html"><a href="Coupling.html#sicnu_set"><i class="fa fa-check"></i><b>15.2</b> 用<code>sicnu_set</code>看看吧</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="Occurence.html"><a href="Occurence.html"><i class="fa fa-check"></i><b>16</b> 共现矩阵在信息服务中的应用</a><ul>
+<li class="chapter" data-level="16.1" data-path="Occurence.html"><a href="Occurence.html#section-58"><i class="fa fa-check"></i><b>16.1</b> 邻接矩阵</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="Occurence.html"><a href="Occurence.html#section-59"><i class="fa fa-check"></i><b>16.1.1</b> 共现矩阵</a></li>
+<li class="chapter" data-level="16.1.2" data-path="Occurence.html"><a href="Occurence.html#section-60"><i class="fa fa-check"></i><b>16.1.2</b> 距离矩阵</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="Occurence.html"><a href="Occurence.html#section-61"><i class="fa fa-check"></i><b>16.2</b> 聚类案例1：主题词聚类</a></li>
+<li class="chapter" data-level="16.3" data-path="Occurence.html"><a href="Occurence.html#section-62"><i class="fa fa-check"></i><b>16.3</b> 聚类案例2：若干学校的聚类</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="tidyabstract.html"><a href="tidyabstract.html"><i class="fa fa-check"></i><b>17</b> 利用文本挖掘技术分析文献摘要</a><ul>
+<li class="chapter" data-level="17.1" data-path="tidyabstract.html"><a href="tidyabstract.html#section-63"><i class="fa fa-check"></i><b>17.1</b> 数据导入</a></li>
+<li class="chapter" data-level="17.2" data-path="tidyabstract.html"><a href="tidyabstract.html#section-64"><i class="fa fa-check"></i><b>17.2</b> 数据规整</a></li>
+<li class="chapter" data-level="17.3" data-path="tidyabstract.html"><a href="tidyabstract.html#tf_idf"><i class="fa fa-check"></i><b>17.3</b> 计算tf_idf</a></li>
+<li class="chapter" data-level="17.4" data-path="tidyabstract.html"><a href="tidyabstract.html#section-65"><i class="fa fa-check"></i><b>17.4</b> 文本相似性</a></li>
+<li class="chapter" data-level="17.5" data-path="tidyabstract.html"><a href="tidyabstract.html#section-66"><i class="fa fa-check"></i><b>17.5</b> 关联词汇</a></li>
+<li class="chapter" data-level="17.6" data-path="tidyabstract.html"><a href="tidyabstract.html#section-67"><i class="fa fa-check"></i><b>17.6</b> 下一步工作</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="citedtime.html"><a href="citedtime.html"><i class="fa fa-check"></i><b>18</b> 文章被引时间特征分析</a></li>
+<li class="chapter" data-level="19" data-path="tidybib.html"><a href="tidybib.html"><i class="fa fa-check"></i><b>19</b> 基于bibliometrix宏包</a></li>
+<li class="appendix"><span><b>附录</b></span></li>
+<li class="chapter" data-level="A" data-path="sound.html"><a href="sound.html"><i class="fa fa-check"></i><b>A</b> 附录</a><ul>
+<li class="chapter" data-level="A.1" data-path="sound.html"><a href="sound.html#r-1"><i class="fa fa-check"></i><b>A.1</b> R语言系列讲座</a></li>
+<li class="chapter" data-level="A.2" data-path="sound.html"><a href="sound.html#section-68"><i class="fa fa-check"></i><b>A.2</b> 联系我们</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">本书由 bookdown 强力驱动</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">基于R语言的科研信息分析与服务</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="cooperation" class="section level1">
+<h1><span class="header-section-number">第 7 章</span> 科研合作</h1>
+<p>看看我们的科研小圈子</p>
+<div id="section-30" class="section level2">
+<h2><span class="header-section-number">7.1</span> 机构匹配</h2>
+<p>需要用到强大的正则表达式</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1">mc &lt;-<span class="st"> &quot;</span><span class="ch">\\</span><span class="st">[.*?</span><span class="ch">\\</span><span class="st">]</span><span class="ch">\\</span><span class="st">s+([^,]*),&quot;</span></a>
+<a class="sourceLine" id="cb75-2" title="2"></a>
+<a class="sourceLine" id="cb75-3" title="3">complete_set <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(C1) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb75-4" title="4"><span class="st">                 </span><span class="kw">top_n</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb75-5" title="5"><span class="st">                 </span><span class="kw">str_view_all</span>(mc)</a></code></pre></div>
+<div id="htmlwidget-567fb752516aac5aa3c6" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-567fb752516aac5aa3c6">{"x":{"html":"<ul>\n  <li>Zhejiang Univ, Dept Food Sci & Nutr, Hangzhou 310029, Zhejiang, Peoples R China; Sichuan Agr Univ, Dept Food Sci, Yaan, Sichuan, Peoples R China; C&H Sugar Co, Crockett, CA 94525 USA<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="section-31" class="section level2">
+<h2><span class="header-section-number">7.2</span> 化学学科</h2>
+<p>我们就看看四川省的化学学科吧</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1">Organ &lt;-<span class="st"> </span>complete_set <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb76-2" title="2"><span class="st">         </span><span class="kw">filter</span>(Category_ESI <span class="op">==</span><span class="st"> &quot;CHEMISTRY&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb76-3" title="3"><span class="st">         </span><span class="kw">select</span>(UT, C1) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb76-4" title="4"><span class="st">         </span><span class="kw">mutate</span>(<span class="dt">a =</span> <span class="kw">str_extract_all</span>(C1, mc) ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb76-5" title="5"><span class="st">         </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb76-6" title="6"><span class="st">         </span><span class="co">#tidyr::extract(a, c(&quot;namelist&quot;, &quot;organization&quot;), &quot;(\\[.*?\\])\\s+([^,]*),&quot;)</span></a>
+<a class="sourceLine" id="cb76-7" title="7"><span class="st">         </span>tidyr<span class="op">::</span><span class="kw">extract</span>(a, <span class="st">&quot;Organization&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">[.*?</span><span class="ch">\\</span><span class="st">]</span><span class="ch">\\</span><span class="st">s+([^,]*),&quot;</span>)</a>
+<a class="sourceLine" id="cb76-8" title="8"></a>
+<a class="sourceLine" id="cb76-9" title="9"><span class="kw">head</span>(Organ)</a></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["UT"],"name":[1],"type":["chr"],"align":["left"]},{"label":["C1"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Organization"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"WOS:000388900200004","2":"[Liu, Guo; Yang, Shaogui; Sun, Cheng] Nanjing Univ, Sch Environm, State Key Lab Pollut Control & Resource Reuse, Nanjing 210023, Jiangsu, Peoples R China; [Liu, Guo; Zhou, Yaqi; Zhang, Junjie; Tang, Binbin] Chengdu Univ Technol, Key Lab Geohazard Prevent & Geoenvironm Protect, Chengdu 610059, Peoples R China; [Zhou, Yaqi] Chengdu Sichuan Prov Dept Comprehens Rock Ore Tes, Chengdu 610081, Peoples R China; [Liu, Zhaoyang] Qatar Fdn, Qatar Environm & Energy Res Inst, POB 5825, Doha, Qatar","3":"Nanjing Univ"},{"1":"WOS:000388900200004","2":"[Liu, Guo; Yang, Shaogui; Sun, Cheng] Nanjing Univ, Sch Environm, State Key Lab Pollut Control & Resource Reuse, Nanjing 210023, Jiangsu, Peoples R China; [Liu, Guo; Zhou, Yaqi; Zhang, Junjie; Tang, Binbin] Chengdu Univ Technol, Key Lab Geohazard Prevent & Geoenvironm Protect, Chengdu 610059, Peoples R China; [Zhou, Yaqi] Chengdu Sichuan Prov Dept Comprehens Rock Ore Tes, Chengdu 610081, Peoples R China; [Liu, Zhaoyang] Qatar Fdn, Qatar Environm & Energy Res Inst, POB 5825, Doha, Qatar","3":"Chengdu Univ Technol"},{"1":"WOS:000388900200004","2":"[Liu, Guo; Yang, Shaogui; Sun, Cheng] Nanjing Univ, Sch Environm, State Key Lab Pollut Control & Resource Reuse, Nanjing 210023, Jiangsu, Peoples R China; [Liu, Guo; Zhou, Yaqi; Zhang, Junjie; Tang, Binbin] Chengdu Univ Technol, Key Lab Geohazard Prevent & Geoenvironm Protect, Chengdu 610059, Peoples R China; [Zhou, Yaqi] Chengdu Sichuan Prov Dept Comprehens Rock Ore Tes, Chengdu 610081, Peoples R China; [Liu, Zhaoyang] Qatar Fdn, Qatar Environm & Energy Res Inst, POB 5825, Doha, Qatar","3":"Chengdu Sichuan Prov Dept Comprehens Rock Ore Tes"},{"1":"WOS:000388900200004","2":"[Liu, Guo; Yang, Shaogui; Sun, Cheng] Nanjing Univ, Sch Environm, State Key Lab Pollut Control & Resource Reuse, Nanjing 210023, Jiangsu, Peoples R China; [Liu, Guo; Zhou, Yaqi; Zhang, Junjie; Tang, Binbin] Chengdu Univ Technol, Key Lab Geohazard Prevent & Geoenvironm Protect, Chengdu 610059, Peoples R China; [Zhou, Yaqi] Chengdu Sichuan Prov Dept Comprehens Rock Ore Tes, Chengdu 610081, Peoples R China; [Liu, Zhaoyang] Qatar Fdn, Qatar Environm & Energy Res Inst, POB 5825, Doha, Qatar","3":"Qatar Fdn"},{"1":"WOS:000387416500013","2":"[Ye, Changwen] Jilin Univ, Coll Construct Engn, Changchun 130021, Jilin, Peoples R China; [Ye, Changwen; Pei, Xiangjun; Liu, J. C.] Chengdu Univ Technol, State Key Lab Geohazard Prevent & Geoenvironm Pro, Chengdu 610059, Sichuan, Peoples R China","3":"Jilin Univ"},{"1":"WOS:000387416500013","2":"[Ye, Changwen] Jilin Univ, Coll Construct Engn, Changchun 130021, Jilin, Peoples R China; [Ye, Changwen; Pei, Xiangjun; Liu, J. C.] Chengdu Univ Technol, State Key Lab Geohazard Prevent & Geoenvironm Pro, Chengdu 610059, Sichuan, Peoples R China","3":"Chengdu Univ Technol"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1"><span class="kw">library</span>(widyr)</a>
+<a class="sourceLine" id="cb77-2" title="2">paper_org_pairs &lt;-<span class="st"> </span>Organ <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb77-3" title="3"><span class="st">       </span><span class="kw">pairwise_count</span>(Organization, UT, <span class="dt">sort =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb77-4" title="4"><span class="kw">head</span>(paper_org_pairs)</a></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["item1"],"name":[1],"type":["chr"],"align":["left"]},{"label":["item2"],"name":[2],"type":["chr"],"align":["left"]},{"label":["n"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"China Acad Engn Phys","2":"Southwest Univ Sci & Technol","3":"106"},{"1":"Southwest Univ Sci & Technol","2":"China Acad Engn Phys","3":"106"},{"1":"Sichuan Normal Univ","2":"Sichuan Univ","3":"70"},{"1":"Xihua Univ","2":"Sichuan Univ","3":"70"},{"1":"Sichuan Univ","2":"Sichuan Normal Univ","3":"70"},{"1":"Sichuan Univ","2":"Xihua Univ","3":"70"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1">links &lt;-<span class="st"> </span>paper_org_pairs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(item1, item2, n) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb78-2" title="2"><span class="st">                             </span><span class="kw">filter</span>(n <span class="op">&gt;=</span><span class="st"> </span><span class="dv">50</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb78-3" title="3"><span class="st">                             </span><span class="kw">rename</span>(<span class="dt">from =</span> item1, <span class="dt">to =</span> item2, <span class="dt">weight =</span> n)</a>
+<a class="sourceLine" id="cb78-4" title="4">links</a></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["from"],"name":[1],"type":["chr"],"align":["left"]},{"label":["to"],"name":[2],"type":["chr"],"align":["left"]},{"label":["weight"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"China Acad Engn Phys","2":"Southwest Univ Sci & Technol","3":"106"},{"1":"Southwest Univ Sci & Technol","2":"China Acad Engn Phys","3":"106"},{"1":"Sichuan Normal Univ","2":"Sichuan Univ","3":"70"},{"1":"Xihua Univ","2":"Sichuan Univ","3":"70"},{"1":"Sichuan Univ","2":"Sichuan Normal Univ","3":"70"},{"1":"Sichuan Univ","2":"Xihua Univ","3":"70"},{"1":"Univ Georgia","2":"Xihua Univ","3":"70"},{"1":"Xihua Univ","2":"Univ Georgia","3":"70"},{"1":"Sichuan Univ","2":"Chengdu Univ Technol","3":"65"},{"1":"Chengdu Univ Technol","2":"Sichuan Univ","3":"65"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1"><span class="kw">library</span>(igraph)</a>
+<a class="sourceLine" id="cb79-2" title="2"><span class="kw">library</span>(ggraph)</a>
+<a class="sourceLine" id="cb79-3" title="3"></a>
+<a class="sourceLine" id="cb79-4" title="4">links <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb79-5" title="5"><span class="st">  </span><span class="kw">graph_from_data_frame</span>(<span class="dt">directed =</span> F) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb79-6" title="6"><span class="st">  </span><span class="kw">ggraph</span>(<span class="dt">layout =</span> <span class="st">&#39;kk&#39;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb79-7" title="7"><span class="st">  </span><span class="kw">geom_edge_fan</span>(<span class="kw">aes</span>(<span class="dt">edge_alpha =</span> weight, <span class="dt">edge_width =</span> weight)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb79-8" title="8"><span class="st">  </span><span class="kw">geom_node_point</span>(<span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb79-9" title="9"><span class="st">  </span><span class="kw">geom_node_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> name), <span class="dt">repel =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb79-10" title="10">                 <span class="dt">point.padding =</span> <span class="kw">unit</span>(<span class="fl">0.2</span>, <span class="st">&quot;lines&quot;</span>)) </a></code></pre></div>
+<p><img src="R4IS_files/figure-html/unnamed-chunk-82-1.png" width="576" /></p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1">  <span class="co">#theme_void() +</span></a>
+<a class="sourceLine" id="cb80-2" title="2">  <span class="co">#facet_wrap(~ type)  </span></a></code></pre></div>
+</div>
+<div id="section-32" class="section level2">
+<h2><span class="header-section-number">7.3</span> 全部学科</h2>
+<p>不过瘾吗？ 那我们就看看全局</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1">Organize &lt;-<span class="st"> </span>complete_set <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb81-2" title="2"><span class="st">         </span><span class="kw">select</span>(Category_ESI_cn, UT, C1) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb81-3" title="3"><span class="st">         </span><span class="kw">mutate</span>(<span class="dt">a =</span> <span class="kw">str_extract_all</span>(C1, mc) ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb81-4" title="4"><span class="st">         </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb81-5" title="5"><span class="st">         </span><span class="co">#tidyr::extract(a, c(&quot;namelist&quot;, &quot;organization&quot;), &quot;(\\[.*?\\])\\s+([^,]*),&quot;)</span></a>
+<a class="sourceLine" id="cb81-6" title="6"><span class="st">         </span>tidyr<span class="op">::</span><span class="kw">extract</span>(a, <span class="st">&quot;Organization&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">[.*?</span><span class="ch">\\</span><span class="st">]</span><span class="ch">\\</span><span class="st">s+([^,]*),&quot;</span>)</a>
+<a class="sourceLine" id="cb81-7" title="7"></a>
+<a class="sourceLine" id="cb81-8" title="8"><span class="kw">head</span>(Organize)</a></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Category_ESI_cn"],"name":[1],"type":["chr"],"align":["left"]},{"label":["UT"],"name":[2],"type":["chr"],"align":["left"]},{"label":["C1"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Organization"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"工程学","2":"WOS:000389786500012","3":"[Duan, Yiping; Shang, Ruishu; Zhong, Xinyan; Xie, Wei; Wang, Xingyue; Huang, Lihong] Chengdu Univ Technol, Dept Chem & Pharmaceut Engn, Chengdu 610059, Peoples R China; [Huang, Lihong] Indiana Univ Purdue Univ, Richard G Lugar Ctr Renewable Energy, Indianapolis, IN 46224 USA; [Huang, Lihong] Indiana Univ Purdue Univ, Lugar Ctr Renewable Energy, 799 W Michigan St, Indianapolis, IN 46202 USA","4":"Chengdu Univ Technol"},{"1":"工程学","2":"WOS:000389786500012","3":"[Duan, Yiping; Shang, Ruishu; Zhong, Xinyan; Xie, Wei; Wang, Xingyue; Huang, Lihong] Chengdu Univ Technol, Dept Chem & Pharmaceut Engn, Chengdu 610059, Peoples R China; [Huang, Lihong] Indiana Univ Purdue Univ, Richard G Lugar Ctr Renewable Energy, Indianapolis, IN 46224 USA; [Huang, Lihong] Indiana Univ Purdue Univ, Lugar Ctr Renewable Energy, 799 W Michigan St, Indianapolis, IN 46202 USA","4":"Indiana Univ Purdue Univ"},{"1":"工程学","2":"WOS:000389786500012","3":"[Duan, Yiping; Shang, Ruishu; Zhong, Xinyan; Xie, Wei; Wang, Xingyue; Huang, Lihong] Chengdu Univ Technol, Dept Chem & Pharmaceut Engn, Chengdu 610059, Peoples R China; [Huang, Lihong] Indiana Univ Purdue Univ, Richard G Lugar Ctr Renewable Energy, Indianapolis, IN 46224 USA; [Huang, Lihong] Indiana Univ Purdue Univ, Lugar Ctr Renewable Energy, 799 W Michigan St, Indianapolis, IN 46202 USA","4":"Indiana Univ Purdue Univ"},{"1":"地球科学","2":"WOS:000390181000002","3":"[Liu, Han; Wang, Bao-di; Ma, Long; Chen, Li; Li, Xiao-bo; Wang, Li-quan] Chengdu Inst Geol & Mineral Resources, Chengdu 610081, Peoples R China; [Liu, Han; Wang, Bao-di; Chen, Li; Li, Xiao-bo; Wang, Li-quan] China Geol Survey, Res Ctr Tibetan Plateau Geol, Chengdu 610081, Peoples R China; [Gao, Rui] Chengdu Univ Technol, Chengdu 610059, Peoples R China","4":"Chengdu Inst Geol & Mineral Resources"},{"1":"地球科学","2":"WOS:000390181000002","3":"[Liu, Han; Wang, Bao-di; Ma, Long; Chen, Li; Li, Xiao-bo; Wang, Li-quan] Chengdu Inst Geol & Mineral Resources, Chengdu 610081, Peoples R China; [Liu, Han; Wang, Bao-di; Chen, Li; Li, Xiao-bo; Wang, Li-quan] China Geol Survey, Res Ctr Tibetan Plateau Geol, Chengdu 610081, Peoples R China; [Gao, Rui] Chengdu Univ Technol, Chengdu 610059, Peoples R China","4":"China Geol Survey"},{"1":"地球科学","2":"WOS:000390181000002","3":"[Liu, Han; Wang, Bao-di; Ma, Long; Chen, Li; Li, Xiao-bo; Wang, Li-quan] Chengdu Inst Geol & Mineral Resources, Chengdu 610081, Peoples R China; [Liu, Han; Wang, Bao-di; Chen, Li; Li, Xiao-bo; Wang, Li-quan] China Geol Survey, Res Ctr Tibetan Plateau Geol, Chengdu 610081, Peoples R China; [Gao, Rui] Chengdu Univ Technol, Chengdu 610059, Peoples R China","4":"Chengdu Univ Technol"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1"><span class="kw">library</span>(widyr)</a>
+<a class="sourceLine" id="cb82-2" title="2">paper_organ_pairs &lt;-<span class="st"> </span>Organize <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb82-3" title="3"><span class="st">       </span><span class="kw">group_by</span>(Category_ESI_cn) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb82-4" title="4"><span class="st">       </span><span class="kw">pairwise_count</span>(Organization, UT, <span class="dt">sort =</span> <span class="ot">TRUE</span>, <span class="dt">upper =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb82-5" title="5"><span class="kw">head</span>(paper_organ_pairs)</a></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Category_ESI_cn"],"name":[1],"type":["chr"],"align":["left"]},{"label":["item1"],"name":[2],"type":["chr"],"align":["left"]},{"label":["item2"],"name":[3],"type":["chr"],"align":["left"]},{"label":["n"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"工程学","2":"Sichuan Univ","3":"Chengdu Univ Informat Technol","4":"31"},{"1":"工程学","2":"Univ Elect Sci & Technol China","3":"Chengdu Univ Informat Technol","4":"27"},{"1":"工程学","2":"Southwest Petr Univ","3":"China Univ Petr","4":"23"},{"1":"工程学","2":"Sichuan Univ","3":"Xihua Univ","4":"22"},{"1":"工程学","2":"Univ Elect Sci & Technol China","3":"Sichuan Normal Univ","4":"19"},{"1":"工程学","2":"Southwest Univ Sci & Technol","3":"China Acad Engn Phys","4":"18"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" title="1">linkss &lt;-<span class="st"> </span>paper_organ_pairs <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb83-2" title="2"><span class="st">         </span><span class="kw">select</span>(item1, item2, n, Category_ESI_cn) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb83-3" title="3"><span class="st">         </span><span class="kw">filter</span>(n <span class="op">&gt;=</span><span class="st"> </span><span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb83-4" title="4"><span class="st">         </span><span class="kw">filter</span>(Category_ESI_cn <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;物理学&quot;</span>, <span class="st">&quot;化学&quot;</span>, <span class="st">&quot;数学&quot;</span>, <span class="st">&quot;工程学&quot;</span>, <span class="st">&quot;计算机科学&quot;</span>, <span class="st">&quot;材料科学&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb83-5" title="5"><span class="st">         </span><span class="kw">rename</span>(<span class="dt">from =</span> item1, <span class="dt">to =</span> item2, <span class="dt">weight =</span> n)</a>
+<a class="sourceLine" id="cb83-6" title="6">linkss</a></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["from"],"name":[1],"type":["chr"],"align":["left"]},{"label":["to"],"name":[2],"type":["chr"],"align":["left"]},{"label":["weight"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Category_ESI_cn"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"Sichuan Univ","2":"Chengdu Univ Informat Technol","3":"31","4":"工程学"},{"1":"Univ Elect Sci & Technol China","2":"Chengdu Univ Informat Technol","3":"27","4":"工程学"},{"1":"Southwest Petr Univ","2":"China Univ Petr","3":"23","4":"工程学"},{"1":"Sichuan Univ","2":"Xihua Univ","3":"22","4":"工程学"},{"1":"Univ Elect Sci & Technol China","2":"Sichuan Normal Univ","3":"19","4":"工程学"},{"1":"Southwest Univ Sci & Technol","2":"China Acad Engn Phys","3":"18","4":"工程学"},{"1":"Southwest Petr Univ","2":"Sichuan Univ","3":"16","4":"工程学"},{"1":"Univ Elect Sci & Technol China","2":"Xihua Univ","3":"15","4":"工程学"},{"1":"Sichuan Univ","2":"Sichuan Agr Univ","3":"14","4":"工程学"},{"1":"Southwest Petr Univ","2":"Univ Elect Sci & Technol China","3":"13","4":"工程学"},{"1":"Univ Elect Sci & Technol China","2":"Sichuan Univ Sci & Engn","3":"13","4":"工程学"},{"1":"Sichuan Univ","2":"Sichuan Normal Univ","3":"13","4":"工程学"},{"1":"SW Jiaotong Univ","2":"Xihua Univ","3":"13","4":"工程学"},{"1":"Sichuan Univ","2":"Yibin Univ","3":"13","4":"工程学"},{"1":"Chengdu Univ Technol","2":"Sichuan Univ","3":"12","4":"工程学"},{"1":"Chengdu Univ","2":"Univ Elect Sci & Technol China","3":"12","4":"工程学"},{"1":"Southwest Jiaotong Univ","2":"Xihua Univ","3":"12","4":"工程学"},{"1":"Xihua Univ","2":"Victoria Univ","3":"12","4":"工程学"},{"1":"Chengdu Univ Technol","2":"Chinese Acad Sci","3":"11","4":"工程学"},{"1":"PetroChina","2":"Southwest Petr Univ","3":"11","4":"工程学"},{"1":"Sichuan Univ","2":"Chengdu Univ","3":"11","4":"工程学"},{"1":"Xihua Univ","2":"Univ Adelaide","3":"11","4":"工程学"},{"1":"Sichuan Univ","2":"Neijiang Normal Univ","3":"11","4":"工程学"},{"1":"Chinese Acad Sci","2":"Sichuan Agr Univ","3":"10","4":"工程学"},{"1":"Chengdu Univ Technol","2":"Univ Elect Sci & Technol China","3":"10","4":"工程学"},{"1":"Southwest Jiaotong Univ","2":"Southwest Univ Sci & Technol","3":"10","4":"工程学"},{"1":"Sichuan Univ","2":"Chengdu Univ Informat Technol","3":"15","4":"计算机科学"},{"1":"Sichuan Univ","2":"Chengdu Univ Informat Technol","3":"28","4":"数学"},{"1":"Sichuan Univ","2":"Sichuan Normal Univ","3":"27","4":"数学"},{"1":"Sichuan Normal Univ","2":"Inst Appl Phys & Computat Math","3":"21","4":"数学"},{"1":"Sichuan Univ","2":"Xihua Univ","3":"13","4":"数学"},{"1":"Sichuan Univ","2":"Neijiang Normal Univ","3":"11","4":"数学"},{"1":"Yibin Univ","2":"Yunnan Univ Finance & Econ","3":"11","4":"数学"},{"1":"Sichuan Univ Sci & Engn","2":"Southwest Univ","3":"10","4":"数学"},{"1":"Sichuan Normal Univ","2":"Hoseo Univ","3":"10","4":"数学"},{"1":"Sichuan Univ","2":"Panzhihua Univ","3":"10","4":"数学"},{"1":"Southwest Univ Sci & Technol","2":"China Acad Engn Phys","3":"106","4":"化学"},{"1":"Sichuan Univ","2":"Sichuan Normal Univ","3":"70","4":"化学"},{"1":"Sichuan Univ","2":"Xihua Univ","3":"70","4":"化学"},{"1":"Xihua Univ","2":"Univ Georgia","3":"70","4":"化学"},{"1":"Chengdu Univ Technol","2":"Sichuan Univ","3":"65","4":"化学"},{"1":"Sichuan Univ","2":"Sichuan Agr Univ","3":"40","4":"化学"},{"1":"Sichuan Univ","2":"Chengdu Univ Tradit Chinese Med","3":"40","4":"化学"},{"1":"Sichuan Univ","2":"Sichuan Univ Sci & Engn","3":"37","4":"化学"},{"1":"Chinese Acad Sci","2":"Sichuan Normal Univ","3":"37","4":"化学"},{"1":"Sichuan Univ","2":"Yibin Univ","3":"35","4":"化学"},{"1":"Chinese Acad Sci","2":"Sichuan Univ","3":"31","4":"化学"},{"1":"Chengdu Univ Technol","2":"Sichuan Higher Educ Inst","3":"30","4":"化学"},{"1":"Sichuan Univ","2":"Chengdu Univ","3":"29","4":"化学"},{"1":"Chengdu Univ Technol","2":"Chinese Acad Sci","3":"27","4":"化学"},{"1":"Sichuan Univ","2":"Chengdu Univ Informat Technol","3":"27","4":"化学"},{"1":"Chinese Acad Sci","2":"Univ Chinese Acad Sci","3":"25","4":"化学"},{"1":"China West Normal Univ","2":"King Abdulaziz Univ","3":"25","4":"化学"},{"1":"Sichuan Univ","2":"Southwest Petr Univ","3":"23","4":"化学"},{"1":"Sichuan Univ","2":"Univ Georgia","3":"23","4":"化学"},{"1":"Chinese Acad Sci","2":"Southwest Petr Univ","3":"22","4":"化学"},{"1":"Sichuan Univ","2":"Southwest Univ Sci & Technol","3":"20","4":"化学"},{"1":"Sichuan Univ","2":"Mianyang Normal Univ","3":"20","4":"化学"},{"1":"Southwest Petr Univ","2":"Soochow Univ","3":"20","4":"化学"},{"1":"Southwest Univ Sci & Technol","2":"Minist Educ","3":"19","4":"化学"},{"1":"Chinese Acad Sci","2":"China West Normal Univ","3":"19","4":"化学"},{"1":"Sichuan Univ","2":"Chengdu Med Coll","3":"19","4":"化学"},{"1":"Chengdu Univ Technol","2":"Mineral Resources Chem Key Lab Sichuan Higher Edu","3":"18","4":"化学"},{"1":"Chinese Acad Sci","2":"Sichuan Univ Sci & Engn","3":"18","4":"化学"},{"1":"Sichuan Univ Sci & Engn","2":"Chongqing Univ","3":"18","4":"化学"},{"1":"Southwest Petr Univ","2":"Oil & Gas Field Appl Chem Key Lab Sichuan Prov","3":"18","4":"化学"},{"1":"Southwest Petr Univ","2":"Lovely Profess Univ","3":"17","4":"化学"},{"1":"Chinese Acad Sci","2":"Southwest Univ Sci & Technol","3":"16","4":"化学"},{"1":"Southwest Petr Univ","2":"Minist Educ","3":"16","4":"化学"},{"1":"Southwest Univ Sci & Technol","2":"Univ Sci & Technol China","3":"16","4":"化学"},{"1":"Sichuan Univ","2":"China West Normal Univ","3":"16","4":"化学"},{"1":"Peking Univ","2":"Sichuan Normal Univ","3":"16","4":"化学"},{"1":"Chengdu Univ Tradit Chinese Med","2":"302 Mil Hosp China","3":"16","4":"化学"},{"1":"Chinese Acad Sci","2":"Sichuan Agr Univ","3":"15","4":"化学"},{"1":"Southwest Petr Univ","2":"North West Univ","3":"15","4":"化学"},{"1":"Chinese Acad Sci","2":"Chengdu Univ Tradit Chinese Med","3":"15","4":"化学"},{"1":"Sichuan Normal Univ","2":"Univ Hull","3":"15","4":"化学"},{"1":"Chengdu Univ Technol","2":"Southwest Petr Univ","3":"14","4":"化学"},{"1":"Chinese Acad Sci","2":"Peking Univ","3":"14","4":"化学"},{"1":"Sichuan Univ","2":"Luzhou Med Coll","3":"14","4":"化学"},{"1":"Sichuan Univ Sci & Engn","2":"Chongqing Univ Arts & Sci","3":"14","4":"化学"},{"1":"Southwest Petr Univ","2":"China West Normal Univ","3":"13","4":"化学"},{"1":"Sichuan Univ Sci & Engn","2":"Southwest Univ","3":"13","4":"化学"},{"1":"North West Univ","2":"Lovely Profess Univ","3":"13","4":"化学"},{"1":"Chongqing Univ","2":"Yibin Univ","3":"13","4":"化学"},{"1":"Chinese Acad Sci","2":"Chengdu Med Coll","3":"12","4":"化学"},{"1":"Chengdu Univ Tradit Chinese Med","2":"Chinese Acad Med Sci","3":"12","4":"化学"},{"1":"Southwest Petr Univ","2":"Deakin Univ","3":"12","4":"化学"},{"1":"Southwest Univ Sci & Technol","2":"CAEP","3":"12","4":"化学"},{"1":"Chinese Acad Sci","2":"Chengdu Univ Informat Technol","3":"12","4":"化学"},{"1":"Mianyang Normal Univ","2":"China Acad Engn Phys","3":"11","4":"化学"},{"1":"Chengdu Univ Tradit Chinese Med","2":"Jiangxi Univ Tradit Chinese Med","3":"11","4":"化学"},{"1":"Sichuan Univ Sci & Engn","2":"Chongqing Univ Technol","3":"11","4":"化学"},{"1":"Xihua Univ","2":"SW Jiaotong Univ","3":"11","4":"化学"},{"1":"Southwest Petr Univ","2":"Xinjiang Univ","3":"10","4":"化学"},{"1":"Southwest Univ","2":"Xihua Univ","3":"10","4":"化学"},{"1":"Sichuan Univ Sci & Engn","2":"Sichuan Inst Higher Educ","3":"10","4":"化学"},{"1":"Southwest Univ Sci & Technol","2":"China Acad Engn Phys","3":"85","4":"材料科学"},{"1":"Chengdu Univ Technol","2":"Sichuan Univ","3":"48","4":"材料科学"},{"1":"Sichuan Univ","2":"Southwest Univ Sci & Technol","3":"30","4":"材料科学"},{"1":"Sichuan Univ","2":"Sichuan Univ Sci & Engn","3":"25","4":"材料科学"},{"1":"Sichuan Univ","2":"Chengdu Univ","3":"24","4":"材料科学"},{"1":"Sichuan Univ","2":"Sichuan Normal Univ","3":"23","4":"材料科学"},{"1":"Sichuan Univ","2":"Chengdu Univ Informat Technol","3":"22","4":"材料科学"},{"1":"Hong Kong Polytech Univ","2":"Sichuan Normal Univ","3":"22","4":"材料科学"},{"1":"Southwest Univ Sci & Technol","2":"CAEP","3":"20","4":"材料科学"},{"1":"Univ Elect Sci & Technol China","2":"Chengdu Univ Informat Technol","3":"16","4":"材料科学"},{"1":"Sichuan Univ","2":"Mianyang Normal Univ","3":"16","4":"材料科学"},{"1":"Sichuan Univ","2":"Xihua Univ","3":"15","4":"材料科学"},{"1":"China West Normal Univ","2":"King Abdulaziz Univ","3":"15","4":"材料科学"},{"1":"Sichuan Univ","2":"Chinese Acad Sci","3":"14","4":"材料科学"},{"1":"Southwest Jiaotong Univ","2":"Southwest Univ Sci & Technol","3":"14","4":"材料科学"},{"1":"Southwest Univ Sci & Technol","2":"Univ Elect Sci & Technol China","3":"14","4":"材料科学"},{"1":"Sichuan Univ","2":"Southwest Petr Univ","3":"14","4":"材料科学"},{"1":"Sichuan Univ Sci & Engn","2":"Chongqing Univ","3":"14","4":"材料科学"},{"1":"Southwest Univ Sci & Technol","2":"Univ Sci & Technol China","3":"14","4":"材料科学"},{"1":"Chinese Acad Sci","2":"Southwest Petr Univ","3":"11","4":"材料科学"},{"1":"Univ Elect Sci & Technol China","2":"Chengdu Technol Univ","3":"11","4":"材料科学"},{"1":"Cent S Univ","2":"Southwest Univ Sci & Technol","3":"10","4":"材料科学"},{"1":"Chinese Acad Sci","2":"Southwest Univ Sci & Technol","3":"10","4":"材料科学"},{"1":"Chinese Acad Sci","2":"Sichuan Univ Sci & Engn","3":"10","4":"材料科学"},{"1":"China Acad Engn Phys","2":"Mianyang Normal Univ","3":"10","4":"材料科学"},{"1":"Sichuan Normal Univ","2":"Sichuan Univ","3":"70","4":"物理学"},{"1":"Sichuan Univ","2":"Xihua Univ","3":"65","4":"物理学"},{"1":"Southwest Univ Sci & Technol","2":"China Acad Engn Phys","3":"57","4":"物理学"},{"1":"Sichuan Univ","2":"Mianyang Normal Univ","3":"49","4":"物理学"},{"1":"Sichuan Normal Univ","2":"Univ Elect Sci & Technol China","3":"48","4":"物理学"},{"1":"Sichuan Univ","2":"Chinese Acad Sci","3":"47","4":"物理学"},{"1":"Sichuan Univ","2":"Chengdu Univ Informat Technol","3":"41","4":"物理学"},{"1":"Sichuan Univ","2":"Yibin Univ","3":"41","4":"物理学"},{"1":"Univ Elect Sci & Technol China","2":"Chengdu Univ Informat Technol","3":"37","4":"物理学"},{"1":"Sichuan Normal Univ","2":"Chinese Acad Sci","3":"34","4":"物理学"},{"1":"Chengdu Univ Technol","2":"Sichuan Univ","3":"24","4":"物理学"},{"1":"Chinese Acad Sci","2":"Chengdu Univ Informat Technol","3":"23","4":"物理学"},{"1":"Univ Elect Sci & Technol China","2":"China West Normal Univ","3":"21","4":"物理学"},{"1":"Sichuan Normal Univ","2":"Neijiang Normal Univ","3":"18","4":"物理学"},{"1":"Univ Sci & Technol China","2":"Southwest Univ Sci & Technol","3":"17","4":"物理学"},{"1":"Sichuan Univ","2":"CAEP","3":"17","4":"物理学"},{"1":"Sichuan Univ","2":"China Acad Engn Phys","3":"17","4":"物理学"},{"1":"CAEP","2":"Mianyang Normal Univ","3":"16","4":"物理学"},{"1":"Hong Kong Polytech Univ","2":"Sichuan Normal Univ","3":"15","4":"物理学"},{"1":"Sichuan Univ Sci & Engn","2":"Sichuan Univ","3":"15","4":"物理学"},{"1":"Southwest Univ Sci & Technol","2":"Chinese Acad Sci","3":"15","4":"物理学"},{"1":"Sichuan Normal Univ","2":"SW Jiaotong Univ","3":"15","4":"物理学"},{"1":"Sichuan Univ","2":"Neijiang Normal Univ","3":"15","4":"物理学"},{"1":"Nanyang Technol Univ","2":"Sichuan Normal Univ","3":"14","4":"物理学"},{"1":"Chengdu Univ Technol","2":"Tsinghua Univ","3":"13","4":"物理学"},{"1":"Sichuan Univ","2":"Southwest Petr Univ","3":"13","4":"物理学"},{"1":"Southwest Univ Sci & Technol","2":"Univ Elect Sci & Technol China","3":"13","4":"物理学"},{"1":"Chinese Acad Sci","2":"Mianyang Normal Univ","3":"13","4":"物理学"},{"1":"Sichuan Univ","2":"Chengdu Technol Univ","3":"13","4":"物理学"},{"1":"Univ Elect Sci & Technol China","2":"Chengdu Technol Univ","3":"13","4":"物理学"},{"1":"Southwest Univ Sci & Technol","2":"CAEP","3":"12","4":"物理学"},{"1":"Chengdu Univ Technol","2":"Sichuan Normal Univ","3":"11","4":"物理学"},{"1":"Chengdu Univ Technol","2":"Nanjing Univ","3":"11","4":"物理学"},{"1":"Sichuan Univ","2":"Univ Elect Sci & Technol China","3":"11","4":"物理学"},{"1":"Chongqing Univ","2":"Univ Elect Sci & Technol China","3":"11","4":"物理学"},{"1":"Univ Elect Sci & Technol China","2":"Yibin Univ","3":"11","4":"物理学"},{"1":"Sichuan Univ","2":"Leshan Normal Univ","3":"11","4":"物理学"},{"1":"Sichuan Univ","2":"Luzhou Med Coll","3":"11","4":"物理学"},{"1":"Zhejiang Univ","2":"Sichuan Normal Univ","3":"10","4":"物理学"},{"1":"Chengdu Univ Technol","2":"Southwest Jiaotong Univ","3":"10","4":"物理学"},{"1":"Sichuan Normal Univ","2":"Southwest Jiaotong Univ","3":"10","4":"物理学"},{"1":"Chengdu Univ Technol","2":"Xi An Jiao Tong Univ","3":"10","4":"物理学"},{"1":"Southwest Jiaotong Univ","2":"Xihua Univ","3":"10","4":"物理学"},{"1":"Univ Sci & Technol China","2":"Chinese Acad Sci","3":"10","4":"物理学"},{"1":"Sichuan Normal Univ","2":"China Acad Engn Phys","3":"10","4":"物理学"},{"1":"Sichuan Normal Univ","2":"Cankaya Univ","3":"10","4":"物理学"},{"1":"China Acad Engn Phys","2":"Univ Elect Sci & Technol China","3":"10","4":"物理学"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1"><span class="kw">library</span>(igraph)</a>
+<a class="sourceLine" id="cb84-2" title="2"><span class="kw">library</span>(ggraph)</a>
+<a class="sourceLine" id="cb84-3" title="3"></a>
+<a class="sourceLine" id="cb84-4" title="4">linkss <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb84-5" title="5"><span class="st">  </span><span class="kw">graph_from_data_frame</span>(<span class="dt">directed =</span> F) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb84-6" title="6"><span class="st">  </span><span class="kw">ggraph</span>(<span class="dt">layout =</span> <span class="st">&#39;kk&#39;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb84-7" title="7"><span class="st">  </span><span class="kw">geom_edge_fan</span>(<span class="kw">aes</span>(<span class="dt">edge_alpha =</span> weight, </a>
+<a class="sourceLine" id="cb84-8" title="8">                    <span class="dt">edge_width =</span> weight,</a>
+<a class="sourceLine" id="cb84-9" title="9">                    <span class="dt">edge_colour =</span> Category_ESI_cn)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb84-10" title="10"><span class="st">  </span><span class="kw">geom_node_point</span>(<span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb84-11" title="11"><span class="st">  </span><span class="kw">geom_node_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> name), <span class="dt">repel =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb84-12" title="12">                 <span class="dt">point.padding =</span> <span class="kw">unit</span>(<span class="fl">0.2</span>, <span class="st">&quot;lines&quot;</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb84-13" title="13"><span class="st">  </span><span class="kw">theme_void</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb84-14" title="14"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>Category_ESI_cn)  </a></code></pre></div>
+<p><img src="R4IS_files/figure-html/unnamed-chunk-86-1.png" width="576" /></p>
+</div>
+<div id="section-33" class="section level2">
+<h2><span class="header-section-number">7.4</span> 看看某个学校的呢</h2>
+<p>蓝皮书的网络图</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1">sicnu_organize &lt;-<span class="st"> </span>sicnu_set <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb85-2" title="2"><span class="st">         </span><span class="kw">select</span>(Category_ESI_cn, UT, C1) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb85-3" title="3"><span class="st">         </span><span class="kw">mutate</span>(<span class="dt">a =</span> <span class="kw">str_extract_all</span>(C1, mc) ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb85-4" title="4"><span class="st">         </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb85-5" title="5"><span class="st">         </span><span class="co">#tidyr::extract(a, c(&quot;namelist&quot;, &quot;organization&quot;), &quot;(\\[.*?\\])\\s+([^,]*),&quot;)</span></a>
+<a class="sourceLine" id="cb85-6" title="6"><span class="st">         </span>tidyr<span class="op">::</span><span class="kw">extract</span>(a, <span class="st">&quot;Organization&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">[.*?</span><span class="ch">\\</span><span class="st">]</span><span class="ch">\\</span><span class="st">s+([^,]*),&quot;</span>)</a>
+<a class="sourceLine" id="cb85-7" title="7"></a>
+<a class="sourceLine" id="cb85-8" title="8"><span class="kw">head</span>(sicnu_organize)</a></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Category_ESI_cn"],"name":[1],"type":["chr"],"align":["left"]},{"label":["UT"],"name":[2],"type":["chr"],"align":["left"]},{"label":["C1"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Organization"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"物理学","2":"WOS:000391685500028","3":"[Chen, Z. J.; Xu, G. B.; Yan, J. G.; Kuang, Z.] Univ Elect Sci & Technol China, Sch Phys Elect, Chengdu 610054, Peoples R China; [Chen, T. H.] China West Normal Univ, Coll Phys & Space Sci, Nanchong 637002, Peoples R China; [Li, D. H.] Sichuan Normal Univ, Coll Phys & Elect Engn, Chengdu 610066, Peoples R China","4":"Univ Elect Sci & Technol China"},{"1":"物理学","2":"WOS:000391685500028","3":"[Chen, Z. J.; Xu, G. B.; Yan, J. G.; Kuang, Z.] Univ Elect Sci & Technol China, Sch Phys Elect, Chengdu 610054, Peoples R China; [Chen, T. H.] China West Normal Univ, Coll Phys & Space Sci, Nanchong 637002, Peoples R China; [Li, D. H.] Sichuan Normal Univ, Coll Phys & Elect Engn, Chengdu 610066, Peoples R China","4":"China West Normal Univ"},{"1":"物理学","2":"WOS:000391685500028","3":"[Chen, Z. J.; Xu, G. B.; Yan, J. G.; Kuang, Z.] Univ Elect Sci & Technol China, Sch Phys Elect, Chengdu 610054, Peoples R China; [Chen, T. H.] China West Normal Univ, Coll Phys & Space Sci, Nanchong 637002, Peoples R China; [Li, D. H.] Sichuan Normal Univ, Coll Phys & Elect Engn, Chengdu 610066, Peoples R China","4":"Sichuan Normal Univ"},{"1":"化学","2":"WOS:000390294600057","3":"[He, Lihua; Zou, Xiao; Wang, Tao; Zheng, Qiaoji; Liao, Jie; Xu, Chenggang; Lin, Dunmin] Sichuan Normal Univ, Coll Chem & Mat Sci, Chengdu 610066, Peoples R China; [Liu, Yongfu] Chinese Acad Sci, Ningbo Inst Mat Technol & Engn, Ningbo 315201, Zhejiang, Peoples R China","4":"Sichuan Normal Univ"},{"1":"化学","2":"WOS:000390294600057","3":"[He, Lihua; Zou, Xiao; Wang, Tao; Zheng, Qiaoji; Liao, Jie; Xu, Chenggang; Lin, Dunmin] Sichuan Normal Univ, Coll Chem & Mat Sci, Chengdu 610066, Peoples R China; [Liu, Yongfu] Chinese Acad Sci, Ningbo Inst Mat Technol & Engn, Ningbo 315201, Zhejiang, Peoples R China","4":"Chinese Acad Sci"},{"1":"综合交叉学科","2":"WOS:000391217400023","3":"[Wang, Yang] Univ Illinois, Sch Social Work, Champaign, IL USA; [Wang, Xiaohua; Tian, Donghua; Qu, Zhiyong] Beijing Normal Univ, China Inst Hlth, Sch Social Dev & Publ Policy, Beijing, Peoples R China; [Liu, Fangnan; Jiang, Xiaoning; Dong, Xuehan; Kong, Xianglei] Beijing Normal Univ, Sch Social Dev & Publ Policy, Beijing, Peoples R China; [Xiao, Yun] Maternal & Child Hlth Hosp Mianzhu Cty, Deyang, Sichuan, Peoples R China; [Yang, Xuemei] Sichuan Normal Univ, Teacher Educ Coll, Chengdu, Sichuan, Peoples R China","4":"Univ Illinois"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1">sicnu_organ_pairs &lt;-<span class="st"> </span>sicnu_organize <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb86-2" title="2"><span class="st">       </span><span class="kw">filter</span>(<span class="op">!</span>Organization <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Sichuan Normal Univ&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb86-3" title="3"><span class="st">       </span><span class="kw">count</span>(Category_ESI_cn, Organization) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb86-4" title="4"><span class="st">       </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n))</a>
+<a class="sourceLine" id="cb86-5" title="5"></a>
+<a class="sourceLine" id="cb86-6" title="6"><span class="kw">head</span>(sicnu_organ_pairs)</a></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Category_ESI_cn"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Organization"],"name":[2],"type":["chr"],"align":["left"]},{"label":["n"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"化学","2":"Sichuan Univ","3":"78"},{"1":"物理学","2":"Sichuan Univ","3":"77"},{"1":"物理学","2":"Univ Elect Sci & Technol China","3":"48"},{"1":"化学","2":"Chinese Acad Sci","3":"42"},{"1":"物理学","2":"Chinese Acad Sci","3":"36"},{"1":"材料科学","2":"Hong Kong Polytech Univ","3":"34"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1"><span class="kw">library</span>(tidygraph)</a>
+<a class="sourceLine" id="cb87-2" title="2"><span class="kw">library</span>(ggraph)</a>
+<a class="sourceLine" id="cb87-3" title="3"></a>
+<a class="sourceLine" id="cb87-4" title="4">  sicnu_organ_pairs  <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb87-5" title="5"><span class="st">        </span><span class="kw">rename</span>(<span class="dt">from =</span> Category_ESI_cn, <span class="dt">to =</span> Organization, <span class="dt">weight =</span> n) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb87-6" title="6"><span class="st">        </span><span class="kw">filter</span>( weight <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span> ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb87-7" title="7"><span class="st">        </span><span class="kw">as_tbl_graph</span>(<span class="dt">directed =</span> F) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb87-8" title="8"><span class="st">        </span><span class="kw">ggraph</span>(<span class="dt">layout =</span> <span class="st">&#39;graphopt&#39;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb87-9" title="9"><span class="st">        </span><span class="kw">geom_edge_link</span>(<span class="kw">aes</span>(<span class="dt">edge_alpha =</span> weight, </a>
+<a class="sourceLine" id="cb87-10" title="10">                           <span class="dt">edge_width =</span> weight)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb87-11" title="11"><span class="st">        </span><span class="kw">geom_node_point</span>(<span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb87-12" title="12"><span class="st">        </span><span class="kw">geom_node_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> name), <span class="dt">repel =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb87-13" title="13">                       <span class="dt">point.padding =</span> <span class="kw">unit</span>(<span class="fl">0.2</span>, <span class="st">&quot;lines&quot;</span>)) </a></code></pre></div>
+<p><img src="R4IS_files/figure-html/unnamed-chunk-89-1.png" width="576" /></p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" title="1">df_pairs &lt;-<span class="st"> </span>sicnu_organ_pairs  <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb88-2" title="2"><span class="st">           </span><span class="kw">filter</span>( <span class="op">!</span><span class="kw">is.na</span>(Category_ESI_cn) ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb88-3" title="3"><span class="st">           </span><span class="kw">rename</span>(<span class="dt">from =</span> Category_ESI_cn, <span class="dt">to =</span> Organization, <span class="dt">weight =</span> n) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb88-4" title="4"><span class="st">           </span><span class="kw">filter</span>( weight <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span> ) </a></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1"><span class="kw">library</span>(googleVis)</a>
+<a class="sourceLine" id="cb89-2" title="2">draftsankey &lt;-<span class="st"> </span><span class="kw">gvisSankey</span>(df_pairs, <span class="dt">from =</span> <span class="st">&quot;from&quot;</span>, <span class="dt">to =</span> <span class="st">&quot;to&quot;</span>, <span class="dt">weight =</span> <span class="st">&quot;weight&quot;</span>,</a>
+<a class="sourceLine" id="cb89-3" title="3">              <span class="dt">options=</span><span class="kw">list</span>(<span class="dt">height=</span><span class="dv">1000</span>, <span class="dt">width=</span><span class="dv">600</span>,</a>
+<a class="sourceLine" id="cb89-4" title="4">              <span class="dt">sankey=</span><span class="st">&quot;{</span></a>
+<a class="sourceLine" id="cb89-5" title="5"><span class="st">               link:{color:{fill: &#39;lightgray&#39;, fillOpacity: 0.7}},</span></a>
+<a class="sourceLine" id="cb89-6" title="6"><span class="st">               node:{nodePadding: 5, label:{fontSize: 12}, interactivity: true, width: 20},</span></a>
+<a class="sourceLine" id="cb89-7" title="7"><span class="st">              }&quot;</span>)</a>
+<a class="sourceLine" id="cb89-8" title="8">  )</a>
+<a class="sourceLine" id="cb89-9" title="9"></a>
+<a class="sourceLine" id="cb89-10" title="10"><span class="kw">plot</span>(draftsankey)</a></code></pre></div>
+<!-- Sankey generated in R 3.6.1 by googleVis 0.6.4 package -->
+<!-- Wed Jan 01 15:53:28 2020 -->
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataSankeyID4401c034d38 () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+"化学",
+"Sichuan Univ",
+78
+],
+[
+"物理学",
+"Sichuan Univ",
+77
+],
+[
+"物理学",
+"Univ Elect Sci & Technol China",
+48
+],
+[
+"化学",
+"Chinese Acad Sci",
+42
+],
+[
+"物理学",
+"Chinese Acad Sci",
+36
+],
+[
+"材料科学",
+"Hong Kong Polytech Univ",
+34
+],
+[
+"化学",
+"Peking Univ",
+33
+],
+[
+"数学",
+"Sichuan Univ",
+29
+],
+[
+"植物学与动物学",
+"Chinese Acad Sci",
+27
+],
+[
+"材料科学",
+"Sichuan Univ",
+26
+],
+[
+"物理学",
+"Hong Kong Polytech Univ",
+25
+],
+[
+"数学",
+"Inst Appl Phys & Computat Math",
+21
+],
+[
+"工程学",
+"Univ Elect Sci & Technol China",
+20
+],
+[
+"物理学",
+"Neijiang Normal Univ",
+18
+],
+[
+"物理学",
+"Nanyang Technol Univ",
+17
+],
+[
+"化学",
+"Univ Hull",
+15
+],
+[
+"物理学",
+"SW Jiaotong Univ",
+15
+],
+[
+"物理学",
+"Yibin Univ",
+15
+],
+[
+"工程学",
+"Sichuan Univ",
+14
+],
+[
+"物理学",
+"Chengdu Univ Technol",
+11
+],
+[
+"物理学",
+"Southwest Jiaotong Univ",
+11
+],
+[
+"数学",
+"Hoseo Univ",
+10
+],
+[
+"物理学",
+"Cankaya Univ",
+10
+],
+[
+"物理学",
+"China Acad Engn Phys",
+10
+],
+[
+"物理学",
+"Nanjing Univ",
+10
+],
+[
+"物理学",
+"Zhejiang Univ",
+10
+],
+[
+"化学",
+"Univ Elect Sci & Technol China",
+9
+],
+[
+"计算机科学",
+"Sichuan Univ",
+9
+],
+[
+"精神病学与心理学",
+"Deakin Univ",
+9
+],
+[
+"数学",
+"Chongqing Univ",
+9
+],
+[
+"微生物学",
+"Guangdong Inst Ecoenvironm & Soil Sci",
+9
+],
+[
+"工程学",
+"Sichuan Univ Sci & Engn",
+8
+],
+[
+"化学",
+"Natl Inst Adv Ind Sci & Technol",
+8
+],
+[
+"计算机科学",
+"Univ Elect Sci & Technol China",
+8
+],
+[
+"数学",
+"SW Univ Finance & Econ",
+8
+],
+[
+"物理学",
+"Huaihua Univ",
+8
+],
+[
+"物理学",
+"Natl Univ Singapore",
+8
+],
+[
+"物理学",
+"Tianjin Univ",
+8
+],
+[
+"物理学",
+"Univ Sci & Technol China",
+8
+],
+[
+"分子生物学与遗传学",
+"Sichuan Univ",
+7
+],
+[
+"化学",
+"Univ Loughborough",
+7
+],
+[
+"计算机科学",
+"Tongji Univ",
+7
+],
+[
+"数学",
+"Curtin Univ Technol",
+7
+],
+[
+"数学",
+"Sichuan Univ Sci & Engn",
+7
+],
+[
+"数学",
+"Univ Elect Sci & Technol China",
+7
+],
+[
+"物理学",
+"Chongqing Univ",
+7
+],
+[
+"物理学",
+"Hunan Normal Univ",
+7
+],
+[
+"材料科学",
+"Univ Elect Sci & Technol China",
+6
+],
+[
+"工程学",
+"Southwest Univ Sci & Technol",
+6
+],
+[
+"化学",
+"Nanyang Technol Univ",
+6
+],
+[
+"计算机科学",
+"Minist Educ",
+6
+],
+[
+"精神病学与心理学",
+"Southwest Univ",
+6
+],
+[
+"数学",
+"Southwest Jiaotong Univ",
+6
+],
+[
+"数学",
+"Southwest Univ Sci & Technol",
+6
+],
+[
+"数学",
+"Tianjin Univ",
+6
+],
+[
+"物理学",
+"Yancheng Inst Technol",
+6
+],
+[
+"综合交叉学科",
+"Beijing Normal Univ",
+6
+],
+[
+"材料科学",
+"Chinese Acad Sci",
+5
+],
+[
+"分子生物学与遗传学",
+"Chinese Acad Sci",
+5
+],
+[
+"工程学",
+"Natl Univ Singapore",
+5
+],
+[
+"工程学",
+"So Med Univ",
+5
+],
+[
+"化学",
+"Civil Aviat Adm China",
+5
+],
+[
+"化学",
+"Natl Ctr Nanosci & Technol",
+5
+],
+[
+"计算机科学",
+"Sichuan Univ Sci & Engn",
+5
+],
+[
+"计算机科学",
+"Southwest Jiaotong Univ",
+5
+],
+[
+"数学",
+"Nankai Univ",
+5
+],
+[
+"物理学",
+"CSIRO Mat Sci & Engn",
+5
+],
+[
+"物理学",
+"Southwest Univ Nationalities",
+5
+],
+[
+"物理学",
+"SW Petr Univ",
+5
+],
+[
+"物理学",
+"Visual Comp & Virtual Real Key Lab Sichuan Prov",
+5
+],
+[
+"药理学和毒理学",
+"Sichuan Univ",
+5
+],
+[
+"植物学与动物学",
+"Shenyang Normal Univ",
+5
+] 
+];
+data.addColumn('string','from');
+data.addColumn('string','to');
+data.addColumn('number','weight');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartSankeyID4401c034d38() {
+var data = gvisDataSankeyID4401c034d38();
+var options = {};
+options["width"] = 600;
+options["height"] = 1000;
+options["sankey"] = {
+               link:{color:{fill: 'lightgray', fillOpacity: 0.7}},
+               node:{nodePadding: 5, label:{fontSize: 12}, interactivity: true, width: 20},
+              };
+
+    var chart = new google.visualization.Sankey(
+    document.getElementById('SankeyID4401c034d38')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "sankey";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartSankeyID4401c034d38);
+})();
+function displayChartSankeyID4401c034d38() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script>
+<!-- jsChart -->
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartSankeyID4401c034d38"></script>
+<!-- divChart -->
+<div id="SankeyID4401c034d38" style="width: 600; height: 1000;">
+
+</div>
+</div>
+<div id="section-34" class="section level2">
+<h2><span class="header-section-number">7.5</span> 思考1</h2>
+<p>把发文量加进来，学院-学科-合作，这个有意思?</p>
+</div>
+<div id="section-35" class="section level2">
+<h2><span class="header-section-number">7.6</span> 思考2</h2>
+<p>类似（NBA2015）<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>，学校类型- 学校 - 学科贡献。这个有意思。可能要调整数据集</p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="4">
+<li id="fn4"><p><a href="https://thedatagame.com.au/2015/12/14/visualising-the-2015-nba-draft-in-r/" class="uri">https://thedatagame.com.au/2015/12/14/visualising-the-2015-nba-draft-in-r/</a><a href="cooperation.html#fnref4" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="JCR.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="potential.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/yihui/bookdown-chinese/edit/master/Cooperation.Rmd",
+"text": "编辑"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["R4IS.pdf", "R4IS.epub"],
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

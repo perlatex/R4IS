@@ -6,9 +6,9 @@
 
 我们选择四川农业大学的数据来看看。
 ```{r message=FALSE, warning=FALSE}
-scau_set <- complete_set %>% 
-            filter(University == "Sichuan_Agr_Univ") %>% 
-            filter(!is.na(Category_ESI_cn)) 
+scau_set <- complete_set %>%
+  filter(University == "Sichuan_Agr_Univ") %>%
+  filter(!is.na(Category_ESI_cn))
 ```
 
 ```{r}
@@ -17,10 +17,10 @@ scau_set %>% count(Category_ESI_cn, PY)
 
 
 ```{r}
-df_scau <- scau_set %>% 
-      count(Category_ESI_cn, PY) %>% 
-      spread(Category_ESI_cn, n ,fill =0) %>% 
-      select(-PY) 
+df_scau <- scau_set %>%
+  count(Category_ESI_cn, PY) %>%
+  spread(Category_ESI_cn, n, fill = 0) %>%
+  select(-PY)
 
 # Correlation matrix
 corr <- round(cor(df_scau), 1)
@@ -41,21 +41,21 @@ ESI学科分类对生命科学领域情有独钟啊，谁叫它那么重要！
 用机器学习的套路搞搞
 ```{r}
 train_set <- scau_set %>%
-             filter(!PY %in% c("2016"))  %>%
-             count(Category_ESI_cn, PY) %>% 
-             rename(paper =n, year = PY) %>% 
-             group_by(Category_ESI_cn) %>%
-             nest() 
+  filter(!PY %in% c("2016")) %>%
+  count(Category_ESI_cn, PY) %>%
+  rename(paper = n, year = PY) %>%
+  group_by(Category_ESI_cn) %>%
+  nest()
 
 test_set <- scau_set %>%
-            filter(PY %in% c("2016"))  %>%
-            count(Category_ESI_cn, PY) %>% 
-            rename(paper =n, year = PY) %>%
-            group_by(Category_ESI_cn) %>%
-            nest()  
+  filter(PY %in% c("2016")) %>%
+  count(Category_ESI_cn, PY) %>%
+  rename(paper = n, year = PY) %>%
+  group_by(Category_ESI_cn) %>%
+  nest()
 
-set <- left_join( train_set, test_set, by = "Category_ESI_cn")
-set 
+set <- left_join(train_set, test_set, by = "Category_ESI_cn")
+set
 ```
 
 
@@ -77,13 +77,14 @@ get_output <- function(mod) augment(mod)
 
 
 master <- set %>%
-         mutate( model = map(data.x, fit_model),
-                 predictions = map2(data.y, model, add_predictions),
-                 resids = map2(data.x, model, add_residuals),
-                 glance = map(model, broom::glance),
-                   tidy = map(model, broom::tidy),
-                augment = map(model, broom::augment)
-               ) 
+  mutate(
+    model = map(data.x, fit_model),
+    predictions = map2(data.y, model, add_predictions),
+    resids = map2(data.x, model, add_residuals),
+    glance = map(model, broom::glance),
+    tidy = map(model, broom::tidy),
+    augment = map(model, broom::augment)
+  )
 
 master
 ```
@@ -92,25 +93,31 @@ master
 
 
 ```{r}
-master %>% unnest(glance) %>% 
-           select(Category_ESI_cn, r.squared) %>%
-           arrange(-r.squared)
+master %>%
+  unnest(glance) %>%
+  select(Category_ESI_cn, r.squared) %>%
+  arrange(-r.squared)
 ```
 
 
 ```{r fig.asp = 0.8, fig.width = 6, out.width = "99%"}
-select <- master %>% unnest(glance) %>%
-                     filter(r.squared >= 0.75) 
+selected <- master %>%
+  unnest(glance) %>%
+  filter(r.squared >= 0.75)
 
-master %>% unnest(glance) %>%
-           ggplot( mapping = aes(x = Category_ESI_cn, y = r.squared, label = Category_ESI_cn) ) +
-           geom_point() +
-           geom_text(check_overlap = TRUE, na.rm =TRUE) +
-           theme(axis.line=element_blank(),
-                 axis.text.x=element_blank(),
-                 text=element_text(size=14)) +
-           geom_point(data=select, aes(x=Category_ESI_cn, y=r.squared), colour ="red") 
-           
+master %>%
+  unnest(glance) %>%
+  ggplot(
+    mapping = aes(x = Category_ESI_cn, y = r.squared, label = Category_ESI_cn)
+  ) +
+  geom_point() +
+  geom_text(check_overlap = TRUE, na.rm = TRUE) +
+  theme(
+    axis.line = element_blank(),
+    axis.text.x = element_blank(),
+    text = element_text(size = 14)
+  ) +
+  geom_point(data = selected, aes(x = Category_ESI_cn, y = r.squared), colour = "red")
 ```
 
 绝大部分是线性的
@@ -118,10 +125,14 @@ master %>% unnest(glance) %>%
 
 
 ```{r}
-select <- master %>% unnest(glance) %>%
-                     filter(r.squared >= 0.75) 
+selected <- master %>%
+  unnest(glance) %>%
+  filter(r.squared >= 0.75)
+```
 
-select %>% unnest(data.x)
+
+```{r}
+selected %>% unnest(data.x)
 ```
 
 
@@ -129,24 +140,34 @@ select %>% unnest(data.x)
 
 
 ```{r fig.asp = 0.7, fig.width = 8, out.width = "99%"}
-select %>% unnest(data.x) %>%
-           ggplot( mapping = aes(x = year, y = paper, colour = Category_ESI_cn) ) +
-           geom_point() +
-           geom_smooth(method = lm, se =FALSE) +
-           facet_wrap(~ Category_ESI_cn)+
-           theme(legend.position = "none")
+selected %>%
+  unnest(data.x) %>%
+  ggplot(mapping = aes(x = year, y = paper, colour = Category_ESI_cn)) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE) +
+  facet_wrap(~Category_ESI_cn) +
+  theme(legend.position = "none")
+```
+
+
+
+
+
+```{r}
+checkdata <- selected %>%
+  unnest(predictions) %>%
+  select(Category_ESI_cn, data.y, pred) %>%
+  unnest(data.y, names_repair = "universal")
+
+checkdata
 ```
 
 
 ```{r}
-checkdata <- select %>% unnest(predictions) %>%
-                        select(Category_ESI_cn,  data.y, paper, pred) %>%
-                        unnest(data.y) 
-
-
-compare <- checkdata %>% mutate(delta =  abs((paper - pred)/paper) ) %>%
-                         select(Category_ESI_cn, year, paper, pred, delta)  %>%
-                         arrange(delta)
+compare <- checkdata %>%
+  mutate(delta = abs((paper - pred) / paper)) %>%
+  select(Category_ESI_cn, year, paper, pred, delta) %>%
+  arrange(delta)
 
 compare
 ```
@@ -158,16 +179,16 @@ compare
 library(showtext)
 showtext_auto()
 
-select %>% unnest(data.x) %>%
-           ggplot( mapping = aes(x = year, y = paper, colour = Category_ESI_cn) ) +
-           geom_point() +
-           geom_smooth(method = lm, se =FALSE) + 
-           geom_point(data = compare, mapping = aes(x = year, y = paper), colour = "black" ) +
-           geom_point(data = compare, mapping = aes(x = year, y = pred ), colour = "red" ) +
-           facet_wrap(~ Category_ESI_cn, scales = "free") +
-           labs(x = NULL, y = NULL, colour = "") +
-           theme(legend.position = "none")
-
+selected %>%
+  unnest(data.x) %>%
+  ggplot(mapping = aes(x = year, y = paper, colour = Category_ESI_cn)) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE) +
+  geom_point(data = compare, mapping = aes(x = year, y = paper), colour = "black") +
+  geom_point(data = compare, mapping = aes(x = year, y = pred), colour = "red") +
+  facet_wrap(~Category_ESI_cn, scales = "free") +
+  labs(x = NULL, y = NULL, colour = "") +
+  theme(legend.position = "none")
 ```
 
 

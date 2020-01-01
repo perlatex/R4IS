@@ -25,7 +25,9 @@ knitr::kable(
 )%>%
   kable_styling("striped")
 ```
+
 大家多多发一区的文章吧，1篇一区文章影响力相当于10篇四区的喔！
+
 
 ## 各学科论文影响力结构
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
@@ -43,7 +45,7 @@ stat2 <- complete_set %>%
 knitr::kable(
   stat2,
   caption = "基于中科院期刊分区的各学科论文影响力结构（四川省省属高校近几年数据）"
-)%>%
+) %>%
   kable_styling("striped")
 ```
 
@@ -68,7 +70,7 @@ stat3 <- complete_set %>%
 knitr::kable(
   stat3,
   caption = "对引文最大贡献的期刊排行（四川省省属高校近几年数据）"
-)%>%
+) %>%
   kable_styling("striped")
 ```
 

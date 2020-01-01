@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>第 8 章 潜力学科 | 基于R语言的科研信息分析与服务</title>
+  <meta name="description" content="Scientific Research information service using R" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="第 8 章 潜力学科 | 基于R语言的科研信息分析与服务" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Scientific Research information service using R" />
+  <meta name="github-repo" content="perlatex/R4IS" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 8 章 潜力学科 | 基于R语言的科研信息分析与服务" />
+  
+  <meta name="twitter:description" content="Scientific Research information service using R" />
+  
+
+<meta name="author" content="王敏杰" />
+
+
+<meta name="date" content="2020-01-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="cooperation.html"/>
+<link rel="next" href="impact.html"/>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<link href="libs/pagedtable/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable/js/pagedtable.js"></script>
+<script src="libs/kePrint/kePrint.js"></script>
+<script src="libs/htmlwidgets/htmlwidgets.js"></script>
+<link href="libs/str_view/str_view.css" rel="stylesheet" />
+<script src="libs/str_view-binding/str_view.js"></script>
+<link href="libs/wordcloud2/wordcloud.css" rel="stylesheet" />
+<script src="libs/wordcloud2/wordcloud2-all.js"></script>
+<script src="libs/wordcloud2/hover.js"></script>
+<script src="libs/wordcloud2-binding/wordcloud2.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css\psyteachr.css" type="text/css" />
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">科研信息服务</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-1"><i class="fa fa-check"></i>本书内容</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-2"><i class="fa fa-check"></i>数据和代码</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-3"><i class="fa fa-check"></i>未来想法</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-4"><i class="fa fa-check"></i>致谢</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i>作者简介</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> 数据科学与R语言</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#section-5"><i class="fa fa-check"></i><b>1.1</b> 数据科学</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#r"><i class="fa fa-check"></i><b>1.2</b> R语言基础</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#r--the-tidyverse"><i class="fa fa-check"></i><b>1.3</b> R 宏包: The tidyverse</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#section-6"><i class="fa fa-check"></i><b>1.4</b> 字符串处理：正则表达式</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#section-7"><i class="fa fa-check"></i><b>1.5</b> 数据科学工作流程</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#section-8"><i class="fa fa-check"></i><b>1.6</b> 推荐书目</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="develop.html"><a href="develop.html"><i class="fa fa-check"></i><b>2</b> 学科结构与发展</a><ul>
+<li class="chapter" data-level="2.1" data-path="develop.html"><a href="develop.html#pros"><i class="fa fa-check"></i><b>2.1</b> PROS</a></li>
+<li class="chapter" data-level="2.2" data-path="develop.html"><a href="develop.html#web-of-science"><i class="fa fa-check"></i><b>2.2</b> Web of Science</a></li>
+<li class="chapter" data-level="2.3" data-path="develop.html"><a href="develop.html#section-9"><i class="fa fa-check"></i><b>2.3</b> 数据集的构建</a></li>
+<li class="chapter" data-level="2.4" data-path="develop.html"><a href="develop.html#section-10"><i class="fa fa-check"></i><b>2.4</b> 数据集的导入</a></li>
+<li class="chapter" data-level="2.5" data-path="develop.html"><a href="develop.html#section-11"><i class="fa fa-check"></i><b>2.5</b> 各高校对比</a></li>
+<li class="chapter" data-level="2.6" data-path="develop.html"><a href="develop.html#section-12"><i class="fa fa-check"></i><b>2.6</b> 分析单个学校</a></li>
+<li class="chapter" data-level="2.7" data-path="develop.html"><a href="develop.html#section-13"><i class="fa fa-check"></i><b>2.7</b> 第一作者筛查</a></li>
+<li class="chapter" data-level="2.8" data-path="develop.html"><a href="develop.html#section-14"><i class="fa fa-check"></i><b>2.8</b> 通讯作者筛查</a></li>
+<li class="chapter" data-level="2.9" data-path="develop.html"><a href="develop.html#section-15"><i class="fa fa-check"></i><b>2.9</b> 可视化之小试牛刀</a></li>
+<li class="chapter" data-level="2.10" data-path="develop.html"><a href="develop.html#section-16"><i class="fa fa-check"></i><b>2.10</b> 可视化之初显身手</a></li>
+<li class="chapter" data-level="2.11" data-path="develop.html"><a href="develop.html#section-17"><i class="fa fa-check"></i><b>2.11</b> 可视化之渐入佳境</a></li>
+<li class="chapter" data-level="2.12" data-path="develop.html"><a href="develop.html#section-18"><i class="fa fa-check"></i><b>2.12</b> 更多</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="college.html"><a href="college.html"><i class="fa fa-check"></i><b>3</b> 通讯地址统计</a><ul>
+<li class="chapter" data-level="3.1" data-path="college.html"><a href="college.html#section-19"><i class="fa fa-check"></i><b>3.1</b> 各学院英文地址</a></li>
+<li class="chapter" data-level="3.2" data-path="college.html"><a href="college.html#section-20"><i class="fa fa-check"></i><b>3.2</b> 统计</a></li>
+<li class="chapter" data-level="3.3" data-path="college.html"><a href="college.html#section-21"><i class="fa fa-check"></i><b>3.3</b> 部分学院结果</a></li>
+<li class="chapter" data-level="3.4" data-path="college.html"><a href="college.html#section-22"><i class="fa fa-check"></i><b>3.4</b> 随年份的变化</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="contri.html"><a href="contri.html"><i class="fa fa-check"></i><b>4</b> 学院对学科的贡献</a><ul>
+<li class="chapter" data-level="4.1" data-path="contri.html"><a href="contri.html#section-23"><i class="fa fa-check"></i><b>4.1</b> 这里开始吧</a></li>
+<li class="chapter" data-level="4.2" data-path="contri.html"><a href="contri.html#section-24"><i class="fa fa-check"></i><b>4.2</b> 学院对发文的贡献</a></li>
+<li class="chapter" data-level="4.3" data-path="contri.html"><a href="contri.html#section-25"><i class="fa fa-check"></i><b>4.3</b> 学院对引文的贡献</a></li>
+<li class="chapter" data-level="4.4" data-path="contri.html"><a href="contri.html#section-26"><i class="fa fa-check"></i><b>4.4</b> 期刊对引文的贡献分析</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="Journal.html"><a href="Journal.html"><i class="fa fa-check"></i><b>5</b> 学校科研人员的选刊倾向</a><ul>
+<li class="chapter" data-level="5.1" data-path="Journal.html"><a href="Journal.html#jcr"><i class="fa fa-check"></i><b>5.1</b> 中科院JCR期刊分区介绍</a></li>
+<li class="chapter" data-level="5.2" data-path="Journal.html"><a href="Journal.html#section-27"><i class="fa fa-check"></i><b>5.2</b> 各学科论文的期刊分布</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="JCR.html"><a href="JCR.html"><i class="fa fa-check"></i><b>6</b> 期刊使用情况</a><ul>
+<li class="chapter" data-level="6.1" data-path="JCR.html"><a href="JCR.html#jcr-1"><i class="fa fa-check"></i><b>6.1</b> JCR简介</a></li>
+<li class="chapter" data-level="6.2" data-path="JCR.html"><a href="JCR.html#jcr-2"><i class="fa fa-check"></i><b>6.2</b> JCR初探</a></li>
+<li class="chapter" data-level="6.3" data-path="JCR.html"><a href="JCR.html#sci"><i class="fa fa-check"></i><b>6.3</b> 中国SCI期刊</a></li>
+<li class="chapter" data-level="6.4" data-path="JCR.html"><a href="JCR.html#section-28"><i class="fa fa-check"></i><b>6.4</b> 可视化</a></li>
+<li class="chapter" data-level="6.5" data-path="JCR.html"><a href="JCR.html#section-29"><i class="fa fa-check"></i><b>6.5</b> 各学科期刊使用情况</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="cooperation.html"><a href="cooperation.html"><i class="fa fa-check"></i><b>7</b> 科研合作</a><ul>
+<li class="chapter" data-level="7.1" data-path="cooperation.html"><a href="cooperation.html#section-30"><i class="fa fa-check"></i><b>7.1</b> 机构匹配</a></li>
+<li class="chapter" data-level="7.2" data-path="cooperation.html"><a href="cooperation.html#section-31"><i class="fa fa-check"></i><b>7.2</b> 化学学科</a></li>
+<li class="chapter" data-level="7.3" data-path="cooperation.html"><a href="cooperation.html#section-32"><i class="fa fa-check"></i><b>7.3</b> 全部学科</a></li>
+<li class="chapter" data-level="7.4" data-path="cooperation.html"><a href="cooperation.html#section-33"><i class="fa fa-check"></i><b>7.4</b> 看看某个学校的呢</a></li>
+<li class="chapter" data-level="7.5" data-path="cooperation.html"><a href="cooperation.html#section-34"><i class="fa fa-check"></i><b>7.5</b> 思考1</a></li>
+<li class="chapter" data-level="7.6" data-path="cooperation.html"><a href="cooperation.html#section-35"><i class="fa fa-check"></i><b>7.6</b> 思考2</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="potential.html"><a href="potential.html"><i class="fa fa-check"></i><b>8</b> 潜力学科</a><ul>
+<li class="chapter" data-level="8.1" data-path="potential.html"><a href="potential.html#esi"><i class="fa fa-check"></i><b>8.1</b> ESI学科</a></li>
+<li class="chapter" data-level="8.2" data-path="potential.html"><a href="potential.html#section-36"><i class="fa fa-check"></i><b>8.2</b> 潜力学科定义</a></li>
+<li class="chapter" data-level="8.3" data-path="potential.html"><a href="potential.html#esi-1"><i class="fa fa-check"></i><b>8.3</b> 各学科进入ESI的阈值</a></li>
+<li class="chapter" data-level="8.4" data-path="potential.html"><a href="potential.html#section-37"><i class="fa fa-check"></i><b>8.4</b> 潜力学科统计</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="impact.html"><a href="impact.html"><i class="fa fa-check"></i><b>9</b> 影响力结构分析</a><ul>
+<li class="chapter" data-level="9.1" data-path="impact.html"><a href="impact.html#section-38"><i class="fa fa-check"></i><b>9.1</b> 论文影响力结构</a></li>
+<li class="chapter" data-level="9.2" data-path="impact.html"><a href="impact.html#section-39"><i class="fa fa-check"></i><b>9.2</b> 各学科论文影响力结构</a></li>
+<li class="chapter" data-level="9.3" data-path="impact.html"><a href="impact.html#section-40"><i class="fa fa-check"></i><b>9.3</b> 引文最大贡献的期刊</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="prediction.html"><a href="prediction.html"><i class="fa fa-check"></i><b>10</b> 预测</a><ul>
+<li class="chapter" data-level="10.1" data-path="prediction.html"><a href="prediction.html#section-41"><i class="fa fa-check"></i><b>10.1</b> 学科发展的相关性</a></li>
+<li class="chapter" data-level="10.2" data-path="prediction.html"><a href="prediction.html#section-42"><i class="fa fa-check"></i><b>10.2</b> 发文量的预测</a></li>
+<li class="chapter" data-level="10.3" data-path="prediction.html"><a href="prediction.html#section-43"><i class="fa fa-check"></i><b>10.3</b> 建模</a></li>
+<li class="chapter" data-level="10.4" data-path="prediction.html"><a href="prediction.html#section-44"><i class="fa fa-check"></i><b>10.4</b> 引文量的预测</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="keywords.html"><a href="keywords.html"><i class="fa fa-check"></i><b>11</b> 主题词分析</a><ul>
+<li class="chapter" data-level="11.1" data-path="keywords.html"><a href="keywords.html#section-45"><i class="fa fa-check"></i><b>11.1</b> 化学学科</a></li>
+<li class="chapter" data-level="11.2" data-path="keywords.html"><a href="keywords.html#section-46"><i class="fa fa-check"></i><b>11.2</b> 词云</a></li>
+<li class="chapter" data-level="11.3" data-path="keywords.html"><a href="keywords.html#section-47"><i class="fa fa-check"></i><b>11.3</b> 共现矩阵</a></li>
+<li class="chapter" data-level="11.4" data-path="keywords.html"><a href="keywords.html#section-48"><i class="fa fa-check"></i><b>11.4</b> 全部学科</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="ImpactFactor.html"><a href="ImpactFactor.html"><i class="fa fa-check"></i><b>12</b> 期刊的影响因子</a><ul>
+<li class="chapter" data-level="12.1" data-path="ImpactFactor.html"><a href="ImpactFactor.html#section-49"><i class="fa fa-check"></i><b>12.1</b> 各学科影响因子最高的期刊</a></li>
+<li class="chapter" data-level="12.2" data-path="ImpactFactor.html"><a href="ImpactFactor.html#esi-2"><i class="fa fa-check"></i><b>12.2</b> 不同ESI学科，影响因子的分布</a></li>
+<li class="chapter" data-level="12.3" data-path="ImpactFactor.html"><a href="ImpactFactor.html#section-50"><i class="fa fa-check"></i><b>12.3</b> 加入学校数据，影响因子求和得分</a></li>
+<li class="chapter" data-level="12.4" data-path="ImpactFactor.html"><a href="ImpactFactor.html#section-51"><i class="fa fa-check"></i><b>12.4</b> 得分与被引量的关系</a></li>
+<li class="chapter" data-level="12.5" data-path="ImpactFactor.html"><a href="ImpactFactor.html#section-52"><i class="fa fa-check"></i><b>12.5</b> 看看不同中科院学科和等级下，随影响因子排序的期刊</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="fund.html"><a href="fund.html"><i class="fa fa-check"></i><b>13</b> 基金资助分析</a><ul>
+<li class="chapter" data-level="13.1" data-path="fund.html"><a href="fund.html#section-53"><i class="fa fa-check"></i><b>13.1</b> 各学科受基金资助</a></li>
+<li class="chapter" data-level="13.2" data-path="fund.html"><a href="fund.html#section-54"><i class="fa fa-check"></i><b>13.2</b> 各学科情况</a></li>
+<li class="chapter" data-level="13.3" data-path="fund.html"><a href="fund.html#section-55"><i class="fa fa-check"></i><b>13.3</b> 各校的情况</a></li>
+<li class="chapter" data-level="13.4" data-path="fund.html"><a href="fund.html#section-56"><i class="fa fa-check"></i><b>13.4</b> 那个项目基金下的文章最丰富？</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="Highcited.html"><a href="Highcited.html"><i class="fa fa-check"></i><b>14</b> 高被引论文</a><ul>
+<li class="chapter" data-level="14.1" data-path="Highcited.html"><a href="Highcited.html#section-57"><i class="fa fa-check"></i><b>14.1</b> 还没想好</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="Coupling.html"><a href="Coupling.html"><i class="fa fa-check"></i><b>15</b> 耦合</a><ul>
+<li class="chapter" data-level="15.1" data-path="Coupling.html"><a href="Coupling.html#bibliographic-coupling"><i class="fa fa-check"></i><b>15.1</b> Bibliographic coupling</a></li>
+<li class="chapter" data-level="15.2" data-path="Coupling.html"><a href="Coupling.html#sicnu_set"><i class="fa fa-check"></i><b>15.2</b> 用<code>sicnu_set</code>看看吧</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="Occurence.html"><a href="Occurence.html"><i class="fa fa-check"></i><b>16</b> 共现矩阵在信息服务中的应用</a><ul>
+<li class="chapter" data-level="16.1" data-path="Occurence.html"><a href="Occurence.html#section-58"><i class="fa fa-check"></i><b>16.1</b> 邻接矩阵</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="Occurence.html"><a href="Occurence.html#section-59"><i class="fa fa-check"></i><b>16.1.1</b> 共现矩阵</a></li>
+<li class="chapter" data-level="16.1.2" data-path="Occurence.html"><a href="Occurence.html#section-60"><i class="fa fa-check"></i><b>16.1.2</b> 距离矩阵</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="Occurence.html"><a href="Occurence.html#section-61"><i class="fa fa-check"></i><b>16.2</b> 聚类案例1：主题词聚类</a></li>
+<li class="chapter" data-level="16.3" data-path="Occurence.html"><a href="Occurence.html#section-62"><i class="fa fa-check"></i><b>16.3</b> 聚类案例2：若干学校的聚类</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="tidyabstract.html"><a href="tidyabstract.html"><i class="fa fa-check"></i><b>17</b> 利用文本挖掘技术分析文献摘要</a><ul>
+<li class="chapter" data-level="17.1" data-path="tidyabstract.html"><a href="tidyabstract.html#section-63"><i class="fa fa-check"></i><b>17.1</b> 数据导入</a></li>
+<li class="chapter" data-level="17.2" data-path="tidyabstract.html"><a href="tidyabstract.html#section-64"><i class="fa fa-check"></i><b>17.2</b> 数据规整</a></li>
+<li class="chapter" data-level="17.3" data-path="tidyabstract.html"><a href="tidyabstract.html#tf_idf"><i class="fa fa-check"></i><b>17.3</b> 计算tf_idf</a></li>
+<li class="chapter" data-level="17.4" data-path="tidyabstract.html"><a href="tidyabstract.html#section-65"><i class="fa fa-check"></i><b>17.4</b> 文本相似性</a></li>
+<li class="chapter" data-level="17.5" data-path="tidyabstract.html"><a href="tidyabstract.html#section-66"><i class="fa fa-check"></i><b>17.5</b> 关联词汇</a></li>
+<li class="chapter" data-level="17.6" data-path="tidyabstract.html"><a href="tidyabstract.html#section-67"><i class="fa fa-check"></i><b>17.6</b> 下一步工作</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="citedtime.html"><a href="citedtime.html"><i class="fa fa-check"></i><b>18</b> 文章被引时间特征分析</a></li>
+<li class="chapter" data-level="19" data-path="tidybib.html"><a href="tidybib.html"><i class="fa fa-check"></i><b>19</b> 基于bibliometrix宏包</a></li>
+<li class="appendix"><span><b>附录</b></span></li>
+<li class="chapter" data-level="A" data-path="sound.html"><a href="sound.html"><i class="fa fa-check"></i><b>A</b> 附录</a><ul>
+<li class="chapter" data-level="A.1" data-path="sound.html"><a href="sound.html#r-1"><i class="fa fa-check"></i><b>A.1</b> R语言系列讲座</a></li>
+<li class="chapter" data-level="A.2" data-path="sound.html"><a href="sound.html#section-68"><i class="fa fa-check"></i><b>A.2</b> 联系我们</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">本书由 bookdown 强力驱动</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">基于R语言的科研信息分析与服务</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="potential" class="section level1">
+<h1><span class="header-section-number">第 8 章</span> 潜力学科</h1>
+<p>所谓潜力学科，就是机构各学科的被引量与各学科进入ESI的阈值进行比较，较接近的这个阈值的学科，就称为潜力学科。</p>
+<div id="esi" class="section level2">
+<h2><span class="header-section-number">8.1</span> ESI学科</h2>
+<div class="figure"><span id="fig:unnamed-chunk-92"></span>
+<img src="images/table.png" alt="ESI学科分类" width="55%" />
+<p class="caption">
+图 8.1: ESI学科分类
+</p>
+</div>
+</div>
+<div id="section-36" class="section level2">
+<h2><span class="header-section-number">8.2</span> 潜力学科定义</h2>
+<p>学科潜力值 <span class="math inline">\(P\)</span> 计算公式：
+<span class="math display">\[\begin{align}
+    P  &amp;= 1- \log\left( \frac{C_e}{PN \times C_{av} } \right) \\
+       &amp;= 1- \log\left( \frac{C_e}{C_i} \right) 
+\end{align}\]</span>
+<span class="math inline">\(C_e\)</span> 指当前进入该学科 ESI
+引文排名的最低引文次数，<span class="math inline">\(C_i\)</span> 指机构在该学科实际获得的引用次数，<span class="math inline">\(PN\)</span> 指机构在该学科的发表的论文数，
+<span class="math inline">\(C_{av}\)</span> 指机构在该学科发表论文的篇均被引频次。</p>
+<p>学科潜力指数同时考虑了机构学科的总被引次数、论文数和
+篇均被引频次，从总体衡量了机构在某个学科与 ESI
+引文排名中引文指标的差距。<span class="math inline">\(P \in (0, 1)\)</span> 值越大表明机构在
+该学科与ESI引文排名差距越小，从而越接近ESI引文排名。
+一般来说，如果学科的 <span class="math inline">\(P\)</span> 值接近 1，则可以表
+明机构在该学科有较好的发展前景，并有可能在未来进
+入 ESI 引文排名，即可认为是机构的潜势学科。</p>
+</div>
+<div id="esi-1" class="section level2">
+<h2><span class="header-section-number">8.3</span> 各学科进入ESI的阈值</h2>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" title="1">ThresholdESI &lt;-<span class="st"> </span><span class="kw">read_rds</span>(<span class="st">&quot;./data/dataset/ThresholdESI_set.rds&quot;</span>)</a>
+<a class="sourceLine" id="cb90-2" title="2">ThresholdESI <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb90-3" title="3"><span class="st">      </span>knitr<span class="op">::</span><span class="kw">kable</span>( <span class="dt">booktabs =</span> T, </a>
+<a class="sourceLine" id="cb90-4" title="4">                    <span class="dt">caption =</span> <span class="st">&quot;各学科进入ESI的阈值(2017年8月数据)&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb90-5" title="5"><span class="st">      </span><span class="kw">kable_styling</span>(<span class="st">&quot;striped&quot;</span>)</a></code></pre></div>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-93">表 8.1: </span>各学科进入ESI的阈值(2017年8月数据)
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Category_ESI_cn
+</th>
+<th style="text-align:right;">
+Lowest_Cited_ESI
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+农业科学
+</td>
+<td style="text-align:right;">
+1692
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+生物学与生物化学
+</td>
+<td style="text-align:right;">
+5079
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+化学
+</td>
+<td style="text-align:right;">
+5981
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+临床医学
+</td>
+<td style="text-align:right;">
+1855
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+计算机科学
+</td>
+<td style="text-align:right;">
+2837
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+经济与商业
+</td>
+<td style="text-align:right;">
+3549
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+工程学
+</td>
+<td style="text-align:right;">
+1876
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+环境科学与生态学
+</td>
+<td style="text-align:right;">
+3319
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+地球科学
+</td>
+<td style="text-align:right;">
+4795
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+免疫学
+</td>
+<td style="text-align:right;">
+3844
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+材料科学
+</td>
+<td style="text-align:right;">
+3918
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+数学
+</td>
+<td style="text-align:right;">
+3620
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+微生物学
+</td>
+<td style="text-align:right;">
+4421
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+分子生物学与遗传学
+</td>
+<td style="text-align:right;">
+10243
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+综合交叉学科
+</td>
+<td style="text-align:right;">
+2087
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+神经系统学与行为学
+</td>
+<td style="text-align:right;">
+4959
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+药理学和毒理学
+</td>
+<td style="text-align:right;">
+2864
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+物理学
+</td>
+<td style="text-align:right;">
+14029
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+植物学与动物学
+</td>
+<td style="text-align:right;">
+2236
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+精神病学与心理学
+</td>
+<td style="text-align:right;">
+3464
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+社会科学总论
+</td>
+<td style="text-align:right;">
+1142
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+空间科学
+</td>
+<td style="text-align:right;">
+27851
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="section-37" class="section level2">
+<h2><span class="header-section-number">8.4</span> 潜力学科统计</h2>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1">potent &lt;-<span class="st"> </span>complete_set <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb91-2" title="2"><span class="st">        </span><span class="kw">group_by</span>(University_cn, Category_ESI_cn) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb91-3" title="3"><span class="st">        </span><span class="kw">summarise</span>(<span class="dt">sumcited =</span> <span class="kw">sum</span>(TC), <span class="dt">meancited =</span> <span class="kw">round</span>(<span class="kw">mean</span>(TC),<span class="dv">2</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb91-4" title="4"><span class="st">        </span><span class="kw">filter</span>( <span class="op">!</span><span class="kw">is.na</span>(Category_ESI_cn) ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb91-5" title="5"><span class="st">        </span><span class="kw">left_join</span>(ThresholdESI, <span class="dt">by =</span> <span class="st">&quot;Category_ESI_cn&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb91-6" title="6"><span class="st">               </span><span class="kw">mutate</span>( <span class="dt">pd=</span> <span class="kw">round</span>(sumcited<span class="op">/</span>Lowest_Cited_ESI, <span class="dv">3</span>)  ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb91-7" title="7"><span class="st">               </span><span class="co">#filter( pd &gt; 0.1 ) %&gt;%</span></a>
+<a class="sourceLine" id="cb91-8" title="8"><span class="st">               </span><span class="kw">arrange</span>(University_cn, pd) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb91-9" title="9"><span class="st">               </span><span class="kw">select</span>(University_cn, Category_ESI_cn, pd) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb91-10" title="10"><span class="st">               </span><span class="kw">filter</span>(University_cn <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;四川师范大学&quot;</span>, <span class="st">&quot;成都理工大学&quot;</span>,   </a>
+<a class="sourceLine" id="cb91-11" title="11">                                           <span class="st">&quot;西华师范大学&quot;</span>,<span class="st">&quot;西华大学&quot;</span>)</a>
+<a class="sourceLine" id="cb91-12" title="12">                     ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb91-13" title="13"><span class="st">               </span><span class="kw">ungroup</span>()  </a></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" title="1">potent</a></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["University_cn"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Category_ESI_cn"],"name":[2],"type":["chr"],"align":["left"]},{"label":["pd"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"成都理工大学","2":"空间科学","3":"0.000"},{"1":"成都理工大学","2":"神经系统学与行为学","3":"0.001"},{"1":"成都理工大学","2":"免疫学","3":"0.003"},{"1":"成都理工大学","2":"分子生物学与遗传学","3":"0.004"},{"1":"成都理工大学","2":"微生物学","3":"0.004"},{"1":"成都理工大学","2":"临床医学","3":"0.011"},{"1":"成都理工大学","2":"生物学与生物化学","3":"0.019"},{"1":"成都理工大学","2":"植物学与动物学","3":"0.027"},{"1":"成都理工大学","2":"农业科学","3":"0.029"},{"1":"成都理工大学","2":"药理学和毒理学","3":"0.031"},{"1":"成都理工大学","2":"计算机科学","3":"0.033"},{"1":"成都理工大学","2":"社会科学总论","3":"0.033"},{"1":"成都理工大学","2":"数学","3":"0.042"},{"1":"成都理工大学","2":"综合交叉学科","3":"0.132"},{"1":"成都理工大学","2":"物理学","3":"0.160"},{"1":"成都理工大学","2":"环境科学与生态学","3":"0.232"},{"1":"成都理工大学","2":"材料科学","3":"0.258"},{"1":"成都理工大学","2":"工程学","3":"0.301"},{"1":"成都理工大学","2":"化学","3":"0.452"},{"1":"成都理工大学","2":"地球科学","3":"1.063"},{"1":"四川师范大学","2":"空间科学","3":"0.004"},{"1":"四川师范大学","2":"神经系统学与行为学","3":"0.004"},{"1":"四川师范大学","2":"分子生物学与遗传学","3":"0.007"},{"1":"四川师范大学","2":"经济与商业","3":"0.008"},{"1":"四川师范大学","2":"地球科学","3":"0.010"},{"1":"四川师范大学","2":"环境科学与生态学","3":"0.010"},{"1":"四川师范大学","2":"临床医学","3":"0.011"},{"1":"四川师范大学","2":"微生物学","3":"0.012"},{"1":"四川师范大学","2":"生物学与生物化学","3":"0.013"},{"1":"四川师范大学","2":"药理学和毒理学","3":"0.024"},{"1":"四川师范大学","2":"农业科学","3":"0.027"},{"1":"四川师范大学","2":"精神病学与心理学","3":"0.039"},{"1":"四川师范大学","2":"社会科学总论","3":"0.040"},{"1":"四川师范大学","2":"植物学与动物学","3":"0.045"},{"1":"四川师范大学","2":"计算机科学","3":"0.143"},{"1":"四川师范大学","2":"物理学","3":"0.210"},{"1":"四川师范大学","2":"数学","3":"0.266"},{"1":"四川师范大学","2":"材料科学","3":"0.274"},{"1":"四川师范大学","2":"综合交叉学科","3":"0.340"},{"1":"四川师范大学","2":"工程学","3":"0.369"},{"1":"四川师范大学","2":"化学","3":"0.434"},{"1":"西华大学","2":"神经系统学与行为学","3":"0.000"},{"1":"西华大学","2":"分子生物学与遗传学","3":"0.001"},{"1":"西华大学","2":"综合交叉学科","3":"0.001"},{"1":"西华大学","2":"临床医学","3":"0.003"},{"1":"西华大学","2":"社会科学总论","3":"0.003"},{"1":"西华大学","2":"植物学与动物学","3":"0.004"},{"1":"西华大学","2":"微生物学","3":"0.005"},{"1":"西华大学","2":"精神病学与心理学","3":"0.007"},{"1":"西华大学","2":"地球科学","3":"0.013"},{"1":"西华大学","2":"环境科学与生态学","3":"0.014"},{"1":"西华大学","2":"生物学与生物化学","3":"0.018"},{"1":"西华大学","2":"物理学","3":"0.037"},{"1":"西华大学","2":"农业科学","3":"0.048"},{"1":"西华大学","2":"药理学和毒理学","3":"0.049"},{"1":"西华大学","2":"数学","3":"0.050"},{"1":"西华大学","2":"材料科学","3":"0.097"},{"1":"西华大学","2":"化学","3":"0.161"},{"1":"西华大学","2":"计算机科学","3":"0.202"},{"1":"西华大学","2":"工程学","3":"0.432"},{"1":"西华师范大学","2":"精神病学与心理学","3":"0.000"},{"1":"西华师范大学","2":"免疫学","3":"0.001"},{"1":"西华师范大学","2":"神经系统学与行为学","3":"0.001"},{"1":"西华师范大学","2":"空间科学","3":"0.003"},{"1":"西华师范大学","2":"微生物学","3":"0.003"},{"1":"西华师范大学","2":"临床医学","3":"0.005"},{"1":"西华师范大学","2":"分子生物学与遗传学","3":"0.008"},{"1":"西华师范大学","2":"计算机科学","3":"0.008"},{"1":"西华师范大学","2":"生物学与生物化学","3":"0.011"},{"1":"西华师范大学","2":"药理学和毒理学","3":"0.016"},{"1":"西华师范大学","2":"农业科学","3":"0.017"},{"1":"西华师范大学","2":"社会科学总论","3":"0.017"},{"1":"西华师范大学","2":"数学","3":"0.017"},{"1":"西华师范大学","2":"地球科学","3":"0.018"},{"1":"西华师范大学","2":"综合交叉学科","3":"0.021"},{"1":"西华师范大学","2":"环境科学与生态学","3":"0.024"},{"1":"西华师范大学","2":"物理学","3":"0.047"},{"1":"西华师范大学","2":"植物学与动物学","3":"0.110"},{"1":"西华师范大学","2":"材料科学","3":"0.232"},{"1":"西华师范大学","2":"工程学","3":"0.263"},{"1":"西华师范大学","2":"化学","3":"0.359"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" title="1"><span class="kw">library</span>(gridExtra)</a>
+<a class="sourceLine" id="cb93-2" title="2"><span class="kw">library</span>(grid)</a>
+<a class="sourceLine" id="cb93-3" title="3"><span class="kw">library</span>(ggpubr)</a>
+<a class="sourceLine" id="cb93-4" title="4"><span class="kw">library</span>(scales) </a>
+<a class="sourceLine" id="cb93-5" title="5"></a>
+<a class="sourceLine" id="cb93-6" title="6">pplot &lt;-<span class="st"> </span><span class="cf">function</span>(df){</a>
+<a class="sourceLine" id="cb93-7" title="7">  </a>
+<a class="sourceLine" id="cb93-8" title="8">  p&lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb93-9" title="9"><span class="st">    </span><span class="kw">ggplot</span>( <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">fct_reorder</span>(Category_ESI_cn, pd), <span class="dt">y =</span> pd, <span class="dt">fill =</span> University_cn, <span class="dt">width=</span><span class="fl">0.75</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb93-10" title="10"><span class="st">      </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb93-11" title="11"><span class="st">      </span><span class="kw">scale_fill_discrete</span>(<span class="dt">drop=</span>F)<span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb93-12" title="12"><span class="st">      </span><span class="kw">theme_bw</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb93-13" title="13"><span class="st">      </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb93-14" title="14"><span class="st">      </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="st">&quot;potential index&quot;</span>, <span class="dt">x=</span><span class="st">&quot;&quot;</span>, <span class="dt">title=</span><span class="kw">unique</span>(df<span class="op">$</span>University_cn))<span class="op">+</span></a>
+<a class="sourceLine" id="cb93-15" title="15"><span class="st">      </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),<span class="dt">labels=</span>percent) <span class="op">+</span></a>
+<a class="sourceLine" id="cb93-16" title="16"><span class="st">      </span><span class="kw">coord_flip</span>()</a>
+<a class="sourceLine" id="cb93-17" title="17">  </a>
+<a class="sourceLine" id="cb93-18" title="18">  }</a>
+<a class="sourceLine" id="cb93-19" title="19">     </a>
+<a class="sourceLine" id="cb93-20" title="20">     </a>
+<a class="sourceLine" id="cb93-21" title="21">glist &lt;-<span class="st"> </span>potent <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb93-22" title="22"><span class="st">         </span><span class="kw">mutate</span>(<span class="dt">University_cn =</span> <span class="kw">factor</span>(University_cn)) <span class="op">%&gt;%</span><span class="st">             </span></a>
+<a class="sourceLine" id="cb93-23" title="23"><span class="st">         </span><span class="kw">split</span>(.<span class="op">$</span>University_cn) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb93-24" title="24"><span class="st">         </span><span class="kw">map</span>(<span class="op">~</span><span class="kw">pplot</span>(.))  </a>
+<a class="sourceLine" id="cb93-25" title="25"></a>
+<a class="sourceLine" id="cb93-26" title="26">ggpubr<span class="op">::</span><span class="kw">ggarrange</span>(<span class="dt">plotlist =</span> glist, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">2</span>) </a></code></pre></div>
+<p><img src="R4IS_files/figure-html/unnamed-chunk-96-1.png" width="99%" /></p>
+<p>根据这个指标，我们计算四川省部分高校各学科的潜力指数，如图所示，化学学科是我校的潜力学科，并在学校规划中已被规划为ESI冲刺学科。但同时我们也发现，在四川省省属高校中，成都理工大学的化学学科是我校的潜在竞争对手。</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="cooperation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="impact.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/yihui/bookdown-chinese/edit/master/Potential.Rmd",
+"text": "编辑"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["R4IS.pdf", "R4IS.epub"],
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
