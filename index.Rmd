@@ -45,6 +45,8 @@ lapply(c(), function(pkg) {
 
 ## 本书内容 {-}
 
+本书数据处理和可视化用到 [**tidyverse**](https://www.tidyverse.org), 您也可以参考我的课件[《数据科学中的 R 语言》](https://bookdown.org/wangminjie/R4DS/)。
+
 - 第 \@ref(intro) 章简单介绍数据科学与R语言，
 - 第 \@ref(develop) 章引入科研信息数据集，并利用tidyverse宏包进行数理统计和数据可视化，
 - 第 \@ref(college) 章统计科研论文中通讯地址使用情况，并给出写作的规范建议，
@@ -64,14 +66,18 @@ lapply(c(), function(pkg) {
 - 第 \@ref(tidyabstract)章利用文本挖掘技术分析文献摘要等等，更多内容和章节未完待续...
 - 第 \@ref(tidybib)章介绍bibliometrix的宏包，以及引文分析
 
+
 ## 数据和代码 {-}
 
 本书的代码可以公开，您完全可以重复每一过程。本书使用的代码和数据集
 
 - <https://github.com/perlatex/R4IS>
 
+
+
 ## 未来想法 {-}
 
+- 使用[tidyESI](https://github.com/perlatex/tidyESI)宏包，方便地处理数据
 - 四川省最近五年的题录（包括引文，与后面bibliometrix的要统一数据来源）
 - 兼顾（tidyverse擅长的格式和bibliometrix能处理的格式）
 - 以Claus O. Wilke的[《Fundamentals of Data Visualization》](https://serialmentor.com/dataviz/) 为指导， 重新精细化图片
@@ -83,6 +89,12 @@ lapply(c(), function(pkg) {
 perl6 -Ilib wos.p6 
 ```
 
+
+## RYouWithMe {-}
+
+```{r echo = FALSE, out.width = "30%"}
+knitr::include_graphics("images/QQgroup.png")
+```
 
 
 ## 致谢 {-}
