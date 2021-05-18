@@ -65,6 +65,7 @@ lapply(c(), function(pkg) {
 - 第 \@ref(Occurence) 章讨论共现矩阵在信息服务中的应用，
 - 第 \@ref(tidyabstract)章利用文本挖掘技术分析文献摘要等等，更多内容和章节未完待续...
 - 第 \@ref(tidybib)章介绍bibliometrix的宏包，以及引文分析
+- 第 \@ref(ownership)章介绍作者信息提取和规整
 
 
 ## 数据和代码 {-}
@@ -87,6 +88,29 @@ lapply(c(), function(pkg) {
 
 ```{markdown}
 perl6 -Ilib wos.p6 
+```
+
+
+## 用到的宏包 {-}
+
+```{r index-3, eval = FALSE}
+my_packages <- 
+  c("tidyverse",  "here", "fs",  "knitr", "kableExtra",  "ggraph",  "igraph", "tidygraph",
+    "googleVis", "googleVis", "ggpubr", "widyr", "wordcloud2", "bibliometrix"
+   )
+```
+
+
+```{r index-4, eval = FALSE}
+install.packages(my_packages, repos = "http://cran.rstudio.com", dependencies = T)
+```
+
+
+
+可能用到的开发版本的宏包
+
+```{r index-5, eval = FALSE}
+devtools::install_github("perlatex/tidyESI")
 ```
 
 

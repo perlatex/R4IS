@@ -32,6 +32,7 @@ rmd_files: [
    "citedtime.Rmd",
    #"analysis_acknowledgements.Rmd",
    "tidybib.Rmd",
+   "ownership_extract.Rmd",
 
 
   "Appendix.Rmd",
