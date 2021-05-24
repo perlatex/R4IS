@@ -1,7 +1,11 @@
 # 作者信息提取 {#ownership}
 
-
 提取文献题录，是一件比较繁琐的工作。我这里使用[tidyESI](https://github.com/perlatex/tidyESI)宏包尝试解决，目前还不完美，还需要不断的探索，欢迎大家PR。
+
+
+```{r echo = FALSE, out.width = "99%"}
+knitr::include_graphics("images/ownership.png")
+```
 
 
 ```{r message=FALSE, warning=FALSE}
